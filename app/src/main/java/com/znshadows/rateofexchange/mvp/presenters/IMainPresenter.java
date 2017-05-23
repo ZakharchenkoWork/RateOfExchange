@@ -1,10 +1,12 @@
 package com.znshadows.rateofexchange.mvp.presenters;
 
 import com.znshadows.rateofexchange.mvp.views.IBaseView;
+import com.znshadows.rateofexchange.mvp.views.IMainView;
 
 /**
  * Created by kostya on 17.05.2017.
  */
 
-public interface IMainPresenter<ILoadingView extends IBaseView> extends IBasePreseter<ILoadingView> {
+public interface IMainPresenter<ViewType extends IMainView> extends IBasePreseter<ViewType> {
+    void getNBU();
 }

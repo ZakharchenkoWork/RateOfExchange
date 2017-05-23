@@ -1,19 +1,78 @@
 package com.znshadows.rateofexchange.general.activities;
 
+import android.util.Log;
+
 import com.znshadows.rateofexchange.mvp.presenters.IBasePreseter;
 import com.znshadows.rateofexchange.mvp.views.IBaseView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by kostya on 17.05.2017.
  */
 
-public class BasePresenter<ViewType extends IBaseView> implements IBasePreseter<ViewType>{
+public abstract class BasePresenter<ViewType extends IBaseView> implements IBasePreseter<ViewType> {
     private ViewType view;
-   public void setView(ViewType view){
+    protected List<Disposable> disposables = new ArrayList<>();
+
+    public void setView(ViewType view) {
         this.view = view;
     }
-    protected ViewType getView(){
+
+    protected ViewType getView() {
         return view;
     }
 
+    public BasePresenter() {
+        resolveDaggerDependencies();
+    }
+
+    public abstract void resolveDaggerDependencies();
+
+    protected <Type> Observer<Type> getObservable(boolean isShowLoading, OnNext<Type> action) {
+        return new Observer<Type>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                disposables.add(d);
+                if (isShowLoading) {
+                    getView().onStartLoading();
+                }
+            }
+
+            @Override
+            public void onNext(Type t) {
+                action.onNext(t);
+                if (isShowLoading) {
+                    getView().onFinishLoading();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (isShowLoading) {
+                    onCallError(e.getMessage());
+                } else {
+                    Log.e("Presenter", e.getMessage());
+                }
+            }
+
+            @Override
+            public void onComplete() {
+                Log.v("Presenter", "completed");
+            }
+        };
+    }
+
+    public void onCallError(String message) {
+        Log.e("Presenter", message);
+        view.onError();
+    }
+
+    protected interface OnNext<Type> {
+        void onNext(Type data);
+    }
 }

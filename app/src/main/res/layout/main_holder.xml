@@ -16,6 +16,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar_holder"
         android:layout_alignParentBottom="true"
+        android:background="@color/c2_dark"
         android:orientation="vertical" />
 
     <ProgressBar

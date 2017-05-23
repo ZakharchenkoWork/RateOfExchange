@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/item_background"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/standard_vertical_margin"
+        android:layout_marginBottom="@dimen/standard_vertical_margin"
+        style="@style/paddined_view">
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/item_rate_list_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@+id/code"
+            android:layout_toLeftOf="@+id/code"
+            android:gravity="start|left"/>
+
+        <TextView
+            android:id="@+id/code"
+            style="@style/item_rate_list_main"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/rate"
+            android:layout_toStartOf="@+id/rate"/>
+
+        <TextView
+            android:id="@+id/rate"
+            style="@style/item_rate_list_main"
+            android:layout_width="60dp"
+            android:ellipsize="end"
+
+            android:maxLines="1"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="start|left"/>
+    </RelativeLayout>
+</LinearLayout>

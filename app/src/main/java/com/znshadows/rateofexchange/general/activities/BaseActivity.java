@@ -23,8 +23,6 @@ import com.znshadows.rateofexchange.general.menu.MenuFragment;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private boolean hasRefreshButton;
-
     public abstract void resolveDaggerDependencies();
 
     private Menu menu;

@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/c2_dark</item>
         <item name="colorPrimaryDark">@color/c1_darkest</item>
-        <item name="colorAccent">@color/c4_lightest</item>
+        <item name="colorAccent">@color/c3_light</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -25,4 +25,14 @@
     <style name="SplashTheme" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@drawable/progress_icon</item>
     </style>
+    <style name="item_rate_list_main">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/c4_lightest</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="paddined_view">
+        <item name="android:paddingLeft">@dimen/standard_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/standard_horizontal_margin</item>
+    </style>
+
 </resources>

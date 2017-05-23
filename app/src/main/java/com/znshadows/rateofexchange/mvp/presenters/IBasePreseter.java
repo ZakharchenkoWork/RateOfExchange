@@ -8,4 +8,5 @@ import com.znshadows.rateofexchange.mvp.views.IBaseView;
 
 public interface IBasePreseter<ViewType extends IBaseView> {
     void setView(ViewType view);
+    void resolveDaggerDependencies();
 }

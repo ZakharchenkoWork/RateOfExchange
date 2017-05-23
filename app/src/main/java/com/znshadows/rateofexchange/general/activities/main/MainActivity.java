@@ -1,42 +1,56 @@
 package com.znshadows.rateofexchange.general.activities.main;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+
+import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.activities.BaseActivity;
-import com.znshadows.rateofexchange.general.activities.loading.LoadingPresenter;
-import com.znshadows.rateofexchange.mvp.presenters.ILoadingPresenter;
-import com.znshadows.rateofexchange.mvp.views.ILoadingView;
+
+import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
+
+import com.znshadows.rateofexchange.mvp.presenters.IMainPresenter;
 import com.znshadows.rateofexchange.mvp.views.IMainView;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Created by kostya on 17.05.2017.
  */
 
 
-
 public class MainActivity extends BaseActivity implements IMainView {
-    ILoadingPresenter presenter = new LoadingPresenter();
+    @Inject
+    IMainPresenter presenter;
 
     @Override
     public void resolveDaggerDependencies() {
-
+        App.getAppComponent().inject(this);
+        presenter.setView(this);
     }
+
+    private RecyclerView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_holder_layout);
+        setContentView(R.layout.activity_main);
+
+        list = (RecyclerView) findViewById(R.id.list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        list.setLayoutManager(layoutManager);
+
+        presenter.getNBU();
+    }
+
+    @Override
+    public void showResponce(List<UnifiedBankResponce> nbuResponse) {
+        list.setAdapter(new RateListAdapter(this, nbuResponse));
     }
 }
 

@@ -1,0 +1,9 @@
+<resources>
+
+
+    <style name="paddined_view">
+        <item name="android:paddingStart">@dimen/standard_horizontal_margin</item>
+        <item name="android:paddingEnd">@dimen/standard_horizontal_margin</item>
+    </style>
+
+</resources>

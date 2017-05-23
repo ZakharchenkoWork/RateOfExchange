@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="c1_darkest">#262216</color>
-    <color name="c2_dark">#49412c</color>
-    <color name="c3_light">#97743a</color>
-    <color name="c4_lightest">#b0a18e</color>
+    <color name="c1_darkest">#388E3C</color>
+    <color name="c2_dark">#43A047</color>
+    <color name="c3_light">#C8E6C9</color>
+    <color name="c4_lightest">#E8F5E9</color>
 </resources>

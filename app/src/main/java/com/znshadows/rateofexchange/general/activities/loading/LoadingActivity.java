@@ -14,18 +14,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.activities.BaseActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainActivity;
 import com.znshadows.rateofexchange.mvp.presenters.ILoadingPresenter;
 import com.znshadows.rateofexchange.mvp.views.ILoadingView;
 
+import javax.inject.Inject;
+
 public class LoadingActivity extends BaseActivity implements ILoadingView{
-ILoadingPresenter presenter = new LoadingPresenter();
+    @Inject
+ILoadingPresenter presenter;
 
     @Override
     public void resolveDaggerDependencies() {
-
+        App.getAppComponent().inject(this);
+        presenter.setView(this);
     }
 
     @Override

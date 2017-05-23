@@ -5,4 +5,7 @@ package com.znshadows.rateofexchange.mvp.views;
  */
 
 public interface IBaseView {
+    void onError();
+    void onStartLoading();
+    void onFinishLoading();
 }

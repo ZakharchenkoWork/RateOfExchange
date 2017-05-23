@@ -10,4 +10,8 @@ import com.znshadows.rateofexchange.mvp.views.ILoadingView;
 
 public class LoadingPresenter extends BasePresenter<ILoadingView> implements ILoadingPresenter<ILoadingView>{
 
+    @Override
+    public void resolveDaggerDependencies() {
+
+    }
 }
