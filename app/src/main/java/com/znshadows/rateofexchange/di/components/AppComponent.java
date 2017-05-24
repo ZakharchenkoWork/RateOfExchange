@@ -5,6 +5,7 @@ import com.znshadows.rateofexchange.di.modules.PresentersModule;
 import com.znshadows.rateofexchange.general.activities.loading.LoadingActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainPresenter;
+import com.znshadows.rateofexchange.mvp.models.UnifiedModel;
 
 
 import javax.inject.Singleton;
@@ -23,4 +24,6 @@ public interface AppComponent {
     void inject(MainActivity mainActivity);
 
     void inject(MainPresenter mainPresenter);
+
+    void inject(UnifiedModel unifiedModel);
 }

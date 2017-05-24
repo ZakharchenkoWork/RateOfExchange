@@ -2,6 +2,7 @@ package com.znshadows.rateofexchange.mvp.models;
 
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
 import com.znshadows.rateofexchange.general.models.nbu.NBUResponse;
 
 import java.util.List;
@@ -19,32 +20,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by kostya on 19.05.2017.
  */
 
-public class NBUApiImpl implements NBUApi {
+public class NBUApiImpl extends BaseModel implements NBUApi<NBUResponse> {
 
     NBUApi apiInterface;
 
     public NBUApiImpl() {
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(100, TimeUnit.SECONDS)
-                .writeTimeout(100, TimeUnit.SECONDS)
-                .readTimeout(100, TimeUnit.SECONDS)
-                .addInterceptor(logging)
-                .build();
-
-
-        GsonBuilder gsonBuilder = new GsonBuilder();
-
-
-        Retrofit builder = new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
-                .baseUrl(URL_START)
-                .client(okHttpClient)
-                .build();
-        apiInterface = builder.create(NBUApi.class);
-
+        apiInterface = getApiBuilder(URL_START).create(NBUApi.class);
     }
 
     @Override
@@ -53,4 +34,10 @@ public class NBUApiImpl implements NBUApi {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    @Override
+    public UnifiedBankResponce mapResponce(NBUResponse responceDTO) {
+        return new UnifiedBankResponce(responceDTO.getName(),responceDTO.getCode(), responceDTO.getRate());
+    }
+
 }

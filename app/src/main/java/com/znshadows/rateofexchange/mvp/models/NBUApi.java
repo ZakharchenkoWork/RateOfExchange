@@ -13,11 +13,12 @@ import retrofit2.http.Headers;
  * Created by kostya on 19.05.2017.
  */
 
-public interface NBUApi {
+public interface NBUApi<Type> extends IBaseApi<Type>{
     String URL_START = "https://bank.gov.ua/";
     @Headers({"Accept: application/json;charset=utf-8",
             "Accept-Language:ru-RU,ru;","Content-Type: application/json;charset=utf-8"})
     @GET("/NBUStatService/v1/statdirectory/exchange?json")
     Observable<List<NBUResponse>> getTodaysList();
+
 
 }
