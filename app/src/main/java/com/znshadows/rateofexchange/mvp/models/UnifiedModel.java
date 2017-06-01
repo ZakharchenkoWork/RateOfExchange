@@ -1,6 +1,7 @@
 package com.znshadows.rateofexchange.mvp.models;
 
 import com.znshadows.rateofexchange.App;
+import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
 import com.znshadows.rateofexchange.general.models.nbu.NBUResponse;
 
@@ -13,13 +14,15 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.znshadows.rateofexchange.general.models.BANKS.NBU;
+
 /**
  * Created by kostya on 24.05.2017.
  */
 
 public class UnifiedModel implements IUnifiedModel{
     @Inject
-    NBUApi<NBUResponse> nbuApi;
+    IBaseApi nbuApi;
 
     public UnifiedModel(){
         App.getAppComponent().inject(this);
@@ -28,17 +31,9 @@ public class UnifiedModel implements IUnifiedModel{
     public Observable<List<UnifiedBankResponce>> getTodaysList(BANKS bank) {
         switch (bank){
             case NBU:
-            return nbuApi.getTodaysList()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .map((listDTO)->nbuApi.mapResponceList(listDTO));
+            return nbuApi.getTodaysUnifiedList();
         }
-        return nbuApi.getTodaysList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map((listDTO)->nbuApi.mapResponceList(listDTO));
+        return nbuApi.getTodaysUnifiedList();
     }
-    public enum BANKS {
-        NBU
-    }
+
 }

@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by kostya on 24.05.2017.
  */
 
-abstract class BaseModel implements IBaseApi {
+abstract class BaseModel {
     protected Retrofit getApiBuilder(String baseUrl) {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -34,15 +34,5 @@ abstract class BaseModel implements IBaseApi {
                 .client(okHttpClient)
                 .build();
 
-    }
-
-    @Override
-    public List<UnifiedBankResponce> mapResponceList(List responceDTO) {
-        List<UnifiedBankResponce> responseResultList= new ArrayList<>();
-
-        for (int i = 0; i < responceDTO.size(); i++) {
-            responseResultList.add(mapResponce(responceDTO.get(i)));
-        }
-        return responseResultList;
     }
 }

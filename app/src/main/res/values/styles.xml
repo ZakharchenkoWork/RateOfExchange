@@ -22,17 +22,28 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentTop">true</item>
     </style>
+
     <style name="SplashTheme" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@drawable/progress_icon</item>
     </style>
+
     <style name="item_rate_list_main">
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/c4_lightest</item>
         <item name="android:gravity">center</item>
     </style>
+
     <style name="paddined_view">
         <item name="android:paddingLeft">@dimen/standard_horizontal_margin</item>
         <item name="android:paddingRight">@dimen/standard_horizontal_margin</item>
+    </style>
+
+    <style name="widget_text_style">
+        <item name="android:textColor">@color/c4_lightest</item>
+        <item name="android:shadowColor">@color/c0_black</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
     </style>
 
 </resources>

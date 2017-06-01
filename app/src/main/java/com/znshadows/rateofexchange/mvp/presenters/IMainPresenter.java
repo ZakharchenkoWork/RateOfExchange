@@ -1,6 +1,5 @@
 package com.znshadows.rateofexchange.mvp.presenters;
 
-import com.znshadows.rateofexchange.mvp.views.IBaseView;
 import com.znshadows.rateofexchange.mvp.views.IMainView;
 
 /**
@@ -9,4 +8,6 @@ import com.znshadows.rateofexchange.mvp.views.IMainView;
 
 public interface IMainPresenter<ViewType extends IMainView> extends IBasePreseter<ViewType> {
     void getNBU();
+
+    void getChoosenBanks();
 }

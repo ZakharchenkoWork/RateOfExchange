@@ -1,5 +1,7 @@
 package com.znshadows.rateofexchange.di.modules;
 
+import com.znshadows.rateofexchange.general.models.nbu.NBUResponse;
+import com.znshadows.rateofexchange.mvp.models.IBaseApi;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
 import com.znshadows.rateofexchange.mvp.models.NBUApi;
 import com.znshadows.rateofexchange.mvp.models.NBUApiImpl;
@@ -21,14 +23,16 @@ public class ModelModule {
     NBUApi provideApiNBU(){
         return new NBUApiImpl();
     }
+
+    @Singleton
+    @Provides
+    IBaseApi provideIbaseApi(){
+        return new NBUApiImpl();
+    }
+
     @Singleton
     @Provides
     IUnifiedModel provideUnifiedModel(){
         return new UnifiedModel();
     }
-  /*  @Singleton
-    @Provides
-    DriversedApi provideApi(){
-        return new ModelImpl();
-    }*/
 }

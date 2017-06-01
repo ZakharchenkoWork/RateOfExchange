@@ -1,7 +1,9 @@
 package com.znshadows.rateofexchange.di.components;
 
+
 import com.znshadows.rateofexchange.di.modules.ModelModule;
 import com.znshadows.rateofexchange.di.modules.PresentersModule;
+import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankActivity;
 import com.znshadows.rateofexchange.general.activities.loading.LoadingActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainPresenter;
@@ -26,4 +28,6 @@ public interface AppComponent {
     void inject(MainPresenter mainPresenter);
 
     void inject(UnifiedModel unifiedModel);
+
+    void inject(ChooseBankActivity chooseBankActivity);
 }

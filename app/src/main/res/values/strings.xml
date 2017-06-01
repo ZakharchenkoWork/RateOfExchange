@@ -5,4 +5,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="main_activity_title">Отслеживаемые банки</string>
+    <string name="choose_bank_activity_title">Выберите банк</string>
+    <string name="ok">OK</string>
+    <array name="bankNames">
+    <item name="nbu">Национальный Банк Украины</item>
+    <item name="nbu">Приват Банк</item>
+    </array>
 </resources>

@@ -1,7 +1,9 @@
 package com.znshadows.rateofexchange.general.activities;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.MenuRes;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,8 +26,11 @@ import com.znshadows.rateofexchange.general.menu.MenuFragment;
 public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract void resolveDaggerDependencies();
-
+    public static final int NO_MENU = -1;
+    @MenuRes
+    private int menuResourse = NO_MENU;
     private Menu menu;
+
 
 
     @Override
@@ -68,15 +73,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         this.menu = menu;
-        /*
-        if (hasRefreshButton) {
-            getMenuInflater().inflate(R.menu.main, menu);
+
+        if (menuResourse != NO_MENU) {
+            getMenuInflater().inflate(menuResourse, menu);
             return true;
         }
-        //*/
+
             return super.onCreateOptionsMenu(menu);
-
-
     }
 
     /**
@@ -178,6 +181,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return onOptionItemSelected.onClick(item);
+    }
+
+    /**
+     * Used in case we need some special menu resource, before onCreate. use NO_MENU if menu isn't needed
+     * @param menuResourse
+     */
+    public void setMenuResourse(int menuResourse) {
+        this.menuResourse = menuResourse;
     }
 
     /**

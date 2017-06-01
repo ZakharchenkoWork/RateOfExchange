@@ -47,10 +47,6 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
         return 0;
     }
 
-    private boolean isPositionHeader(int position) {
-        return position == 0;
-    }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

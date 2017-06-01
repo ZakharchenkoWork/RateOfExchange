@@ -1,5 +1,6 @@
 package com.znshadows.rateofexchange.mvp.models;
 
+import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
 
 import java.util.List;
@@ -13,5 +14,5 @@ import io.reactivex.Observable;
  */
 
 public interface IUnifiedModel {
-    Observable<List<UnifiedBankResponce>> getTodaysList(UnifiedModel.BANKS bank);
+    Observable<List<UnifiedBankResponce>> getTodaysList(BANKS bank);
 }
