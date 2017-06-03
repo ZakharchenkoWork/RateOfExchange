@@ -27,6 +27,9 @@
         <activity
             android:name=".general.activities.choose_bank.ChooseBankActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".general.activities.rate_list.BankRatesActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver
             android:name=".general.WidgetProvider"

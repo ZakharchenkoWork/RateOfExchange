@@ -19,10 +19,13 @@ import java.util.List;
  */
 
 public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksListAdapter.ViewHolder> {
-        private View.OnClickListener onItemClickListener = null;
+        private OnClickListener onItemClickListener = null;
         private Context context;
         private List<BANKS> dataList;
 
+    interface OnClickListener {
+        void onClick(BANKS bank);
+    }
         /**
          * ViewHolder class will contain row view for RecyclerView
          */
@@ -33,8 +36,9 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
             this.dataList = dataList;
         }
 
-    public void setOnItemClickListener(View.OnClickListener onItemClickListener) {
+    public ChoosenBanksListAdapter setOnItemClickListener(OnClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+        return this;
     }
 
     @Override
@@ -67,7 +71,9 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
             holder.code.setText("sdf");
             holder.rate.setText("sd");
             if(onItemClickListener != null){
-                holder.itemView.setOnClickListener(onItemClickListener);
+                holder.itemView.setOnClickListener((v)->{
+                    onItemClickListener.onClick(dataList.get(position));
+                });
             }
         }
 

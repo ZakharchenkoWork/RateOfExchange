@@ -7,6 +7,8 @@ import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankAct
 import com.znshadows.rateofexchange.general.activities.loading.LoadingActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainPresenter;
+import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesActivity;
+import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesPresenter;
 import com.znshadows.rateofexchange.mvp.models.UnifiedModel;
 
 
@@ -30,4 +32,8 @@ public interface AppComponent {
     void inject(UnifiedModel unifiedModel);
 
     void inject(ChooseBankActivity chooseBankActivity);
+
+    void inject(BankRatesActivity bankRatesActivity);
+
+    void inject(BankRatesPresenter bankRatesPresenter);
 }

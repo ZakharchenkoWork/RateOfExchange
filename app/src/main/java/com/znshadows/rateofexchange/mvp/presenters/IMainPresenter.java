@@ -7,7 +7,7 @@ import com.znshadows.rateofexchange.mvp.views.IMainView;
  */
 
 public interface IMainPresenter<ViewType extends IMainView> extends IBasePreseter<ViewType> {
-    void getNBU();
+
 
     void getChoosenBanks();
 }

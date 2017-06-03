@@ -1,4 +1,4 @@
-package com.znshadows.rateofexchange.general.activities.main;
+package com.znshadows.rateofexchange.general.activities.rate_list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,13 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
-import com.znshadows.rateofexchange.general.models.nbu.NBUResponse;
 
 import java.util.List;
-
 
 
 /**

@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 
 import com.znshadows.rateofexchange.App;
@@ -15,6 +16,7 @@ import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.activities.BaseActivity;
 
 import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankActivity;
+import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesActivity;
 import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
 
@@ -33,7 +35,8 @@ import javax.inject.Inject;
 public class MainActivity extends BaseActivity implements IMainView {
     @Inject
     IMainPresenter presenter;
-
+    private TextView noBanksText;
+    private RecyclerView list;
 
     @Override
     public void resolveDaggerDependencies() {
@@ -41,7 +44,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         presenter.setView(this);
     }
 
-    private RecyclerView list;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,8 @@ public class MainActivity extends BaseActivity implements IMainView {
         list = (RecyclerView) findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         list.setLayoutManager(layoutManager);
+        noBanksText = (TextView) findViewById(R.id.noBanksText);
+
         presenter.getChoosenBanks();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -64,12 +69,20 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @Override
     public void showChoosenBanks(List<BANKS> banks) {
-        list.setAdapter(new ChoosenBanksListAdapter(this, banks));
+        if(banks != null && banks.size() > 0 ) {
+            list.setAdapter(new ChoosenBanksListAdapter(this, banks)
+                    .setOnItemClickListener((bank)->{
+                        Intent intent = new Intent(this, BankRatesActivity.class);
+                        intent.putExtra(BankRatesActivity.EXTRA_BANK_INDEX, bank.ordinal());
+                        startActivity(intent);
+            }));
+            noBanksText.setVisibility(View.GONE);
+        } else {
+            list.setAdapter(new ChoosenBanksListAdapter(this, banks));
+            noBanksText.setVisibility(View.VISIBLE);
+        }
     }
 
-    @Override
-    public void showResponce(List<UnifiedBankResponce> nbuResponse) {
-        list.setAdapter(new RateListAdapter(this, nbuResponse));
-    }
+
 }
 
