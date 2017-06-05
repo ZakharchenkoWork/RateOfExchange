@@ -8,14 +8,24 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class UnifiedBankResponce {
+    public static final double NO_VALUE = -1;
     private String name;
     private String code;
-    private double rate;
+    private double buy;
+    private double sale;
 
     public UnifiedBankResponce(String name, String code, double rate) {
         this.name = name;
         this.code = code;
-        this.rate = rate;
+        this.buy = rate;
+        this.sale = NO_VALUE;
+    }
+
+    public UnifiedBankResponce(String name, String code, double buy, double sale) {
+        this.name = name;
+        this.code = code;
+        this.buy = buy;
+        this.sale = sale;
     }
 
     public String getName() {
@@ -26,8 +36,12 @@ public class UnifiedBankResponce {
         return code;
     }
 
-    public double getRate() {
-        return rate;
+    public double getBuy() {
+        return buy;
+    }
+
+    public double getSale() {
+        return sale;
     }
 }
 

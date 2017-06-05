@@ -1,13 +1,10 @@
 package com.znshadows.rateofexchange.mvp.models;
 
-import com.google.gson.GsonBuilder;
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
-import com.znshadows.rateofexchange.general.models.nbu.NBUResponse;
+import com.znshadows.rateofexchange.general.models.responces.NBUResponse;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

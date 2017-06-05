@@ -1,8 +1,6 @@
 package com.znshadows.rateofexchange.mvp.views;
 
 import com.znshadows.rateofexchange.general.models.BANKS;
-import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
-import com.znshadows.rateofexchange.general.models.nbu.NBUResponse;
 
 import java.util.List;
 

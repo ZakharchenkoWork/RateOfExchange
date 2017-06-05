@@ -6,5 +6,6 @@ package com.znshadows.rateofexchange.general.models;
 
 public enum BANKS {
         NBU,
-        PRIVATE_BANK
+        PRIVATE_BANK,
+        A_BANK
 }

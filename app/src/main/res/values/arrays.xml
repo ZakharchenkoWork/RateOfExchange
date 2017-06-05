@@ -3,6 +3,7 @@
     <integer-array name="banks_logo">
         <item>@drawable/nbu_logo</item>
         <item>@drawable/private_bank_logo</item>
+        <item>@drawable/a_bank_logo</item>
     </integer-array>
 
 </resources>

@@ -1,5 +1,5 @@
 
-package com.znshadows.rateofexchange.general.models.nbu;
+package com.znshadows.rateofexchange.general.models.responces;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

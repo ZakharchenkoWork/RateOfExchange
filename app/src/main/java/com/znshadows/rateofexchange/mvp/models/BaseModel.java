@@ -19,20 +19,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 abstract class BaseModel {
     protected Retrofit getApiBuilder(String baseUrl) {
+        return new Retrofit.Builder()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
+                .baseUrl(baseUrl)
+                .client(getOkHttpClient())
+                .build();
+    }
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+    protected OkHttpClient getOkHttpClient(){
+        return new OkHttpClient.Builder()
                 .connectTimeout(100, TimeUnit.SECONDS)
                 .writeTimeout(100, TimeUnit.SECONDS)
                 .readTimeout(100, TimeUnit.SECONDS)
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();
-
-        return new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
-                .baseUrl(baseUrl)
-                .client(okHttpClient)
-                .build();
-
     }
 }

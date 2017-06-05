@@ -57,9 +57,14 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
     // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.name.setText(dataList.get(position).getName());
+
         holder.code.setText(dataList.get(position).getCode());
-        holder.rate.setText("" + dataList.get(position).getRate());
+        holder.rateBuy.setText("" + dataList.get(position).getBuy());
+        if(dataList.get(position).getSale() == UnifiedBankResponce.NO_VALUE){
+             holder.rateSale.setVisibility(View.GONE);
+        } else {
+            holder.rateSale.setText("" + dataList.get(position).getSale());
+        }
     }
 
     // Returns the total count of items in the list
@@ -71,9 +76,10 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView name;
+
         TextView code;
-        TextView rate;
+        TextView rateBuy;
+        TextView rateSale;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -81,9 +87,10 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.name);
+
             code = (TextView) itemView.findViewById(R.id.code);
-            rate = (TextView) itemView.findViewById(R.id.rate);
+            rateBuy = (TextView) itemView.findViewById(R.id.rateBuy);
+            rateSale = (TextView) itemView.findViewById(R.id.rateSale);
         }
     }
 }

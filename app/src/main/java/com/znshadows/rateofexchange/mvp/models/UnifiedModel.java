@@ -3,27 +3,26 @@ package com.znshadows.rateofexchange.mvp.models;
 import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
-import com.znshadows.rateofexchange.general.models.nbu.NBUResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
-import static com.znshadows.rateofexchange.general.models.BANKS.NBU;
 
 /**
  * Created by kostya on 24.05.2017.
  */
 
 public class UnifiedModel implements IUnifiedModel{
-    @Inject
+    @Inject @Named("nbu")
     IBaseApi nbuApi;
-
+    @Inject @Named("pb")
+    IBaseApi pbApi;
+    @Inject @Named("abank")
+    IBaseApi abankApi;
+    
     public UnifiedModel(){
         App.getAppComponent().inject(this);
     }
@@ -32,6 +31,10 @@ public class UnifiedModel implements IUnifiedModel{
         switch (bank){
             case NBU:
             return nbuApi.getTodaysUnifiedList();
+            case PRIVATE_BANK:
+                return pbApi.getTodaysUnifiedList();
+            case A_BANK:
+                return abankApi.getTodaysUnifiedList();
         }
         return nbuApi.getTodaysUnifiedList();
     }
