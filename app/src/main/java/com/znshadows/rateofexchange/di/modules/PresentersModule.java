@@ -4,10 +4,12 @@ import com.znshadows.rateofexchange.general.activities.choose_bank.ChoosseBankPr
 import com.znshadows.rateofexchange.general.activities.loading.LoadingPresenter;
 import com.znshadows.rateofexchange.general.activities.main.MainPresenter;
 import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesPresenter;
+import com.znshadows.rateofexchange.general.widget.WidgetPresenter;
 import com.znshadows.rateofexchange.mvp.presenters.IBankRatesPresenter;
 import com.znshadows.rateofexchange.mvp.presenters.IChoosseBankPresenter;
 import com.znshadows.rateofexchange.mvp.presenters.ILoadingPresenter;
 import com.znshadows.rateofexchange.mvp.presenters.IMainPresenter;
+import com.znshadows.rateofexchange.mvp.presenters.IWidgetPresenter;
 
 import javax.inject.Singleton;
 
@@ -42,5 +44,10 @@ public class PresentersModule {
     @Provides
     IBankRatesPresenter provideBankRatesPresenter(){
         return new BankRatesPresenter();
+    }
+    @Singleton
+    @Provides
+    IWidgetPresenter provideWidgetPresenter(){
+        return new WidgetPresenter();
     }
 }

@@ -32,7 +32,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver
-            android:name=".general.WidgetProvider"
+            android:name=".general.widget.WidgetProvider"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

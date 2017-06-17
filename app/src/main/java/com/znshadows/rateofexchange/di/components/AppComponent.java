@@ -9,6 +9,8 @@ import com.znshadows.rateofexchange.general.activities.main.MainActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainPresenter;
 import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesActivity;
 import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesPresenter;
+import com.znshadows.rateofexchange.general.widget.WidgetPresenter;
+import com.znshadows.rateofexchange.general.widget.WidgetProvider;
 import com.znshadows.rateofexchange.mvp.models.UnifiedModel;
 
 
@@ -36,4 +38,8 @@ public interface AppComponent {
     void inject(BankRatesActivity bankRatesActivity);
 
     void inject(BankRatesPresenter bankRatesPresenter);
+
+    void inject(WidgetProvider widgetProvider);
+
+    void inject(WidgetPresenter widgetPresenter);
 }

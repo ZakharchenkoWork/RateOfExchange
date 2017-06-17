@@ -68,7 +68,6 @@ public class ABankApiImpl extends BaseModel implements ABankApi, IBaseApi {
             for (int i = 0; i < parcedData.length; i+=3) {
                 mapedResponse.add(new UnifiedBankResponce("", parcedData[i], Double.parseDouble(parcedData[i+1]), Double.parseDouble(parcedData[i+2])));
             }
-            
             return mapedResponse;
         });
     }

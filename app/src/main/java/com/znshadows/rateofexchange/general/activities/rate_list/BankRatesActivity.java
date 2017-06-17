@@ -37,6 +37,7 @@ public class BankRatesActivity extends BaseActivity implements IBankRatesView{
         if(!getIntent().hasExtra(EXTRA_BANK_INDEX) || (bankIndx = getIntent().getIntExtra(EXTRA_BANK_INDEX, -1)) == -1 ){finish();}
         setContentView(R.layout.activity_choose_bank);
 
+setupToolbar(R.drawable.nav_drawer_icon, getResources().getStringArray(R.array.bankNames)[bankIndx]);
         list = (RecyclerView) findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         list.setLayoutManager(layoutManager);
