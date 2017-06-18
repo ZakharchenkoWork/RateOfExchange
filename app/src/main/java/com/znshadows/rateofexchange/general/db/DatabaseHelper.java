@@ -12,7 +12,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.znshadows.rateofexchange.general.models.ChoosenBanks;
+import com.znshadows.rateofexchange.general.models.UserData;
 
 
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "app.db";
     private static final int DATABASE_VERSION = 1;
-    private Dao<ChoosenBanks, String> pictureDao = null;
+    private Dao<UserData, String> pictureDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -39,7 +39,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
         try {
 
-            TableUtils.createTable(connectionSource, ChoosenBanks.class);
+            TableUtils.createTable(connectionSource, UserData.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
@@ -53,7 +53,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             Log.i(DatabaseHelper.class.getName(), "onUpgrade");
-            TableUtils.dropTable(connectionSource, ChoosenBanks.class, true);
+            TableUtils.dropTable(connectionSource, UserData.class, true);
             // after we drop the old databases, we create the new ones
             onCreate(db, connectionSource);
         } catch (SQLException e) {
@@ -65,9 +65,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     /**
      * Returns the Database Access Object (DAO) for our Book class. It will create it or just give the cached * value.
      */
-    public Dao<ChoosenBanks, String> getPictureDataDao() throws SQLException {
+    public Dao<UserData, String> getPictureDataDao() throws SQLException {
         if (pictureDao == null) {
-            pictureDao = getDao(ChoosenBanks.class);
+            pictureDao = getDao(UserData.class);
         }
         return pictureDao;
     }
