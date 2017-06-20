@@ -18,11 +18,13 @@ import com.znshadows.rateofexchange.general.activities.BaseActivity;
 import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankActivity;
 import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesActivity;
 import com.znshadows.rateofexchange.general.models.BANKS;
+import com.znshadows.rateofexchange.general.models.ChoosenBank;
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
 
 import com.znshadows.rateofexchange.mvp.presenters.IMainPresenter;
 import com.znshadows.rateofexchange.mvp.views.IMainView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -61,14 +63,20 @@ public class MainActivity extends BaseActivity implements IMainView {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener((view) -> {
-            ChooseBankActivity.setOnOkListener((choosenBanks) -> showChoosenBanks(choosenBanks));
+            ChooseBankActivity.setOnOkListener((choosenBanks) -> {
+                List<ChoosenBank> list = new ArrayList<>();
+                for (int i = 0; i < choosenBanks.size(); i++) {
+                    list.add(new ChoosenBank(choosenBanks.get(i)));
+                }
+
+                showChoosenBanks(list);});
             Intent intent = new Intent(this, ChooseBankActivity.class);
             startActivity(intent);
         });
     }
 
     @Override
-    public void showChoosenBanks(List<BANKS> banks) {
+    public void showChoosenBanks(List<ChoosenBank> banks) {
         if(banks != null && banks.size() > 0 ) {
             list.setAdapter(new ChoosenBanksListAdapter(this, banks)
                     .setOnItemClickListener((bank)->{

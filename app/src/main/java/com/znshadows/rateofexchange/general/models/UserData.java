@@ -6,6 +6,8 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.znshadows.rateofexchange.general.models.ChoosenBank.NOT_SET;
+
 /**
  * Created by kostya on 30.05.2017.
  */
@@ -36,16 +38,18 @@ public class UserData {
     public void addCurencyToBank(BANKS bank, String currency){
         ChoosenBank choosenBank;
         if((choosenBank = getChosenBank(bank)) == null){
-            banksList.add(new ChoosenBank(bank, currency));
+            choosenBank = new ChoosenBank(bank);
+            choosenBank.addCurrency(currency);
+            banksList.add(choosenBank);
         } else {
-            choosenBank.setCurency(currency);
+            choosenBank.addCurrency(currency);
         }
     }
 
     public void addBank(BANKS bank){
 
         if(getChosenBank(bank) == null){
-            banksList.add(new ChoosenBank(bank, "USD"));
+            banksList.add(new ChoosenBank(bank));
         }
     }
 

@@ -1,6 +1,7 @@
 package com.znshadows.rateofexchange.mvp.views;
 
 import com.znshadows.rateofexchange.general.models.BANKS;
+import com.znshadows.rateofexchange.general.models.ChoosenBank;
 
 import java.util.List;
 
@@ -9,5 +10,6 @@ import java.util.List;
  */
 
 public interface IMainView extends IBaseView{
-    void showChoosenBanks(List<BANKS> banks);
+
+    void showChoosenBanks(List<ChoosenBank> banks);
 }

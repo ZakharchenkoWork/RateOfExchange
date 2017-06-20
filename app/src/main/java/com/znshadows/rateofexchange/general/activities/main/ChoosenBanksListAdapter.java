@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.models.BANKS;
+import com.znshadows.rateofexchange.general.models.ChoosenBank;
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
 
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksListAdapter.ViewHolder> {
         private OnClickListener onItemClickListener = null;
         private Context context;
-        private List<BANKS> dataList;
+        private List<ChoosenBank> dataList;
 
     interface OnClickListener {
         void onClick(BANKS bank);
@@ -31,7 +32,7 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
          */
 
 
-        public ChoosenBanksListAdapter(Context context, List<BANKS> dataList) {
+        public ChoosenBanksListAdapter(Context context, List<ChoosenBank> dataList) {
             this.context = context;
             this.dataList = dataList;
         }
@@ -65,14 +66,15 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
         // Involves populating data into the item through holder
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.logo.setImageResource(context.getResources().obtainTypedArray(R.array.banks_logo).getResourceId(dataList.get(position).ordinal(), -1));
-            holder.name.setText(context.getResources().getStringArray(R.array.bankNames)[dataList.get(position).ordinal()]);
+            ChoosenBank choosenBank = dataList.get(position);
+            holder.logo.setImageResource(context.getResources().obtainTypedArray(R.array.banks_logo).getResourceId(choosenBank.getBank().ordinal(), -1));
+            holder.name.setText(context.getResources().getStringArray(R.array.bankNames)[choosenBank.getBank().ordinal()]);
 
-            holder.code.setText("sdf");
-            holder.rate.setText("sd");
+            //holder.code.setText(choosenBank.getCurency());
+            //holder.rate.setText(choosenBank.getCurency());
             if(onItemClickListener != null){
                 holder.itemView.setOnClickListener((v)->{
-                    onItemClickListener.onClick(dataList.get(position));
+                    onItemClickListener.onClick(choosenBank.getBank());
                 });
             }
         }
