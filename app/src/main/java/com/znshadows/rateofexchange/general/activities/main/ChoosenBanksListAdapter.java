@@ -108,7 +108,7 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
                 }
                 holder.finishChildsProgressBar();
             });
-
+        holder.showState();
         }
         //holder.itemDataLoadingProgress.setVisibility(VISIBLE);
 
@@ -158,7 +158,6 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
 public void addChild(View view){
     childs.add(view);
     childsHolder.addView(view);
-
 }
 
         private void showState(){
