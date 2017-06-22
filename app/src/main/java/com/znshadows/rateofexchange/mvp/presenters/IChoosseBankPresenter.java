@@ -14,4 +14,5 @@ import java.util.List;
 public interface IChoosseBankPresenter<ViewType extends IChooseBankView> extends IBasePreseter<ViewType> {
 
     List<BANKS> getChoosenBanks();
+    void saveChoosenBanks(List<BANKS> banks);
 }

@@ -4,6 +4,7 @@ import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.general.activities.BasePresenter;
 import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
+import com.znshadows.rateofexchange.mvp.models.IUserData;
 import com.znshadows.rateofexchange.mvp.presenters.IChoosseBankPresenter;
 import com.znshadows.rateofexchange.mvp.views.IChooseBankView;
 import com.znshadows.rateofexchange.mvp.views.IMainView;
@@ -20,15 +21,21 @@ import javax.inject.Inject;
 
 public class ChoosseBankPresenter extends BasePresenter<IChooseBankView> implements IChoosseBankPresenter<IChooseBankView> {
 
+    @Inject
+    IUserData userData;
     @Override
     public List<BANKS> getChoosenBanks() {
-        List<BANKS> banks = new ArrayList<>();
-        banks.add(BANKS.NBU);
-        return banks;
+
+        return userData.getRawBanksList();
+    }
+
+    @Override
+    public void saveChoosenBanks(List<BANKS> banks) {
+        userData.saveChoosenBanks(banks);
     }
 
     @Override
     public void resolveDaggerDependencies() {
-
+App.getAppComponent().inject(this);
     }
 }

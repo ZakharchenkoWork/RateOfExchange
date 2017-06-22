@@ -31,7 +31,6 @@ public class ChooseBankActivity extends BaseActivity implements IChooseBankView 
     IChoosseBankPresenter presenter;
 
     RecyclerView list;
-    private static OnOkListener onOkListener;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +47,7 @@ public class ChooseBankActivity extends BaseActivity implements IChooseBankView 
         list.setAdapter(chooseBanksListAdapter);
 
         setOnOptionItemSelected((v) -> {
-
-            onOkListener.onOkClicked(chooseBanksListAdapter.getCheckedList());
+            presenter.saveChoosenBanks(chooseBanksListAdapter.getCheckedList());
             finish();
             return true;
         });
@@ -59,10 +57,6 @@ public class ChooseBankActivity extends BaseActivity implements IChooseBankView 
     public void resolveDaggerDependencies() {
         App.getAppComponent().inject(this);
         presenter.setView(this);
-    }
-
-    public static void setOnOkListener(OnOkListener onOkListener) {
-        ChooseBankActivity.onOkListener = onOkListener;
     }
 
     public interface OnOkListener{

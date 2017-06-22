@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/btn_form_arrow_down_normal"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:fromDegrees="0"
+    android:interpolator="@android:anim/cycle_interpolator"
+    android:toDegrees="-90"
+    android:duration="300"
+    android:startOffset="0"
+    android:repeatCount="1"
+    />

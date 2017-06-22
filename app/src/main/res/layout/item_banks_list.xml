@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/item_background"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <RelativeLayout
         style="@style/paddined_view"
@@ -41,24 +41,22 @@
             android:layout_toStartOf="@+id/code"
             android:gravity="left|start|center_vertical" />
 
-        <TextView
-            android:id="@+id/code"
-            style="@style/item_rate_list_main"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/rate"
-            android:layout_toStartOf="@+id/rate"
-            android:gravity="left|start|center_vertical" />
 
-        <TextView
-            android:id="@+id/rate"
-            style="@style/item_rate_list_main"
-            android:layout_width="60dp"
+        <ImageView
+            android:id="@+id/arrow"
+            android:src="@drawable/arrow_anim_to_right"
+            android:layout_width="@dimen/bank_item_height"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:ellipsize="end"
-            android:gravity="left|start|center_vertical"
-            android:maxLines="1" />
+
+
+            />
+
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/childsHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"/>
 </LinearLayout>

@@ -1,8 +1,10 @@
 package com.znshadows.rateofexchange.di.modules;
 
+import com.znshadows.rateofexchange.general.models.UserData;
 import com.znshadows.rateofexchange.mvp.models.ABankApiImpl;
 import com.znshadows.rateofexchange.mvp.models.IBaseApi;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
+import com.znshadows.rateofexchange.mvp.models.IUserData;
 import com.znshadows.rateofexchange.mvp.models.NBUApi;
 import com.znshadows.rateofexchange.mvp.models.NBUApiImpl;
 import com.znshadows.rateofexchange.mvp.models.PrivateBankApiImpl;
@@ -20,7 +22,11 @@ import dagger.Provides;
 @Singleton
 @Module
 public class ModelModule {
+    @Singleton @Provides
 
+    IUserData provideUserData(){
+        return new UserData();
+    }
     @Singleton @Provides
     NBUApi provideApiNBU(){
         return new NBUApiImpl();

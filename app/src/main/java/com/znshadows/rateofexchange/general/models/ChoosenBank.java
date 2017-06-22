@@ -38,4 +38,12 @@ public class ChoosenBank {
     }
 
 
+    public void removeCurrency(String currency) {
+        for (int i = 0; i < curencies.size(); i++) {
+            if(curencies.get(i).equals(currency)){
+                curencies.remove(i);
+                return;
+            }
+        }
+    }
 }

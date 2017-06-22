@@ -6,6 +6,7 @@ import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.general.models.ChoosenBank;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
 
+import com.znshadows.rateofexchange.mvp.models.IUserData;
 import com.znshadows.rateofexchange.mvp.models.UnifiedModel;
 import com.znshadows.rateofexchange.mvp.presenters.IMainPresenter;
 import com.znshadows.rateofexchange.mvp.views.IMainView;
@@ -24,13 +25,13 @@ public class MainPresenter extends BasePresenter<IMainView> implements IMainPres
 
     @Inject
     IUnifiedModel model;
-
+    @Inject
+    IUserData userData;
 
     @Override
+
     public void getChoosenBanks() {
-        List<ChoosenBank> banks = new ArrayList<>();
-        banks.add(new ChoosenBank(BANKS.NBU));
-        getView().showChoosenBanks(banks);
+        getView().showChoosenBanks(userData.getBanksList());
     }
 
     @Override

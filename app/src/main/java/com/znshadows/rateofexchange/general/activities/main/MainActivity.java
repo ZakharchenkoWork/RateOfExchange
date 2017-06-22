@@ -46,7 +46,13 @@ public class MainActivity extends BaseActivity implements IMainView {
         presenter.setView(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+            presenter.getChoosenBanks();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,17 +65,10 @@ public class MainActivity extends BaseActivity implements IMainView {
         list.setLayoutManager(layoutManager);
         noBanksText = (TextView) findViewById(R.id.noBanksText);
 
-        presenter.getChoosenBanks();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener((view) -> {
-            ChooseBankActivity.setOnOkListener((choosenBanks) -> {
-                List<ChoosenBank> list = new ArrayList<>();
-                for (int i = 0; i < choosenBanks.size(); i++) {
-                    list.add(new ChoosenBank(choosenBanks.get(i)));
-                }
-
-                showChoosenBanks(list);});
             Intent intent = new Intent(this, ChooseBankActivity.class);
             startActivity(intent);
         });

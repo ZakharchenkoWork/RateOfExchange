@@ -4,11 +4,13 @@ package com.znshadows.rateofexchange.di.components;
 import com.znshadows.rateofexchange.di.modules.ModelModule;
 import com.znshadows.rateofexchange.di.modules.PresentersModule;
 import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankActivity;
+import com.znshadows.rateofexchange.general.activities.choose_bank.ChoosseBankPresenter;
 import com.znshadows.rateofexchange.general.activities.loading.LoadingActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainPresenter;
 import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesActivity;
 import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesPresenter;
+import com.znshadows.rateofexchange.general.activities.rate_list.RateListAdapter;
 import com.znshadows.rateofexchange.general.widget.WidgetPresenter;
 import com.znshadows.rateofexchange.general.widget.WidgetProvider;
 import com.znshadows.rateofexchange.mvp.models.UnifiedModel;
@@ -42,4 +44,9 @@ public interface AppComponent {
     void inject(WidgetProvider widgetProvider);
 
     void inject(WidgetPresenter widgetPresenter);
+
+
+    void inject(RateListAdapter rateListAdapter);
+
+    void inject(ChoosseBankPresenter choosseBankPresenter);
 }

@@ -29,15 +29,16 @@ public class BankRatesActivity extends BaseActivity implements IBankRatesView{
     @Inject
     IBankRatesPresenter presenter;
     private RecyclerView list;
+    private int bankIndx = -1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int bankIndx = -1;
+
         if(!getIntent().hasExtra(EXTRA_BANK_INDEX) || (bankIndx = getIntent().getIntExtra(EXTRA_BANK_INDEX, -1)) == -1 ){finish();}
         setContentView(R.layout.activity_choose_bank);
 
-setupToolbar(R.drawable.nav_drawer_icon, getResources().getStringArray(R.array.bankNames)[bankIndx]);
+        setupToolbar(R.drawable.nav_drawer_icon, getResources().getStringArray(R.array.bankNames)[bankIndx]);
         list = (RecyclerView) findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         list.setLayoutManager(layoutManager);
@@ -47,7 +48,7 @@ setupToolbar(R.drawable.nav_drawer_icon, getResources().getStringArray(R.array.b
 
     @Override
     public void showResponce(List<UnifiedBankResponce> nbuResponse) {
-        list.setAdapter(new RateListAdapter(this, nbuResponse));
+        list.setAdapter(new RateListAdapter(this, BANKS.values()[bankIndx], nbuResponse));
     }
 
     @Override

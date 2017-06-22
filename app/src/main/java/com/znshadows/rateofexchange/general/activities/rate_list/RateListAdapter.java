@@ -5,12 +5,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
+import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
+import com.znshadows.rateofexchange.mvp.presenters.IBankRatesPresenter;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 
 /**
@@ -19,17 +25,22 @@ import java.util.List;
 
 public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHolder> {
 
+    @Inject
+    IBankRatesPresenter presenter;
+    private BANKS bank;
     private Context context;
-    List<UnifiedBankResponce> dataList;
+    private List<UnifiedBankResponce> dataList;
 
     /**
      * ViewHolder class will contain row view for RecyclerView
      */
 
 
-    public RateListAdapter(Context context, List<UnifiedBankResponce> dataList) {
+    public RateListAdapter(Context context, BANKS bank, List<UnifiedBankResponce> dataList) {
+        App.getAppComponent().inject(this);
         this.context = context;
         this.dataList = dataList;
+        this.bank = bank;
     }
 
 
@@ -60,8 +71,23 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
 
         holder.code.setText(dataList.get(position).getCode());
         holder.rateBuy.setText("" + dataList.get(position).getBuy());
+        holder.rateCheckBox.setVisibility(View.VISIBLE);
+        List<String> choosenCurrencies = presenter.getChoosenCurrencies(bank);
+        for (int i = 0; i < choosenCurrencies.size(); i++) {
+            if(choosenCurrencies.get(i).equals(dataList.get(position).getCode())){
+                holder.rateCheckBox.setChecked(true);
+            }
+        }
+
+        holder.rateCheckBox.setOnCheckedChangeListener((compoundButton, isChecked)->{
+            if(isChecked) {
+                presenter.addCurrency(bank, dataList.get(position).getCode());
+            } else {
+                presenter.removeCurrency(bank, dataList.get(position).getCode());
+            }
+        });
         if(dataList.get(position).getSale() == UnifiedBankResponce.NO_VALUE){
-             holder.rateSale.setVisibility(View.GONE);
+            holder.rateSale.setVisibility(View.GONE);
         } else {
             holder.rateSale.setText("" + dataList.get(position).getSale());
         }
@@ -80,7 +106,7 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
         TextView code;
         TextView rateBuy;
         TextView rateSale;
-
+        CheckBox rateCheckBox;
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView) {
@@ -91,6 +117,7 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
             code = (TextView) itemView.findViewById(R.id.code);
             rateBuy = (TextView) itemView.findViewById(R.id.rateBuy);
             rateSale = (TextView) itemView.findViewById(R.id.rateSale);
+            rateCheckBox = (CheckBox) itemView.findViewById(R.id.rateCheckBox);
         }
     }
 }
