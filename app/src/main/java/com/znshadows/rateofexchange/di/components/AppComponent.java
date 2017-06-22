@@ -6,6 +6,7 @@ import com.znshadows.rateofexchange.di.modules.PresentersModule;
 import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankActivity;
 import com.znshadows.rateofexchange.general.activities.choose_bank.ChoosseBankPresenter;
 import com.znshadows.rateofexchange.general.activities.loading.LoadingActivity;
+import com.znshadows.rateofexchange.general.activities.main.ChoosenBanksListAdapter;
 import com.znshadows.rateofexchange.general.activities.main.MainActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainPresenter;
 import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesActivity;
@@ -49,4 +50,6 @@ public interface AppComponent {
     void inject(RateListAdapter rateListAdapter);
 
     void inject(ChoosseBankPresenter choosseBankPresenter);
+
+    void inject(ChoosenBanksListAdapter choosenBanksListAdapter);
 }

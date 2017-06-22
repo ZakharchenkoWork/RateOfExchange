@@ -4,6 +4,7 @@ import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.general.activities.BasePresenter;
 import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.general.models.ChoosenBank;
+import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
 
 import com.znshadows.rateofexchange.mvp.models.IUserData;
@@ -29,13 +30,26 @@ public class MainPresenter extends BasePresenter<IMainView> implements IMainPres
     IUserData userData;
 
     @Override
+    public void resolveDaggerDependencies() {
+        App.getAppComponent().inject(this);
+    }
 
+    @Override
     public void getChoosenBanks() {
         getView().showChoosenBanks(userData.getBanksList());
     }
 
     @Override
-    public void resolveDaggerDependencies() {
-        App.getAppComponent().inject(this);
+    public void getBankRates(ChoosenBank bank, OnBankRatesLoadedListener onBankRatesLoadedListener) {
+        model.getTodaysList(bank.getBank()).subscribe(
+                getObservable(true, (bankResponse) -> {
+                    List<UnifiedBankResponce> result = new ArrayList<>();
+                    for (int i = 0; i < bankResponse.size(); i++) {
+                        if (bank.checkCurrency(bankResponse.get(i).getCode())) {
+                            result.add(bankResponse.get(i));
+                        }
+                    }
+                    onBankRatesLoadedListener.onFinish(result);
+                }));
     }
 }

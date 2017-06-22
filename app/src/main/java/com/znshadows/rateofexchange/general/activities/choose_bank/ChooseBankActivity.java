@@ -59,7 +59,4 @@ public class ChooseBankActivity extends BaseActivity implements IChooseBankView 
         presenter.setView(this);
     }
 
-    public interface OnOkListener{
-    void onOkClicked(List<BANKS> choosenBanksList);
-}
 }

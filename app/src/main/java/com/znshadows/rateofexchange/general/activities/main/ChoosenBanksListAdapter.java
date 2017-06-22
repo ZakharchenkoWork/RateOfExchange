@@ -12,13 +12,17 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.general.models.ChoosenBank;
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
+import com.znshadows.rateofexchange.mvp.presenters.IMainPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -31,7 +35,8 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
     private OnClickListener onItemClickListener = null;
     private Context context;
     private List<ChoosenBank> dataList;
-
+    @Inject
+    IMainPresenter presenter;
     interface OnClickListener {
         void onClick(BANKS bank);
     }
@@ -42,6 +47,7 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
 
 
     public ChoosenBanksListAdapter(Context context, List<ChoosenBank> dataList) {
+        App.getAppComponent().inject(this);
         this.context = context;
         this.dataList = dataList;
     }
@@ -85,9 +91,23 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
                 holder.addChild(view);
                 TextView code = (TextView)view.findViewById(R.id.code);
                 code.setText(curencies.get(i));
-                ProgressBar itemDataLoadingProgress = (ProgressBar) view.findViewById(R.id.itemDataLoadingProgress);
-                itemDataLoadingProgress.setVisibility(VISIBLE);
             }
+            holder.startChildsProgressBar();
+            presenter.getBankRates(choosenBank,(rates)->{
+
+                for (int i = 0; i < holder.childs.size(); i++) {
+                    View view = holder.childs.get(i);
+                    ((TextView) view.findViewById(R.id.code)).setText(rates.get(i).getCode());
+                    ((TextView) view.findViewById(R.id.rateBuy)).setText(""+rates.get(i).getBuy());
+
+                    if(rates.get(i).getSale() == UnifiedBankResponce.NO_VALUE){
+                        view.findViewById(R.id.rateSale).setVisibility(GONE);
+                    } else {
+                        ((TextView) view.findViewById(R.id.rateSale)).setText(""+rates.get(i).getSale());
+                    }
+                }
+                holder.finishChildsProgressBar();
+            });
 
         }
         //holder.itemDataLoadingProgress.setVisibility(VISIBLE);
@@ -180,6 +200,17 @@ public void addChild(View view){
             anim.start();
 
 
+        }
+
+        public void startChildsProgressBar() {
+            for (View child : childs) {
+                child.findViewById(R.id.itemDataLoadingProgress).setVisibility(VISIBLE);
+            }
+        }
+        public void finishChildsProgressBar() {
+            for (View child : childs) {
+                child.findViewById(R.id.itemDataLoadingProgress).setVisibility(GONE);
+            }
         }
     }
 

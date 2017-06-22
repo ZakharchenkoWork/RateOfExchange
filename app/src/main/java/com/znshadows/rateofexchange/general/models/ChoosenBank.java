@@ -24,9 +24,10 @@ public class ChoosenBank {
     public List<String> getCurencies() {
         return curencies;
     }
-    public void addCurrency(String curency){
+
+    public void addCurrency(String curency) {
         for (int i = 0; i < curencies.size(); i++) {
-            if(curencies.equals(curency)){
+            if (curencies.equals(curency)) {
                 return;
             }
         }
@@ -37,10 +38,18 @@ public class ChoosenBank {
         return bank;
     }
 
+    public boolean checkCurrency(String currency) {
+        for (String curencyFromList : curencies) {
+            if (curencyFromList.equals(currency)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void removeCurrency(String currency) {
         for (int i = 0; i < curencies.size(); i++) {
-            if(curencies.get(i).equals(currency)){
+            if (curencies.get(i).equals(currency)) {
                 curencies.remove(i);
                 return;
             }
