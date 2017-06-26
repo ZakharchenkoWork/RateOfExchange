@@ -8,4 +8,5 @@
     <dimen name="standard_vertical_margin">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="bank_item_height">40dp</dimen>
+    <dimen name="ws_button_side_margin">64dp</dimen>
 </resources>

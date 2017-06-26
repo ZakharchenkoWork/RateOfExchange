@@ -3,6 +3,7 @@ package com.znshadows.rateofexchange.general.activities.widget_settings;
 import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.general.activities.BasePresenter;
 import com.znshadows.rateofexchange.general.models.BANKS;
+import com.znshadows.rateofexchange.general.models.WidgetInfo;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
 import com.znshadows.rateofexchange.mvp.presenters.IWidgetSettingsPresenter;
 import com.znshadows.rateofexchange.mvp.views.IWidgetSettingsView;
@@ -27,5 +28,10 @@ public class WidgetSettingsPresenter extends BasePresenter<IWidgetSettingsView> 
                 getObservable(true, (dataList)->{
                     getView().showCurrenciesList(dataList);
                 }));
+    }
+
+    @Override
+    public void saveWidgetInfo(WidgetInfo widgetInfo) {
+
     }
 }

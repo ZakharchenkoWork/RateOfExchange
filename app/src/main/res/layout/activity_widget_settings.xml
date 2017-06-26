@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/c2_dark"
-
+    android:animateLayoutChanges="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -67,4 +67,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone" />
+    <Button
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/main_text"
+        android:text="@string/ws_save"
+        android:layout_marginLeft="@dimen/ws_button_side_margin"
+        android:layout_marginStart="@dimen/ws_button_side_margin"
+        android:layout_marginEnd="@dimen/ws_button_side_margin"
+        android:layout_marginRight="@dimen/ws_button_side_margin"
+        android:textColor="@drawable/button_text_color"
+        android:background="@drawable/button_background"/>
 </LinearLayout>
