@@ -53,7 +53,7 @@ public class WidgetSettingsActivity extends BaseActivity implements IWidgetSetti
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_widget_settings);
-
+        prepareResultIntent(false);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -102,6 +102,7 @@ public class WidgetSettingsActivity extends BaseActivity implements IWidgetSetti
         save.setOnClickListener((v)->{
             presenter.saveWidgetInfo(new WidgetInfo(widgetId, choosenBank, choosenCurrency));
             updateWidget();
+            prepareResultIntent(true);
             finish();
         });
     }
@@ -168,13 +169,20 @@ public class WidgetSettingsActivity extends BaseActivity implements IWidgetSetti
         App.getAppComponent().inject(this);
         presenter.setView(this);
     }
+    private void prepareResultIntent(boolean isOk){
+        Intent resultValue = new Intent();
+        resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+        if(isOk) {
+            setResult(RESULT_OK, resultValue);
+        } else {
+            setResult(RESULT_CANCELED, resultValue);
+        }
+    }
+
     private void updateWidget(){
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         RemoteViews views = new RemoteViews(getPackageName(), R.layout.widget_layout);
         appWidgetManager.updateAppWidget(widgetId, views);
-        Intent resultValue = new Intent();
-        resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
-        setResult(RESULT_OK, resultValue);
     }
 
 }
