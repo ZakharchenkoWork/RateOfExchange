@@ -22,7 +22,7 @@
             android:layout_alignBottom="@id/code"/>
         <TextView
             android:id="@+id/code"
-            style="@style/item_rate_list_main"
+            style="@style/main_text"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/itemDataLoadingProgress"
@@ -42,7 +42,7 @@
 
             <TextView
                 android:id="@+id/rateBuy"
-                style="@style/item_rate_list_main"
+                style="@style/main_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -52,7 +52,7 @@
 
             <TextView
                 android:id="@+id/rateSale"
-                style="@style/item_rate_list_main"
+                style="@style/main_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"

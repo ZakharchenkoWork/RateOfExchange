@@ -18,6 +18,7 @@ import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.activities.BaseActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainActivity;
+import com.znshadows.rateofexchange.general.activities.widget_settings.WidgetSettingsActivity;
 import com.znshadows.rateofexchange.mvp.presenters.ILoadingPresenter;
 import com.znshadows.rateofexchange.mvp.views.ILoadingView;
 
@@ -37,6 +38,8 @@ ILoadingPresenter presenter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = new Intent(this, MainActivity.class);
+       // Intent intent = new Intent(this, WidgetSettingsActivity.class);
+
         startActivity(intent);
         finish();
     }

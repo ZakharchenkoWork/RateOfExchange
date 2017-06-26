@@ -36,7 +36,8 @@ public class ChooseBankActivity extends BaseActivity implements IChooseBankView 
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_choose_bank);
-        setupToolbar(R.drawable.nav_drawer_icon, getString(R.string.choose_bank_activity_title));
+        setupToolbar(R.drawable.btn_form_arrow_left_normal, getString(R.string.choose_bank_activity_title));
+        setNavigationOnClickListener((view -> finish()));
         setMenuResourse(R.menu.ok_menu);
 
         List<BANKS> choosenBanksList = presenter.getChoosenBanks();

@@ -25,7 +25,6 @@ public class ChoosseBankPresenter extends BasePresenter<IChooseBankView> impleme
     IUserData userData;
     @Override
     public List<BANKS> getChoosenBanks() {
-
         return userData.getRawBanksList();
     }
 

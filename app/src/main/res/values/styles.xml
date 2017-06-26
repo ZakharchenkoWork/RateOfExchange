@@ -27,7 +27,7 @@
         <item name="android:windowBackground">@drawable/progress_icon</item>
     </style>
 
-    <style name="item_rate_list_main">
+    <style name="main_text">
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/c4_lightest</item>
         <item name="android:gravity">center</item>

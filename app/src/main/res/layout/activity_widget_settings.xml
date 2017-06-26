@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c2_dark"
+
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/paddined_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/main_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ws_bank_title" />
+
+        <EditText
+            android:id="@+id/bankName"
+            style="@style/main_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|left"
+            android:hint="@string/ws_bank_hint"
+            android:textColorHint="@color/c1_darkest" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/banksList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/currencyHolder"
+        style="@style/paddined_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/standard_vertical_margin"
+        >
+
+        <TextView
+
+            style="@style/main_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ws_currency_title" />
+
+        <EditText
+            android:id="@+id/curencyName"
+            style="@style/main_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ws_currency_hint"
+            android:gravity="start|left"
+            android:textColorHint="@color/c1_darkest"
+            />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/currenciesList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" />
+</LinearLayout>

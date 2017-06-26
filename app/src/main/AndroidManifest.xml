@@ -30,6 +30,13 @@
         <activity
             android:name=".general.activities.rate_list.BankRatesActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".general.activities.widget_settings.WidgetSettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
 
         <receiver
             android:name=".general.widget.WidgetProvider"

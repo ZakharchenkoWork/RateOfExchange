@@ -110,10 +110,7 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
             });
         holder.showState();
         }
-        //holder.itemDataLoadingProgress.setVisibility(VISIBLE);
 
-        //holder.code.setText(choosenBank.getCurency());
-        //holder.rate.setText(choosenBank.getCurency());
         if (onItemClickListener != null) {
             holder.itemView.setOnClickListener((v) -> {
                 onItemClickListener.onClick(choosenBank.getBank());
