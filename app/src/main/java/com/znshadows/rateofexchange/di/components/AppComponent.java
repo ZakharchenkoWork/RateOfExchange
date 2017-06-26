@@ -13,6 +13,7 @@ import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesActivi
 import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesPresenter;
 import com.znshadows.rateofexchange.general.activities.rate_list.RateListAdapter;
 import com.znshadows.rateofexchange.general.activities.widget_settings.WidgetSettingsActivity;
+import com.znshadows.rateofexchange.general.activities.widget_settings.WidgetSettingsPresenter;
 import com.znshadows.rateofexchange.general.widget.WidgetPresenter;
 import com.znshadows.rateofexchange.general.widget.WidgetProvider;
 import com.znshadows.rateofexchange.mvp.models.UnifiedModel;
@@ -55,4 +56,6 @@ public interface AppComponent {
     void inject(ChoosenBanksListAdapter choosenBanksListAdapter);
 
     void inject(WidgetSettingsActivity widgetSettingsActivity);
+
+    void inject(WidgetSettingsPresenter widgetSettingsPresenter);
 }

@@ -1,5 +1,6 @@
 package com.znshadows.rateofexchange.mvp.presenters;
 
+import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.mvp.views.IBaseView;
 import com.znshadows.rateofexchange.mvp.views.IWidgetSettingsView;
 
@@ -8,4 +9,5 @@ import com.znshadows.rateofexchange.mvp.views.IWidgetSettingsView;
  */
 
 public interface IWidgetSettingsPresenter<ViewType extends IWidgetSettingsView> extends IBasePreseter<ViewType> {
+    void getCurrenciesForBank(BANKS choosenBank);
 }
