@@ -26,17 +26,25 @@ public class UnifiedModel implements IUnifiedModel{
     public UnifiedModel(){
         App.getAppComponent().inject(this);
     }
+
     @Override
     public Observable<List<UnifiedBankResponce>> getTodaysList(BANKS bank) {
-        switch (bank){
-            case NBU:
-            return nbuApi.getTodaysUnifiedList();
-            case PRIVATE_BANK:
-                return pbApi.getTodaysUnifiedList();
-            case A_BANK:
-                return abankApi.getTodaysUnifiedList();
-        }
-        return nbuApi.getTodaysUnifiedList();
+            return getBankApi(bank).getTodaysUnifiedList();
     }
 
+    @Override
+    public Observable<UnifiedBankResponce> getTodaysRates(BANKS bank, String currency) {
+        return getBankApi(bank).getTodaysUnifiedRate(currency);
+    }
+private IBaseApi getBankApi(BANKS bank){
+    switch (bank){
+        case NBU:
+            return nbuApi;
+        case PRIVATE_BANK:
+            return pbApi;
+        case A_BANK:
+            return abankApi;
+    }
+    return nbuApi;
+}
 }

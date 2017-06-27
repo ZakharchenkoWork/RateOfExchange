@@ -37,6 +37,19 @@ public class PrivateBankApiImpl extends BaseModel implements PrivateBankApi, IBa
     }
 
     @Override
+    public Observable<UnifiedBankResponce> getTodaysUnifiedRate(String currency) {
+        return getTodaysList(true, "", 4).map((List<PrivateBankResponce> responceDTO) -> {
+
+            for (PrivateBankResponce pbResponse : responceDTO) {
+                if (pbResponse.getCode().equals(currency)) {
+                     return new UnifiedBankResponce("", pbResponse.getCode(), pbResponse.getBuy(), pbResponse.getSale());
+                }
+            }
+            return null;
+        });
+    }
+
+    @Override
     public Observable<List<PrivateBankResponce>> getTodaysList(@Query("json") boolean isJson, @Query("exchange") String emptyExchange, @Query("coursid") int courseId) {
         return apiInterface.getTodaysList(isJson, emptyExchange,courseId)
                 .subscribeOn(Schedulers.io())

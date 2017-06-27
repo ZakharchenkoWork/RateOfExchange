@@ -12,4 +12,6 @@ import io.reactivex.Observable;
 
 public interface IBaseApi {
     Observable<List<UnifiedBankResponce>> getTodaysUnifiedList();
+
+    Observable<UnifiedBankResponce> getTodaysUnifiedRate(String currency);
 }

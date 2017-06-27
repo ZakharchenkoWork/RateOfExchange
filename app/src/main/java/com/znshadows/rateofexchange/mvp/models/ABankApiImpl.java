@@ -71,4 +71,16 @@ public class ABankApiImpl extends BaseModel implements ABankApi, IBaseApi {
             return mapedResponse;
         });
     }
+
+    @Override
+    public Observable<UnifiedBankResponce> getTodaysUnifiedRate(String currency) {
+        return getTodaysUnifiedList().map((List<UnifiedBankResponce> unifiedList)->{
+            for (UnifiedBankResponce unifiedBankResponce : unifiedList) {
+                if(unifiedBankResponce.getCode().equals(currency)){
+                    return unifiedBankResponce;
+                }
+            }
+            return null;
+        });
+    }
 }
