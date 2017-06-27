@@ -16,6 +16,8 @@ import static com.znshadows.rateofexchange.general.models.ChoosenBank.NOT_SET;
 @DatabaseTable(tableName = "user_data")
 public class UserData implements IUserData {
 
+    public UserData() {}
+
     @DatabaseField
     private List<ChoosenBank> banksList = new ArrayList<>();
 

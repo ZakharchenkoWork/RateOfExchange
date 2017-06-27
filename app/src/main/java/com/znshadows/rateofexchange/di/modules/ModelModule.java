@@ -1,8 +1,10 @@
 package com.znshadows.rateofexchange.di.modules;
 
+import com.znshadows.rateofexchange.general.db.DatabaseManager;
 import com.znshadows.rateofexchange.general.models.UserData;
 import com.znshadows.rateofexchange.mvp.models.ABankApiImpl;
 import com.znshadows.rateofexchange.mvp.models.IBaseApi;
+import com.znshadows.rateofexchange.mvp.models.IDatabaseManager;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
 import com.znshadows.rateofexchange.mvp.models.IUserData;
 import com.znshadows.rateofexchange.mvp.models.NBUApi;
@@ -49,5 +51,10 @@ public class ModelModule {
     @Singleton @Provides
     IUnifiedModel provideUnifiedModel(){
         return new UnifiedModel();
+    }
+
+    @Singleton @Provides
+    IDatabaseManager provideDatabaseManager(){
+        return new DatabaseManager();
     }
 }

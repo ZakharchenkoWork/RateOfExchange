@@ -4,6 +4,7 @@ import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.general.activities.BasePresenter;
 import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.general.models.WidgetInfo;
+import com.znshadows.rateofexchange.mvp.models.IDatabaseManager;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
 import com.znshadows.rateofexchange.mvp.presenters.IWidgetSettingsPresenter;
 import com.znshadows.rateofexchange.mvp.views.IWidgetSettingsView;
@@ -17,6 +18,8 @@ import javax.inject.Inject;
 public class WidgetSettingsPresenter extends BasePresenter<IWidgetSettingsView> implements IWidgetSettingsPresenter<IWidgetSettingsView> {
     @Inject
     IUnifiedModel model;
+    @Inject
+    IDatabaseManager databaseManager;
     @Override
     public void resolveDaggerDependencies() {
         App.getAppComponent().inject(this);
@@ -32,6 +35,6 @@ public class WidgetSettingsPresenter extends BasePresenter<IWidgetSettingsView> 
 
     @Override
     public void saveWidgetInfo(WidgetInfo widgetInfo) {
-
+        databaseManager.saveWidgetInfo(widgetInfo);
     }
 }

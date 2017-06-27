@@ -13,6 +13,7 @@ import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.activities.loading.LoadingActivity;
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
+import com.znshadows.rateofexchange.general.models.WidgetInfo;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
 import com.znshadows.rateofexchange.mvp.presenters.IWidgetPresenter;
 import com.znshadows.rateofexchange.mvp.views.IWidgetView;
@@ -25,14 +26,16 @@ import javax.inject.Inject;
  * Created by kostya on 24.05.2017.
  */
 
-public class WidgetProvider extends AppWidgetProvider implements IWidgetView{
+public class WidgetProvider extends AppWidgetProvider implements IWidgetView {
     @Inject
     IWidgetPresenter presenter;
-    RemoteViews views;
+
     AppWidgetManager appWidgetManager;
+    Context context;
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
+        this.context = context;
         // Retrieve the widget’s layout//
         this.appWidgetManager = appWidgetManager;
         App.getAppComponent().inject(this);
@@ -44,10 +47,7 @@ public class WidgetProvider extends AppWidgetProvider implements IWidgetView{
         int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
         for (int widgetId : allWidgetIds) {
             // create some random data
-
-
-            views = new RemoteViews(context.getPackageName(),
-                    R.layout.widget_layout);
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
             Log.w("WidgetExample", "works");
             // Set the text
 
@@ -61,11 +61,11 @@ public class WidgetProvider extends AppWidgetProvider implements IWidgetView{
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                     0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setOnClickPendingIntent(R.id.update, pendingIntent);
-
+            presenter.getBankData(widgetId);
 
         }
 
-        presenter.getRatesInMyBank(allWidgetIds);
+
 // Tell the AppWidgetManager to perform an update on this application widget//
 //        appWidgetManager.updateAppWidget(currentWidgetId, views);
     }
@@ -87,12 +87,12 @@ public class WidgetProvider extends AppWidgetProvider implements IWidgetView{
     }
 
     @Override
-    public void showResponce(int[] allWidgetIds, List<UnifiedBankResponce> bankResponse) {
-        for (int widgetId : allWidgetIds) {
+    public void showResponce(WidgetInfo widgetInfo, UnifiedBankResponce bankResponse) {
         Log.d("showResponce", "done");
-        Log.d("showResponce", "" +bankResponse.get(0).getBuy());
-        views.setTextViewText(R.id.rateToBuy, ""+bankResponse.get(0).getBuy());
-            appWidgetManager.updateAppWidget(widgetId, views);
-        }
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        views.setTextViewText(R.id.bankName, widgetInfo.getChoosenBank().name());
+        views.setTextViewText(R.id.rateToBuy, "" + bankResponse.getBuy());
+        views.setTextViewText(R.id.rateToBuy, "" + bankResponse.getSale());
+        appWidgetManager.updateAppWidget(widgetInfo.getWidgetId(), views);
     }
 }

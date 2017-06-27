@@ -1,6 +1,7 @@
 package com.znshadows.rateofexchange.di.components;
 
 
+import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.di.modules.ModelModule;
 import com.znshadows.rateofexchange.di.modules.PresentersModule;
 import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankActivity;
@@ -58,4 +59,6 @@ public interface AppComponent {
     void inject(WidgetSettingsActivity widgetSettingsActivity);
 
     void inject(WidgetSettingsPresenter widgetSettingsPresenter);
+
+    void inject(App app);
 }

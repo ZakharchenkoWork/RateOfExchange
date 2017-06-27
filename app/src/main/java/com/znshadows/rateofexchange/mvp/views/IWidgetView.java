@@ -1,6 +1,7 @@
 package com.znshadows.rateofexchange.mvp.views;
 
 import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
+import com.znshadows.rateofexchange.general.models.WidgetInfo;
 
 import java.util.List;
 
@@ -10,5 +11,7 @@ import java.util.List;
 
 public interface IWidgetView extends IBaseView{
 
-    void showResponce(int[] allWidgetIds, List<UnifiedBankResponce> bankResponse);
+
+
+    void showResponce(WidgetInfo widgetInfo, UnifiedBankResponce bankResponse);
 }
