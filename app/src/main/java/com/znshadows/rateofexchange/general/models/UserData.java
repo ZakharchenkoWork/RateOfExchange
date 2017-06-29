@@ -1,5 +1,6 @@
 package com.znshadows.rateofexchange.general.models;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.znshadows.rateofexchange.mvp.models.IUserData;
@@ -18,8 +19,8 @@ public class UserData implements IUserData {
 
     public UserData() {}
 
-    @DatabaseField
-    private List<ChoosenBank> banksList = new ArrayList<>();
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private ArrayList<ChoosenBank> banksList = new ArrayList<>();
 
     @Override
     public List<ChoosenBank> getBanksList() {

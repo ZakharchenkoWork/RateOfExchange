@@ -26,7 +26,7 @@ import javax.inject.Inject;
 
 public class LoadingActivity extends BaseActivity implements ILoadingView{
     @Inject
-ILoadingPresenter presenter;
+    ILoadingPresenter presenter;
 
     @Override
     public void resolveDaggerDependencies() {
@@ -37,6 +37,11 @@ ILoadingPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter.loadData();
+
+    }
+    @Override
+    public void onDataLoaded(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

@@ -1,5 +1,6 @@
 package com.znshadows.rateofexchange.general.models;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -14,9 +15,12 @@ public class ChoosenBank {
     public static final String NOT_SET = "";
     @DatabaseField
     private BANKS bank = null;
-    @DatabaseField
-    private List<String> curencies = new ArrayList<>();
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private ArrayList<String> curencies = new ArrayList<>();
 
+    public ChoosenBank() {
+
+    }
     public ChoosenBank(BANKS bank) {
         this.bank = bank;
     }

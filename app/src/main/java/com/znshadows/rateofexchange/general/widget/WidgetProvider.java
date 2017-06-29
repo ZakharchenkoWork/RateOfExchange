@@ -92,7 +92,7 @@ public class WidgetProvider extends AppWidgetProvider implements IWidgetView {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
         views.setTextViewText(R.id.bankName, widgetInfo.getChoosenBank().name());
         views.setTextViewText(R.id.rateToBuy, "" + bankResponse.getBuy());
-        views.setTextViewText(R.id.rateToBuy, "" + bankResponse.getSale());
+        views.setTextViewText(R.id.rateToSale, "" + bankResponse.getSale());
         appWidgetManager.updateAppWidget(widgetInfo.getWidgetId(), views);
     }
 }

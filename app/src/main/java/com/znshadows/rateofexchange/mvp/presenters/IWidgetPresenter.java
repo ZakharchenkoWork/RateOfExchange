@@ -13,11 +13,5 @@ import java.util.List;
 
 public interface IWidgetPresenter<ViewType extends IWidgetView> extends IBasePreseter<ViewType> {
 
-    WidgetInfo getWidgetSettings(int widgetId);
-
-    List<BANKS> getChoosenBanks();
-
-    void getRatesInMyBank(int[] allWidgetIds);
-
     void getBankData(int widgetId);
 }
