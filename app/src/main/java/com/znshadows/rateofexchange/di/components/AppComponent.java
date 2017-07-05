@@ -7,6 +7,7 @@ import com.znshadows.rateofexchange.di.modules.PresentersModule;
 import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankActivity;
 import com.znshadows.rateofexchange.general.activities.choose_bank.ChoosseBankPresenter;
 import com.znshadows.rateofexchange.general.activities.loading.LoadingActivity;
+import com.znshadows.rateofexchange.general.activities.loading.LoadingPresenter;
 import com.znshadows.rateofexchange.general.activities.main.ChoosenBanksListAdapter;
 import com.znshadows.rateofexchange.general.activities.main.MainActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainPresenter;
@@ -15,6 +16,7 @@ import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesPresen
 import com.znshadows.rateofexchange.general.activities.rate_list.RateListAdapter;
 import com.znshadows.rateofexchange.general.activities.widget_settings.WidgetSettingsActivity;
 import com.znshadows.rateofexchange.general.activities.widget_settings.WidgetSettingsPresenter;
+import com.znshadows.rateofexchange.general.models.UserData;
 import com.znshadows.rateofexchange.general.widget.WidgetPresenter;
 import com.znshadows.rateofexchange.general.widget.WidgetProvider;
 import com.znshadows.rateofexchange.mvp.models.UnifiedModel;
@@ -61,4 +63,8 @@ public interface AppComponent {
     void inject(WidgetSettingsPresenter widgetSettingsPresenter);
 
     void inject(App app);
+
+    void inject(LoadingPresenter loadingPresenter);
+
+    void inject(UserData userData);
 }

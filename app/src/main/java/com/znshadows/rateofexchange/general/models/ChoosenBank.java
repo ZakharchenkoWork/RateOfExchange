@@ -4,6 +4,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by kostya on 17.06.2017.
  */
 @DatabaseTable(tableName = "choosen_banks")
-public class ChoosenBank {
+public class ChoosenBank implements Serializable{
     public static final String NOT_SET = "";
     @DatabaseField
     private BANKS bank = null;

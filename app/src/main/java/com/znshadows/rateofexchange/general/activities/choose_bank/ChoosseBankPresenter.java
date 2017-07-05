@@ -3,6 +3,7 @@ package com.znshadows.rateofexchange.general.activities.choose_bank;
 import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.general.activities.BasePresenter;
 import com.znshadows.rateofexchange.general.models.BANKS;
+import com.znshadows.rateofexchange.mvp.models.IDatabaseManager;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
 import com.znshadows.rateofexchange.mvp.models.IUserData;
 import com.znshadows.rateofexchange.mvp.presenters.IChoosseBankPresenter;
@@ -23,6 +24,7 @@ public class ChoosseBankPresenter extends BasePresenter<IChooseBankView> impleme
 
     @Inject
     IUserData userData;
+
     @Override
     public List<BANKS> getChoosenBanks() {
         return userData.getRawBanksList();
@@ -30,7 +32,8 @@ public class ChoosseBankPresenter extends BasePresenter<IChooseBankView> impleme
 
     @Override
     public void saveChoosenBanks(List<BANKS> banks) {
-        userData.saveChoosenBanks(banks);
+        userData.setChoosenBanks(banks);
+        userData.saveData();
     }
 
     @Override

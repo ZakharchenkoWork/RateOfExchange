@@ -2,7 +2,9 @@ package com.znshadows.rateofexchange.mvp.models;
 
 import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.general.models.ChoosenBank;
+import com.znshadows.rateofexchange.general.models.UserData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +14,13 @@ import java.util.List;
 public interface IUserData {
 
 
-    List<ChoosenBank> getBanksList();
+
+
+    void saveData();
+
+    void loadData();
+
+    ArrayList<ChoosenBank> getBanksList();
     List<BANKS> getRawBanksList();
 
     ChoosenBank getChosenBank(BANKS bank);
@@ -24,5 +32,5 @@ public interface IUserData {
 
     void addBank(BANKS bank);
 
-    void saveChoosenBanks(List<BANKS> banks);
+    void setChoosenBanks(List<BANKS> banks);
 }

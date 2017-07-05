@@ -1,12 +1,17 @@
 package com.znshadows.rateofexchange.general.db;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.znshadows.rateofexchange.general.models.UserData;
 import com.znshadows.rateofexchange.general.models.WidgetInfo;
 import com.znshadows.rateofexchange.mvp.models.IDatabaseManager;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by kostya on 26.06.2017.
@@ -14,28 +19,32 @@ import java.sql.SQLException;
 
 public class DatabaseManager implements IDatabaseManager {
 
-        private DatabaseHelper databaseHelper;
-@Override
-        public void setHelper(Context context){
-            databaseHelper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
-        }
-        @Override
-        public void releaseHelper(){
-            OpenHelperManager.releaseHelper();
-            databaseHelper = null;
-        }
-@Override
-public void saveWidgetInfo(WidgetInfo widgetInfo) {
-    try {
-        databaseHelper.getWidgetsDao().createOrUpdate(widgetInfo);
-    } catch (SQLException e) {
-        e.printStackTrace();
+    private DatabaseHelper databaseHelper;
+
+    @Override
+    public void setHelper(Context context) {
+        databaseHelper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
     }
-}
+
+    @Override
+    public void releaseHelper() {
+        OpenHelperManager.releaseHelper();
+        databaseHelper = null;
+    }
+
+    @Override
+    public void saveWidgetInfo(WidgetInfo widgetInfo) {
+        try {
+            databaseHelper.getWidgetsDao().createOrUpdate(widgetInfo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Searching for the widgwets settings saved in the database,
      * <b> WARNING: </b> returs null if there is no settings for this widget id.
+     *
      * @param widgetId providd by appWidgetManager.getAppWidgetIds(ComponentName)
      * @return settings for this widget
      */
@@ -48,6 +57,30 @@ public void saveWidgetInfo(WidgetInfo widgetInfo) {
         }
         return null;
     }
+    @Override
+    public @NonNull UserData getLastUserData(){
+        try {
+            List<UserData> oldUsers = databaseHelper.getUserDao().queryForAll();
+            if(oldUsers != null && oldUsers.size() > 0) {
+                return oldUsers.get(0);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new UserData();
+    }
+
+    @Override
+    public void saveUserData(UserData userData) {
+        try {
+            Dao.CreateOrUpdateStatus status = databaseHelper.getUserDao().createOrUpdate(userData);
+            Log.v("saveUserData", "status.isCreated() "+status.isCreated());
+            Log.v("saveUserData", "+status.isUpdated() "+status.isUpdated());
+            Log.v("saveUserData", "+status.getNumLinesChanged() "+status.getNumLinesChanged());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 // Dao<Book, String> bookDao;
 // try {
 // bookDao = DatabaseManager.getInstance().getHelper().getBookDao();
@@ -58,4 +91,4 @@ public void saveWidgetInfo(WidgetInfo widgetInfo) {
 // Book b = bookDao.queryForId(id); //получаем книгу по id
 // bookDao.delete(b); //удаляем книгу
 // } catch (SQLException e) { e.printStackTrace(); }
-    }
+}

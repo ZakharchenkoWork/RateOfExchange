@@ -5,4 +5,5 @@ package com.znshadows.rateofexchange.mvp.views;
  */
 
 public interface ILoadingView extends IBaseView{
+    void onDataLoaded();
 }
