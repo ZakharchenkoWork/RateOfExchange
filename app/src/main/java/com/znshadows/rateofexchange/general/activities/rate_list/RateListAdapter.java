@@ -2,6 +2,7 @@ package com.znshadows.rateofexchange.general.activities.rate_list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,30 +74,24 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        UnifiedBankResponce bankResponce = dataList.get(position);
+        final UnifiedBankResponce bankResponce = dataList.get(position);
         holder.code.setText(bankResponce.getCode());
         holder.rateBuy.setText("" + bankResponce.getBuy());
         holder.rateCheckBox.setVisibility(View.VISIBLE);
 
-        boolean isFound = false;
-        for (int i = 0; i < choosenCurrencies.size(); i++) {
-            if (choosenCurrencies.get(i).equals(bankResponce.getCode())) {
-                isFound = true;
-            }
-        }
-        if (isFound) {
+
+        if (choosenCurrencies.contains(bankResponce.getCode())) {
             holder.rateCheckBox.setChecked(true);
         } else {
             holder.rateCheckBox.setChecked(false);
         }
-        holder.rateCheckBox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            if (isChecked) {
-                presenter.addCurrency(bank, bankResponce.getCode());
+        //used instead of setOnCheckedChangeListener because it's get called when ViewHolder is destroyed
+        holder.rateCheckBox.setOnClickListener(checkBox->{
+            if( ( (CheckBox)checkBox ).isChecked() ) {
+               choosenCurrencies = presenter.addCurrency(bank, dataList.get(position).getCode());
             } else {
-                presenter.removeCurrency(bank, bankResponce.getCode());
+                choosenCurrencies =  presenter.removeCurrency(bank, dataList.get(position).getCode());
             }
-            choosenCurrencies = presenter.getChoosenCurrencies(bank);
-
         });
         if (bankResponce.getSale() == UnifiedBankResponce.NO_VALUE) {
             holder.rateSale.setVisibility(View.GONE);

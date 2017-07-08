@@ -63,8 +63,10 @@ public class ChooseBanksListAdapter extends RecyclerView.Adapter<ChooseBanksList
         holder.name.setText(context.getResources().getStringArray(R.array.bankNames)[dataList.get(position).ordinal()]);
         holder.logo.setImageResource(context.getResources().obtainTypedArray(R.array.banks_logo).getResourceId(dataList.get(position).ordinal(), -1));
         holder.bankCheckBox.setChecked(choosenBanksList.contains(dataList.get(position)));
-        holder.bankCheckBox.setOnCheckedChangeListener((b, isChecked) -> {
-            if (isChecked) {
+
+        //used instead of setOnCheckedChangeListener because it's get called when ViewHolder is destroyed
+        holder.bankCheckBox.setOnClickListener(checkBox -> {
+            if (((CheckBox) checkBox).isChecked()) {
                 choosenBanksList.add(dataList.get(position));
             } else {
                 choosenBanksList.remove(dataList.get(position));

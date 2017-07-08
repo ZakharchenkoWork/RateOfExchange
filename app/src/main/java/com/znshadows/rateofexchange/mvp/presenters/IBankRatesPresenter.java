@@ -15,7 +15,7 @@ public interface IBankRatesPresenter<ViewType extends IBankRatesView> extends IB
 
     List<String> getChoosenCurrencies(BANKS banks);
 
-    void addCurrency(BANKS bank, String code);
+    List<String> addCurrency(BANKS bank, String code);
 
-    void removeCurrency(BANKS bank, String code);
+    List<String> removeCurrency(BANKS bank, String code);
 }

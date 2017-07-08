@@ -39,15 +39,17 @@ public class BankRatesPresenter extends BasePresenter<IBankRatesView> implements
     }
 
     @Override
-    public void addCurrency(BANKS bank, String code) {
+    public List<String> addCurrency(BANKS bank, String code) {
         userData.addCurencyToBank(bank, code);
         userData.saveData();
+        return getChoosenCurrencies(bank);
     }
 
     @Override
-    public void removeCurrency(BANKS bank, String code) {
+    public List<String> removeCurrency(BANKS bank, String code) {
         userData.removeCurencyFromBank(bank, code);
         userData.saveData();
+        return getChoosenCurrencies(bank);
     }
 
     @Override
