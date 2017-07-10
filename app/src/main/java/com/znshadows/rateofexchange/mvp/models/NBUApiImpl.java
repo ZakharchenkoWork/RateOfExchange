@@ -28,15 +28,13 @@ public class NBUApiImpl extends BaseModel implements NBUApi, IBaseApi{
     @Override
     public Observable<List<NBUResponse>> getTodaysList() {
         return apiInterface.getTodaysList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(new AsyncTransformer<>());
     }
 
     @Override
     public Observable<NBUResponse> getTodaysRate(String query) {
         return apiInterface.getTodaysRate(query)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(new AsyncTransformer<>());
     }
 
 

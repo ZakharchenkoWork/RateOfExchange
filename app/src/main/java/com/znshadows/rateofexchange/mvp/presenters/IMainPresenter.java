@@ -16,7 +16,14 @@ public interface IMainPresenter<ViewType extends IMainView> extends IBasePresete
         void onFinish(List<UnifiedBankResponce> result);
     }
 
+    /**
+     * Retrieves rates from specified banks API
+     * @param bank target
+     * @param onBankRatesLoadedListener callback
+     */
     void getBankRates(ChoosenBank bank, OnBankRatesLoadedListener onBankRatesLoadedListener);
-
+    /**
+     * retrieves all banks that was choosen by user.
+     */
     void getChoosenBanks();
 }

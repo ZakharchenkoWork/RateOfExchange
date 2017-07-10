@@ -15,6 +15,9 @@
     <string name="ws_bank_hint">Банк</string>
     <string name="ws_currency_hint">Валюта.</string>
     <string name="ws_save">Сохранить</string>
+    <string name="currency">Валюта</string>
+    <string name="buy">Покупка</string>
+    <string name="sell">Продажа</string>
     <array name="bankNames">
     <item name="nbu">Национальный Банк Украины</item>
     <item name="privatBank">Приват Банк</item>

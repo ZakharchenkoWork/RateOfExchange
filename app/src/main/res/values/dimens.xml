@@ -7,6 +7,8 @@
     <dimen name="standard_horizontal_half_margin">8dp</dimen>
     <dimen name="standard_vertical_margin">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="bank_item_height">40dp</dimen>
+    <dimen name="bank_item_height">30dp</dimen>
     <dimen name="ws_button_side_margin">64dp</dimen>
+    <dimen name="text_start_padding">8dp</dimen>
+
 </resources>

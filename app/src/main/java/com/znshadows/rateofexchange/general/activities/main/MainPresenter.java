@@ -34,15 +34,20 @@ public class MainPresenter extends BasePresenter<IMainView> implements IMainPres
         App.getAppComponent().inject(this);
     }
 
+
     @Override
     public void getChoosenBanks() {
         getView().showChoosenBanks(userData.getBanksList());
     }
-
+    /**
+     * Retrieves rates from specified banks API
+     * @param bank target
+     * @param onBankRatesLoadedListener callback
+     */
     @Override
     public void getBankRates(ChoosenBank bank, OnBankRatesLoadedListener onBankRatesLoadedListener) {
         model.getTodaysList(bank.getBank()).subscribe(
-                getObservable(true, (bankResponse) -> {
+                getObserver(true, (bankResponse) -> {
                     List<UnifiedBankResponce> result = new ArrayList<>();
                     for (int i = 0; i < bankResponse.size(); i++) {
                         if (bank.checkCurrency(bankResponse.get(i).getCode())) {

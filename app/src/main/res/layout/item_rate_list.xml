@@ -11,61 +11,79 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/standard_vertical_margin"
         android:layout_marginTop="@dimen/standard_vertical_margin">
-        <ProgressBar
-            android:id="@+id/itemDataLoadingProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateDrawable="@drawable/progress"
-            android:indeterminateDuration="1000"
-            android:indeterminateOnly="true"
-            android:visibility="gone"
-            android:layout_alignBottom="@id/code"/>
-        <TextView
-            android:id="@+id/code"
-            style="@style/main_text"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/itemDataLoadingProgress"
-            android:layout_toEndOf="@+id/itemDataLoadingProgress"
-            />
 
-        <LinearLayout
-            android:id="@+id/ratesHolder"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/rateCheckBox"
-            android:layout_toStartOf="@+id/rateCheckBox"
-            android:layout_toRightOf="@id/code"
-            android:layout_toEndOf="@id/code"
-            android:weightSum="2"
-            android:orientation="horizontal">
+            android:layout_centerVertical="true">
+
+            <ProgressBar
+                android:id="@+id/itemDataLoadingProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/code"
+                android:indeterminateDrawable="@drawable/progress"
+                android:indeterminateDuration="1000"
+                android:indeterminateOnly="true"
+                android:visibility="gone" />
 
             <TextView
-                android:id="@+id/rateBuy"
+                android:id="@+id/code"
                 style="@style/main_text"
-                android:layout_width="match_parent"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:gravity="start|left"
-                android:layout_weight="1"
-                android:maxLines="1" />
+                android:layout_toEndOf="@+id/itemDataLoadingProgress"
+                android:layout_toRightOf="@+id/itemDataLoadingProgress"
+                android:text="@string/currency" />
 
-            <TextView
-                android:id="@+id/rateSale"
-                style="@style/main_text"
+            <LinearLayout
+                android:id="@+id/ratesHolder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:gravity="start|left"
-                android:layout_weight="1"
-                android:maxLines="1" />
-        </LinearLayout>
-        <CheckBox
-            android:id="@+id/rateCheckBox"
-            android:visibility="gone"
-            android:layout_width="@dimen/bank_item_height"
-            android:layout_height="@dimen/bank_item_height"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true" />
+                android:layout_toEndOf="@id/code"
+                android:layout_toLeftOf="@+id/rateCheckBox"
+                android:layout_toRightOf="@id/code"
+                android:layout_toStartOf="@+id/rateCheckBox"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/rateBuy"
+                    style="@style/main_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="start|left"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/text_start_padding"
+                    android:paddingStart="@dimen/text_start_padding"
+                    android:text="@string/buy" />
+                <TextView
+                    android:id="@+id/rateSale"
+                    style="@style/main_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="start|left"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/text_start_padding"
+                    android:paddingStart="@dimen/text_start_padding"
+                    android:text="@string/sell" />
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/rateCheckBox"
+                android:layout_width="@dimen/bank_item_height"
+                android:layout_height="@dimen/bank_item_height"
+                android:layout_alignParentEnd="true"
+
+                android:layout_alignParentRight="true"
+                android:visibility="invisible" />
+        </RelativeLayout>
     </RelativeLayout>
+
 </LinearLayout>

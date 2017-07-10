@@ -27,10 +27,15 @@ public class BankRatesPresenter extends BasePresenter<IBankRatesView> implements
     @Inject
     IUnifiedModel model;
 
-
+    /**
+     * Get bank rates from API of the specified bank.
+     * <p>
+     * IBankRatesView.showResponce() will be called
+     * @param bank
+     */
     public void getBankRates(BANKS bank){
         model.getTodaysList(bank).subscribe(
-                getObservable(true, (bankResponse)->getView().showResponce(bankResponse)));
+                getObserver(true, (bankResponse)->getView().showResponce(bankResponse)));
     }
 
     @Override

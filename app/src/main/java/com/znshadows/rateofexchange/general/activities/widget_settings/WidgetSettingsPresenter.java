@@ -28,7 +28,7 @@ public class WidgetSettingsPresenter extends BasePresenter<IWidgetSettingsView> 
     @Override
     public void getCurrenciesForBank(BANKS choosenBank) {
         model.getTodaysList(choosenBank).subscribe(
-                getObservable(true, (dataList)->{
+                getObserver(true, (dataList)->{
                     getView().showCurrenciesList(dataList);
                 }));
     }

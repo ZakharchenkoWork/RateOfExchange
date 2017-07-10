@@ -8,5 +8,8 @@ import com.znshadows.rateofexchange.mvp.views.ILoadingView;
  */
 
 public interface ILoadingPresenter<ViewType extends ILoadingView> extends IBasePreseter<ViewType> {
+    /**
+     * Loads data from database
+     */
     void loadData();
 }

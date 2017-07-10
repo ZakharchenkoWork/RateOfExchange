@@ -31,9 +31,20 @@ public abstract class BasePresenter<ViewType extends IBaseView> implements IBase
         resolveDaggerDependencies();
     }
 
+    /**
+     * Provide any DI related code here, it will be called with the constructor.
+     */
     public abstract void resolveDaggerDependencies();
 
-    protected <Type> Observer<Type> getObservable(boolean isShowLoading, OnNext<Type> action) {
+
+    /**
+     * Use if you need a lifecicle safe Observable, with loading options.
+     * @param isShowLoading flag to show standard loadin progress bar
+     * @param action callback when data recieved
+     * @param <Type> of the elemen that was recieved.
+     * @return
+     */
+    protected <Type> Observer<Type> getObserver(boolean isShowLoading, OnNext<Type> action) {
         return new Observer<Type>() {
             @Override
             public void onSubscribe(Disposable d) {

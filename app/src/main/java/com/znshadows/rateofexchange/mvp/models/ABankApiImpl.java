@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
- * Created by kostya on 19.05.2017.
+ * Created by Konstantyn Zakharchenko on 19.05.2017.
  */
 
 public class ABankApiImpl extends BaseModel implements ABankApi, IBaseApi {
@@ -42,8 +42,7 @@ public class ABankApiImpl extends BaseModel implements ABankApi, IBaseApi {
     @Override
     public Observable<String> getTodaysList() {
         return apiInterface.getTodaysList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(new AsyncTransformer<>());
     }
 
 

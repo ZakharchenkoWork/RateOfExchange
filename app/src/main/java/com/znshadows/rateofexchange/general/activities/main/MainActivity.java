@@ -49,14 +49,14 @@ public class MainActivity extends BaseActivity implements IMainView {
     @Override
     protected void onResume() {
         super.onResume();
-            presenter.getChoosenBanks();
+        presenter.getChoosenBanks();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choosen_banks_list);
-        setupToolbar(R.drawable.nav_drawer_icon, getString(R.string.main_activity_title));
+        setupToolbar(R.drawable.no_icon, getString(R.string.main_activity_title));
 
         list = (RecyclerView) findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

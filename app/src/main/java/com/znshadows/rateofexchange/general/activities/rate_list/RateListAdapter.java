@@ -54,10 +54,14 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
         return i;
     }
 
+    enum VIEW_TYPE {
+        HEADER,
+        ITEM
+    }
 
     @Override
     public int getItemViewType(int position) {
-        return 0;
+        return position == 0 ? VIEW_TYPE.HEADER.ordinal() : VIEW_TYPE.ITEM.ordinal();
     }
 
 
@@ -65,7 +69,6 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_rate_list, null);
-
         return new ViewHolder(view);
 
     }
@@ -74,25 +77,39 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        final UnifiedBankResponce bankResponce = dataList.get(position);
-        holder.code.setText(bankResponce.getCode());
-        holder.rateBuy.setText("" + bankResponce.getBuy());
-        holder.rateCheckBox.setVisibility(View.VISIBLE);
-
-
-        if (choosenCurrencies.contains(bankResponce.getCode())) {
-            holder.rateCheckBox.setChecked(true);
-        } else {
-            holder.rateCheckBox.setChecked(false);
-        }
-        //used instead of setOnCheckedChangeListener because it's get called when ViewHolder is destroyed
-        holder.rateCheckBox.setOnClickListener(checkBox->{
-            if( ( (CheckBox)checkBox ).isChecked() ) {
-               choosenCurrencies = presenter.addCurrency(bank, dataList.get(position).getCode());
-            } else {
-                choosenCurrencies =  presenter.removeCurrency(bank, dataList.get(position).getCode());
+        if (getItemViewType(position) == VIEW_TYPE.HEADER.ordinal()) {
+            if (dataList != null && dataList.size() > 0){
+                 if(dataList.get(0).getSale() == UnifiedBankResponce.NO_VALUE){
+                     handleSaleState(holder, dataList.get(0));
+                 }
             }
-        });
+            holder.rateCheckBox.setVisibility(View.INVISIBLE);
+        } else {
+            UnifiedBankResponce bankResponce = dataList.get(position - 1);
+
+            holder.code.setText(bankResponce.getCode());
+            holder.rateBuy.setText("" + bankResponce.getBuy());
+            holder.rateCheckBox.setVisibility(View.VISIBLE);
+
+
+            if (choosenCurrencies.contains(bankResponce.getCode())) {
+                holder.rateCheckBox.setChecked(true);
+            } else {
+                holder.rateCheckBox.setChecked(false);
+            }
+            //used instead of setOnCheckedChangeListener because it's get called when ViewHolder is destroyed
+            holder.rateCheckBox.setOnClickListener(checkBox -> {
+                if (((CheckBox) checkBox).isChecked()) {
+                    choosenCurrencies = presenter.addCurrency(bank, bankResponce.getCode());
+                } else {
+                    choosenCurrencies = presenter.removeCurrency(bank, bankResponce.getCode());
+                }
+            });
+            handleSaleState(holder, bankResponce);
+        }
+    }
+
+    private void handleSaleState(ViewHolder holder, UnifiedBankResponce bankResponce) {
         if (bankResponce.getSale() == UnifiedBankResponce.NO_VALUE) {
             holder.rateSale.setVisibility(View.GONE);
         } else {
@@ -103,7 +120,7 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
     // Returns the total count of items in the list
     @Override
     public int getItemCount() {
-        return dataList.size();
+        return dataList.size() + 1;// One is for header
     }
 
 

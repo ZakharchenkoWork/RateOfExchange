@@ -34,7 +34,7 @@ public class WidgetPresenter extends BasePresenter<IWidgetView> implements IWidg
             return;
         }
         model.getTodaysRates(widgetInfo.getChoosenBank(), widgetInfo.getChoosenCurrency()).subscribe(
-                getObservable(true, (bankResponse) -> getView().showResponce(widgetInfo, bankResponse)));
+                getObserver(true, (bankResponse) -> getView().showResponce(widgetInfo, bankResponse)));
     }
 
     @Override

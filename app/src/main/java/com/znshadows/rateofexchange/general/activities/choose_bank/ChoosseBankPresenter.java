@@ -25,11 +25,20 @@ public class ChoosseBankPresenter extends BasePresenter<IChooseBankView> impleme
     @Inject
     IUserData userData;
 
+    /**
+     * @return list of all banks(whithout settings) that was choosen by user.
+     */
     @Override
     public List<BANKS> getChoosenBanks() {
         return userData.getRawBanksList();
     }
 
+    /**
+     * Add's banks that wasn't in the list before, banks that was on the list and still there,
+     * keeps their settings, old banks that are not in the list anymore, gets deleted.
+     * Also saves this data to the DB.
+     * @param banks list of banks to save
+     */
     @Override
     public void saveChoosenBanks(List<BANKS> banks) {
         userData.setChoosenBanks(banks);
@@ -38,6 +47,6 @@ public class ChoosseBankPresenter extends BasePresenter<IChooseBankView> impleme
 
     @Override
     public void resolveDaggerDependencies() {
-App.getAppComponent().inject(this);
+        App.getAppComponent().inject(this);
     }
 }

@@ -24,11 +24,6 @@ public class ChooseBanksListAdapter extends RecyclerView.Adapter<ChooseBanksList
     private List<BANKS> dataList;
     private List<BANKS> choosenBanksList;
 
-    /**
-     * ViewHolder class will contain row view for RecyclerView
-     */
-
-
     public ChooseBanksListAdapter(Context context, List<BANKS> dataList, List<BANKS> choosenBanksList) {
         this.context = context;
         this.dataList = dataList;
@@ -40,23 +35,24 @@ public class ChooseBanksListAdapter extends RecyclerView.Adapter<ChooseBanksList
         return i;
     }
 
-
     @Override
     public int getItemViewType(int position) {
         return 0;
     }
-
-
+    // Returns the total count of items in the list
+    @Override
+    public int getItemCount() {
+        return dataList.size();
+    }
+    // Called once, on first item
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(context).inflate(R.layout.item_all_banks_list, null);
-
         return new ViewHolder(view);
 
     }
 
-    // Involves populating data into the item through holder
+    // Called when adapter need a new view
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
@@ -74,11 +70,7 @@ public class ChooseBanksListAdapter extends RecyclerView.Adapter<ChooseBanksList
         });
     }
 
-    // Returns the total count of items in the list
-    @Override
-    public int getItemCount() {
-        return dataList.size();
-    }
+
 
     public List<BANKS> getCheckedList() {
         return choosenBanksList;
@@ -103,5 +95,6 @@ public class ChooseBanksListAdapter extends RecyclerView.Adapter<ChooseBanksList
             bankCheckBox = (CheckBox) itemView.findViewById(R.id.bankCheckBox);
         }
     }
+
 }
 

@@ -14,23 +14,54 @@ import java.util.List;
 public interface IUserData {
 
 
-
-
+    /**
+     * saves date from this user to the database.
+     */
     void saveData();
 
+    /**
+     * Populates this user with data from database.
+     */
     void loadData();
 
+    /**
+     * Retrieves list of all banks that was choosen by user,
+     * with rates.
+     */
     ArrayList<ChoosenBank> getBanksList();
-    List<BANKS> getRawBanksList();
 
+
+    /**
+     * @return list of all banks that was choosen by user.
+     */
+    List<BANKS> getRawBanksList();
+    /**
+     * @return banks settings for specified bank.
+     */
     ChoosenBank getChosenBank(BANKS bank);
 
+    /**
+     * @return list of currencies for specified bank, choosen by user.
+     */
     List<String> getChoosenCurrencies(BANKS bank);
 
+    /**
+     * Adds currency to specific bank
+     * @param bank
+     * @param currency
+     */
     void addCurencyToBank(BANKS bank, String currency);
+
+    /**
+     * Removes currency from specified bank
+     * @param bank
+     * @param currency
+     */
     void removeCurencyFromBank(BANKS bank, String currency);
 
-    void addBank(BANKS bank);
-
+    /**
+     * Setter for banks list
+     * @param banks
+     */
     void setChoosenBanks(List<BANKS> banks);
 }

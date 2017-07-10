@@ -1,6 +1,7 @@
 package com.znshadows.rateofexchange.general.activities;
 
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.MenuRes;
@@ -17,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.znshadows.rateofexchange.R;
+import com.znshadows.rateofexchange.auxilary.OneButtonDialog;
 import com.znshadows.rateofexchange.general.menu.MenuFragment;
 
 /**
@@ -25,38 +27,42 @@ import com.znshadows.rateofexchange.general.menu.MenuFragment;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    public abstract void resolveDaggerDependencies();
     public static final int NO_MENU = -1;
+
     @MenuRes
     private int menuResourse = NO_MENU;
     private Menu menu;
-
+    private OnOptionItemSelected onOptionItemSelected = item -> false;
 
 
     @Override
+    @CallSuper
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         resolveDaggerDependencies();
         setContentView(R.layout.place_holder);
     }
 
+    /**
+     * Use when you need to set a content view without loosing of basic app functionality as toolbar
+     * @param layoutResID
+     */
+    @CallSuper
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(R.layout.activity_holder_layout);
         RelativeLayout content = (RelativeLayout) findViewById(R.id.main_content);
-        content.addView(getLayoutInflater().inflate(layoutResID, null));
+        content.addView(getLayoutInflater().inflate(layoutResID, content, false));
         setDrawerState(false);
 
     }
 
-
-
     /**
      * call this method from onCreate if activity needs a menu inside side drawer.
-     * make shure to call setupSideDrawer first
+     * make sure to call setupSideDrawer first.
+     * @param fragment to be added.
      */
-    protected void showMenuFragment() {
-        MenuFragment fragment = new MenuFragment();
+    protected void showMenuFragment(MenuFragment fragment) {
         getFragmentManager().beginTransaction().replace(R.id.nav_view, fragment).commitAllowingStateLoss();
     }
 
@@ -94,7 +100,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * stops progress bar
+     * Stops progress bar
      */
     public void onFinishLoading() {
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.loadingProgress);
@@ -103,11 +109,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-
-    //TODO:ADD Coment
+    /**
+     * @return menu object that was used by this activity
+     */
     public Menu getMenu() {
         return menu;
-
     }
 
     /**
@@ -126,6 +132,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         return toolbar;
     }
 
+    /**
+     * Method to retrieve toolbar. That was added to activity automaticaly.
+     * @return Toolbar view
+     */
     public Toolbar getToolbarLayout() {
         return (Toolbar) findViewById(R.id.toolbar);
     }
@@ -148,13 +158,16 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Provide any DI related code here, it will be called with the constructor.
+     */
+    public abstract void resolveDaggerDependencies();
 
     /**
      * Called by presenters, when there is an error
      */
     public void onError() {
-    //    new OneButtonDialog(this, getString(R.string.connection_error_title), getString(R.string.connection_error_message), OneButtonDialog.NO_ICON, null);
+        new OneButtonDialog(this, OneButtonDialog.DIALOG_TYPE.MESSAGE_ONLY).setTitle("Oops.").setMessage("Sorry, there was an error, please try again later.").build();
         //Toast.makeText(this, "Network error", Toast.LENGTH_SHORT).show();
     }
 
@@ -212,18 +225,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         this.onOptionItemSelected = onOptionItemSelected;
     }
 
-    private OnOptionItemSelected onOptionItemSelected = new OnOptionItemSelected() {
-        @Override
-        public boolean onClick(MenuItem item) {
-            return false;
-        }
-    };
-
-
 
     public interface OnOptionItemSelected {
         boolean onClick(MenuItem item);
     }
+
 
 }
 

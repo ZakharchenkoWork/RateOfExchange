@@ -60,7 +60,9 @@ public class UserData implements IUserData {
         }
         return result;
     }
-
+    /**
+     * @return banks settings for specified bank. Or null if bank is not set yet.
+     */
     @Override
     public ChoosenBank getChosenBank(BANKS bank) {
         for (ChoosenBank choosenBank : banksList) {
@@ -100,14 +102,6 @@ public class UserData implements IUserData {
             choosenBank.removeCurrency(currency);
         }
     }
-
-    @Override
-    public void addBank(BANKS bank) {
-        if (getChosenBank(bank) == null) {
-            banksList.add(new ChoosenBank(bank));
-        }
-    }
-
     /**
      * Use to update list if banks choosen by users, preserves old banks settings if they are still in the list.
      * @param banks list of all banks that has been choosen this time.

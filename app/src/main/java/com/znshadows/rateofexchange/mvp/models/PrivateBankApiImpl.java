@@ -23,7 +23,11 @@ public class PrivateBankApiImpl extends BaseModel implements PrivateBankApi, IBa
     public PrivateBankApiImpl() {
         apiInterface = getApiBuilder(URL_START).create(PrivateBankApi.class);
     }
-
+    @Override
+    public Observable<List<PrivateBankResponce>> getTodaysList(@Query("json") boolean isJson, @Query("exchange") String emptyExchange, @Query("coursid") int courseId) {
+        return apiInterface.getTodaysList(isJson, emptyExchange,courseId)
+                .compose(new AsyncTransformer<>());
+    }
 
     @Override
     public Observable<List<UnifiedBankResponce>> getTodaysUnifiedList() {
@@ -49,10 +53,5 @@ public class PrivateBankApiImpl extends BaseModel implements PrivateBankApi, IBa
         });
     }
 
-    @Override
-    public Observable<List<PrivateBankResponce>> getTodaysList(@Query("json") boolean isJson, @Query("exchange") String emptyExchange, @Query("coursid") int courseId) {
-        return apiInterface.getTodaysList(isJson, emptyExchange,courseId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
+
 }

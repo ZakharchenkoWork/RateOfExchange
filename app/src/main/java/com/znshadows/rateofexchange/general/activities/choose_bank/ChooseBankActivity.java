@@ -30,18 +30,18 @@ public class ChooseBankActivity extends BaseActivity implements IChooseBankView 
     @Inject
     IChoosseBankPresenter presenter;
 
-    RecyclerView list;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_choose_bank);
-        setupToolbar(R.drawable.btn_form_arrow_left_normal, getString(R.string.choose_bank_activity_title));
-        setNavigationOnClickListener((view -> finish()));
+
+        setupToolbar(R.drawable.btn_header_back_normal, getString(R.string.choose_bank_activity_title));
+        setNavigationOnClickListener(view -> finish());
+
         setMenuResourse(R.menu.ok_menu);
 
         List<BANKS> choosenBanksList = presenter.getChoosenBanks();
-        list = (RecyclerView) findViewById(R.id.list);
+        RecyclerView list = (RecyclerView) findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         list.setLayoutManager(layoutManager);
         ChooseBanksListAdapter chooseBanksListAdapter = new ChooseBanksListAdapter(this, Arrays.asList(BANKS.values()), choosenBanksList);

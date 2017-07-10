@@ -14,14 +14,14 @@ import javax.inject.Inject;
  */
 
 public class LoadingPresenter extends BasePresenter<ILoadingView> implements ILoadingPresenter<ILoadingView>{
-    @Inject
-    IDatabaseManager databaseManager;
+
     @Inject
     IUserData userData;
     @Override
     public void resolveDaggerDependencies() {
         App.getAppComponent().inject(this);
     }
+
 
     @Override
     public void loadData() {

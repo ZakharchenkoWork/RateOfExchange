@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
+import com.znshadows.rateofexchange.auxilary.OneButtonDialog;
 import com.znshadows.rateofexchange.general.activities.BaseActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainActivity;
 import com.znshadows.rateofexchange.general.activities.widget_settings.WidgetSettingsActivity;
@@ -24,7 +25,7 @@ import com.znshadows.rateofexchange.mvp.views.ILoadingView;
 
 import javax.inject.Inject;
 
-public class LoadingActivity extends BaseActivity implements ILoadingView{
+public class LoadingActivity extends BaseActivity implements ILoadingView {
     @Inject
     ILoadingPresenter presenter;
 
@@ -40,8 +41,12 @@ public class LoadingActivity extends BaseActivity implements ILoadingView{
         presenter.loadData();
 
     }
+
+    /**
+     * Called after {@link ILoadingPresenter#loadData()}.
+     */
     @Override
-    public void onDataLoaded(){
+    public void onDataLoaded() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

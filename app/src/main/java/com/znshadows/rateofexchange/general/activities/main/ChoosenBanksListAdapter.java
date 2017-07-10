@@ -37,6 +37,7 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
     private List<ChoosenBank> dataList;
     @Inject
     IMainPresenter presenter;
+
     interface OnClickListener {
         void onClick(BANKS bank);
     }
@@ -84,38 +85,50 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
         ChoosenBank choosenBank = dataList.get(position);
         holder.logo.setImageResource(context.getResources().obtainTypedArray(R.array.banks_logo).getResourceId(choosenBank.getBank().ordinal(), -1));
         holder.name.setText(context.getResources().getStringArray(R.array.bankNames)[choosenBank.getBank().ordinal()]);
+
         List<String> curencies = dataList.get(position).getCurencies();
-        if(curencies.size() > 0){
+        if (curencies.size() > 0) {
+            //Adding header
+            holder.addChild(LayoutInflater.from(context).inflate(R.layout.item_rate_list, null));
+
             for (int i = 0; i < curencies.size(); i++) {
                 View view = LayoutInflater.from(context).inflate(R.layout.item_rate_list, null);
                 holder.addChild(view);
-                TextView code = (TextView)view.findViewById(R.id.code);
+                TextView code = (TextView) view.findViewById(R.id.code);
                 code.setText(curencies.get(i));
+                ((TextView) view.findViewById(R.id.rateBuy)).setText("");
+                ((TextView) view.findViewById(R.id.rateSale)).setText("");
             }
             holder.startChildsProgressBar();
-            presenter.getBankRates(choosenBank,(rates)->{
+            presenter.getBankRates(choosenBank, (rates) -> {
 
-                for (int i = 0; i < holder.childs.size(); i++) {
+                //view with index of 0 is a header
+                for (int i = 1; i < holder.childs.size(); i++) {
                     View view = holder.childs.get(i);
-                    ((TextView) view.findViewById(R.id.code)).setText(rates.get(i).getCode());
-                    ((TextView) view.findViewById(R.id.rateBuy)).setText(""+rates.get(i).getBuy());
+                    //adjust rates index so header does not populates with data
+                    UnifiedBankResponce bankResponce = rates.get(i - 1);
+                    ((TextView) view.findViewById(R.id.code)).setText(bankResponce.getCode());
+                    ((TextView) view.findViewById(R.id.rateBuy)).setText("" + bankResponce.getBuy());
 
-                    if(rates.get(i).getSale() == UnifiedBankResponce.NO_VALUE){
+                    if (bankResponce.getSale() == UnifiedBankResponce.NO_VALUE) {
                         view.findViewById(R.id.rateSale).setVisibility(GONE);
                     } else {
-                        ((TextView) view.findViewById(R.id.rateSale)).setText(""+rates.get(i).getSale());
+                        ((TextView) view.findViewById(R.id.rateSale)).setText("" + bankResponce.getSale());
                     }
                 }
                 holder.finishChildsProgressBar();
             });
-        holder.showState();
-        }
+            holder.showState();
 
+        } else {
+            holder.arrow.setVisibility(View.INVISIBLE);
+        }
         if (onItemClickListener != null) {
             holder.itemView.setOnClickListener((v) -> {
                 onItemClickListener.onClick(choosenBank.getBank());
             });
         }
+
     }
 
     // Returns the total count of items in the list
@@ -152,12 +165,13 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
                 showState();
             });
         }
-public void addChild(View view){
-    childs.add(view);
-    childsHolder.addView(view);
-}
 
-        private void showState(){
+        public void addChild(View view) {
+            childs.add(view);
+            childsHolder.addView(view);
+        }
+
+        private void showState() {
             if (isOpen) {
                 open();
             } else {
@@ -203,6 +217,7 @@ public void addChild(View view){
                 child.findViewById(R.id.itemDataLoadingProgress).setVisibility(VISIBLE);
             }
         }
+
         public void finishChildsProgressBar() {
             for (View child : childs) {
                 child.findViewById(R.id.itemDataLoadingProgress).setVisibility(GONE);
