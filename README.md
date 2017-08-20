@@ -1,16 +1,15 @@
 # Wind Direction
-Portfolio project. Intended to be used by seamans, to calculate true wind.
+Portfolio project. Intended to be used by Ukranians, who is intrested in the current exchange rate.
 ## Usage
 For any device with android 4.0+
 ## Screenshots
-![screen1](https://github.com/ZakharchenkoWork/WindDirection/blob/master/screenshots/Screenshot1.png)
-![screen2](https://github.com/ZakharchenkoWork/WindDirection/blob/master/screenshots/Screenshot2.png)
-![screen3](https://github.com/ZakharchenkoWork/WindDirection/blob/master/screenshots/Screenshot3.png)
-![screen4](https://github.com/ZakharchenkoWork/WindDirection/blob/master/screenshots/Screenshot4.png)
-![screen5](https://github.com/ZakharchenkoWork/WindDirection/blob/master/screenshots/Screenshot5.png)
-![screen6](https://github.com/ZakharchenkoWork/WindDirection/blob/master/screenshots/Screenshot6.png)
-![screen7](https://github.com/ZakharchenkoWork/WindDirection/blob/master/screenshots/Screenshot7.png)
-![screen8](https://github.com/ZakharchenkoWork/WindDirection/blob/master/screenshots/Screenshot8.png)
+![screen1](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(8).png)
+![screen2](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(7).png)
+![screen3](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(6).png)
+![screen4](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(5).png)
+![screen5](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(4).png)
+![screen6](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(3).png)
+![screen7](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(2).png)
 ## Used materials
 [Shimmer effect for TextView.](https://github.com/RomainPiel/Shimmer-android)
 [Reside Menu for background menu](https://github.com/SpecialCyCi/AndroidResideMenu)
