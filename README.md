@@ -3,16 +3,15 @@ Portfolio project. Intended to be used by Ukranians, who is intrested in the cur
 ## Usage
 For any device with android 4.0+
 ## Screenshots
-![screen1](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(8).png)
-![screen2](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(7).png)
-![screen3](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(6).png)
-![screen4](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(5).png)
-![screen5](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(4).png)
-![screen6](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(3).png)
-![screen7](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(2).png)
+![screen1](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(1).png)
+![screen2](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(2).png)
+![screen3](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(3).png)
+![screen4](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(4).png)
+![screen5](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(5).png)
+![screen6](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(6).png)
+![screen7](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(7).png)
 ## Used materials
-[Shimmer effect for TextView.](https://github.com/RomainPiel/Shimmer-android)
-[Reside Menu for background menu](https://github.com/SpecialCyCi/AndroidResideMenu)
+
 ## License
 Copyright 2016 Zakharchenko Kostyantyn
 
