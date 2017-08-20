@@ -1,4 +1,4 @@
-# Wind Direction
+# Rate Of Exchange
 Portfolio project. Intended to be used by Ukranians, who is intrested in the current exchange rate.
 ## Usage
 For any device with android 4.0+
