@@ -9,11 +9,10 @@ For any device with android 4.0+
 ![screen4](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(4).png)
 ![screen5](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(5).png)
 ![screen6](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(6).png)
-![screen7](https://github.com/ZakharchenkoWork/RateOfExchange/blob/master/Screenshoots/Screenshot%20(7).png)
 ## Used materials
-
+Java SE, HTTP, XML, JSON, GSON, Rest, Retrofit, ORMLite, rxJava, rxAndroid, Dagger2
 ## License
-Copyright 2016 Zakharchenko Kostyantyn
+Copyright 2017 Zakharchenko Kostyantyn
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
