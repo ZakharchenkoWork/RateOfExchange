@@ -48,6 +48,10 @@ public class BankRatesActivity extends BaseActivity implements IBankRatesView{
         presenter.getBankRates(BANKS.values()[bankIndx]);
     }
 
+    /**
+     * Called from {@link BankRatesPresenter#getBankRates(BANKS)}
+     * @param nbuResponse
+     */
     @Override
     public void showResponce(List<UnifiedBankResponce> nbuResponse) {
         list.setAdapter(new RateListAdapter(this, BANKS.values()[bankIndx], nbuResponse));

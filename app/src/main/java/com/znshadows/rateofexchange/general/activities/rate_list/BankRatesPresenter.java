@@ -30,13 +30,14 @@ public class BankRatesPresenter extends BasePresenter<IBankRatesView> implements
     /**
      * Get bank rates from API of the specified bank.
      * <p>
-     * IBankRatesView.showResponce() will be called
+     * After finish calls {@link IBankRatesView#showResponce(List)}
      * @param bank
      */
     public void getBankRates(BANKS bank){
         model.getTodaysList(bank).subscribe(
                 getObserver(true, (bankResponse)->getView().showResponce(bankResponse)));
     }
+
 
     @Override
     public List<String> getChoosenCurrencies(BANKS banks) {

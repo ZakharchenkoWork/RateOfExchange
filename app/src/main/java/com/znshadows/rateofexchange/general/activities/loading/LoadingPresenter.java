@@ -22,7 +22,6 @@ public class LoadingPresenter extends BasePresenter<ILoadingView> implements ILo
         App.getAppComponent().inject(this);
     }
 
-
     @Override
     public void loadData() {
         userData.loadData();

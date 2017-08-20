@@ -21,12 +21,12 @@ public class App extends Application {
         super.onCreate();
         appComponent = DaggerAppComponent.create();
         appComponent.inject(this);
-    databaseManager.setHelper(getApplicationContext());
+    databaseManager.setup(getApplicationContext());
     }
 
     @Override
     public void onTerminate() {
-        databaseManager.releaseHelper();
+        databaseManager.release();
         super.onTerminate();
     }
     public static AppComponent getAppComponent() {

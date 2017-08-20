@@ -21,13 +21,15 @@ public class DatabaseManager implements IDatabaseManager {
 
     private DatabaseHelper databaseHelper;
 
+
+
     @Override
-    public void setHelper(Context context) {
+    public void setup(Context context) {
         databaseHelper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
     }
 
     @Override
-    public void releaseHelper() {
+    public void release() {
         OpenHelperManager.releaseHelper();
         databaseHelper = null;
     }
@@ -81,14 +83,4 @@ public class DatabaseManager implements IDatabaseManager {
             e.printStackTrace();
         }
     }
-// Dao<Book, String> bookDao;
-// try {
-// bookDao = DatabaseManager.getInstance().getHelper().getBookDao();
-// Book book = new book();
-// book.setId(id);
-// book.setTitle(some_title);
-// bookDao.create(book); //создаем книгу
-// Book b = bookDao.queryForId(id); //получаем книгу по id
-// bookDao.delete(b); //удаляем книгу
-// } catch (SQLException e) { e.printStackTrace(); }
 }

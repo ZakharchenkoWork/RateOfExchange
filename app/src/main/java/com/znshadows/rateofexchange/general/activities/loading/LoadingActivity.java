@@ -43,6 +43,7 @@ public class LoadingActivity extends BaseActivity implements ILoadingView {
     }
 
     /**
+     * Moves to MainActivity
      * Called after {@link ILoadingPresenter#loadData()}.
      */
     @Override

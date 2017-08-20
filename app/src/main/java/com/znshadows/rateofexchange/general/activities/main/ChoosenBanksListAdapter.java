@@ -72,9 +72,7 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(context).inflate(R.layout.item_banks_list, null);
-
         return new ViewHolder(view);
 
     }
@@ -88,38 +86,7 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
 
         List<String> curencies = dataList.get(position).getCurencies();
         if (curencies.size() > 0) {
-            //Adding header
-            holder.addChild(LayoutInflater.from(context).inflate(R.layout.item_rate_list, null));
-
-            for (int i = 0; i < curencies.size(); i++) {
-                View view = LayoutInflater.from(context).inflate(R.layout.item_rate_list, null);
-                holder.addChild(view);
-                TextView code = (TextView) view.findViewById(R.id.code);
-                code.setText(curencies.get(i));
-                ((TextView) view.findViewById(R.id.rateBuy)).setText("");
-                ((TextView) view.findViewById(R.id.rateSale)).setText("");
-            }
-            holder.startChildsProgressBar();
-            presenter.getBankRates(choosenBank, (rates) -> {
-
-                //view with index of 0 is a header
-                for (int i = 1; i < holder.childs.size(); i++) {
-                    View view = holder.childs.get(i);
-                    //adjust rates index so header does not populates with data
-                    UnifiedBankResponce bankResponce = rates.get(i - 1);
-                    ((TextView) view.findViewById(R.id.code)).setText(bankResponce.getCode());
-                    ((TextView) view.findViewById(R.id.rateBuy)).setText("" + bankResponce.getBuy());
-
-                    if (bankResponce.getSale() == UnifiedBankResponce.NO_VALUE) {
-                        view.findViewById(R.id.rateSale).setVisibility(GONE);
-                    } else {
-                        ((TextView) view.findViewById(R.id.rateSale)).setText("" + bankResponce.getSale());
-                    }
-                }
-                holder.finishChildsProgressBar();
-            });
-            holder.showState();
-
+            showCurrencies(holder, choosenBank, curencies);
         } else {
             holder.arrow.setVisibility(View.INVISIBLE);
         }
@@ -129,6 +96,43 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
             });
         }
 
+    }
+
+    private void showCurrencies(ViewHolder holder, ChoosenBank choosenBank, List<String> curencies) {
+        //Adding header
+        holder.addChild(LayoutInflater.from(context).inflate(R.layout.item_rate_list, null));
+
+        for (int i = 0; i < curencies.size(); i++) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_rate_list, null);
+            holder.addChild(view);
+            TextView code = (TextView) view.findViewById(R.id.code);
+            code.setText(curencies.get(i));
+            ((TextView) view.findViewById(R.id.rateBuy)).setText("");
+            ((TextView) view.findViewById(R.id.rateSale)).setText("");
+        }
+        holder.startChildsProgressBar();
+
+        presenter.getBankRates(choosenBank, (rates) -> fillChildViewsWithData(holder, rates));
+
+        holder.showState();
+    }
+
+    private void fillChildViewsWithData(ViewHolder holder, List<UnifiedBankResponce> rates) {
+        //view with index of 0 is a header
+        for (int i = 1; i < holder.childs.size(); i++) {
+            View view = holder.childs.get(i);
+            //adjust rates index so header does not populates with data
+            UnifiedBankResponce bankResponce = rates.get(i - 1);
+            ((TextView) view.findViewById(R.id.code)).setText(bankResponce.getCode());
+            ((TextView) view.findViewById(R.id.rateBuy)).setText("" + bankResponce.getBuy());
+
+            if (bankResponce.getSale() == UnifiedBankResponce.NO_VALUE) {
+                view.findViewById(R.id.rateSale).setVisibility(GONE);
+            } else {
+                ((TextView) view.findViewById(R.id.rateSale)).setText("" + bankResponce.getSale());
+            }
+        }
+        holder.finishChildsProgressBar();
     }
 
     // Returns the total count of items in the list
@@ -212,13 +216,13 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
 
         }
 
-        public void startChildsProgressBar() {
+        private void startChildsProgressBar() {
             for (View child : childs) {
                 child.findViewById(R.id.itemDataLoadingProgress).setVisibility(VISIBLE);
             }
         }
 
-        public void finishChildsProgressBar() {
+        private void finishChildsProgressBar() {
             for (View child : childs) {
                 child.findViewById(R.id.itemDataLoadingProgress).setVisibility(GONE);
             }

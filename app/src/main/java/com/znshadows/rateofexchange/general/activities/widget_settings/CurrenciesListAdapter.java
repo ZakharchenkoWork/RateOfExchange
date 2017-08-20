@@ -80,6 +80,7 @@ public class CurrenciesListAdapter extends RecyclerView.Adapter<CurrenciesListAd
         holder.code.setText(dataList.get(position).getCode());
         holder.rateBuy.setVisibility(View.GONE);
         holder.rateCheckBox.setVisibility(View.GONE);
+
         holder.itemView.setOnClickListener((v) -> {
             listener.onChoose(dataList.get(position).getCode());
         });

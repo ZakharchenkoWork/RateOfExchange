@@ -72,9 +72,13 @@ public class MainActivity extends BaseActivity implements IMainView {
         });
     }
 
+    /**
+     * Shows list of banks <p>
+     * Called after {@link MainPresenter#getChoosenBanks()}
+     * @param banks from presenter
+     */
     @Override
     public void showChoosenBanks(List<ChoosenBank> banks) {
-        if(banks != null && banks.size() > 0 ) {
             list.setAdapter(new ChoosenBanksListAdapter(this, banks)
                     .setOnItemClickListener((bank)->{
                         Intent intent = new Intent(this, BankRatesActivity.class);
@@ -82,10 +86,16 @@ public class MainActivity extends BaseActivity implements IMainView {
                         startActivity(intent);
             }));
             noBanksText.setVisibility(View.GONE);
-        } else {
-            list.setAdapter(new ChoosenBanksListAdapter(this, banks));
-            noBanksText.setVisibility(View.VISIBLE);
-        }
+    }
+
+    /**
+     * Shows message that there are no banks <p>
+     * Called after {@link MainPresenter#getChoosenBanks()}
+     */
+    @Override
+    public void showNoBanksMessage(){
+        list.setAdapter(new ChoosenBanksListAdapter(this, new ArrayList<>()));
+        noBanksText.setVisibility(View.VISIBLE);
     }
 
 

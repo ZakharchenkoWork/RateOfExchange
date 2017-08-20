@@ -10,16 +10,30 @@ import com.znshadows.rateofexchange.general.models.WidgetInfo;
  */
 
 
+/**
+ * used in {@link com.znshadows.rateofexchange.general.db.DatabaseManager}
+ */
 public interface IDatabaseManager {
-    void setHelper(Context context);
 
-    void releaseHelper();
+    /**
+     * Call when app lunched first time
+     * @param context app context
+     */
+    void setup(Context context);
+
+    /**
+     * Call when app is closed
+     */
+    void release();
 
     void saveWidgetInfo(WidgetInfo widgetInfo);
 
     WidgetInfo getWidgetInfo(int widgetId);
 
+    void saveUserData(UserData userData);
+
     UserData getLastUserData();
 
-    void saveUserData(UserData userData);
+
+
 }

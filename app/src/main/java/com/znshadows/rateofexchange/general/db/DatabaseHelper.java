@@ -25,7 +25,6 @@ import java.sql.SQLException;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 
-
     private static final String DATABASE_NAME = "app.db";
     private static final int DATABASE_VERSION = 1;
     private Dao<UserData, String> userDao = null;
@@ -76,6 +75,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return userDao;
     }
+
     /**
      * Returns the Database Access Object (DAO) for our WidgetInfo class. It will create it or just give the cached * value.
      */
@@ -85,8 +85,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return widgetsDao;
     }
-    /** * Close the database connections and clear any cached DAOs. */
-    @Override public void close() {
+
+    /**
+     * Close the database connections and clear any cached DAOs.
+     */
+    @Override
+    public void close() {
         super.close();
         userDao = null;
         widgetsDao = null;

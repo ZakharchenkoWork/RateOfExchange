@@ -19,31 +19,43 @@ public abstract class BaseFragment extends Fragment {
     private LayoutInflater inflater;
     private ViewGroup container;
     private Bundle savedInstanceState;
-
+    protected View root;
+    /**
+     * Provide any DI related code here, it will be called before {@link BaseFragment#onCreateView(View)}.
+     */
     protected abstract void resolveDaggerDependencies();
 
-    protected abstract int contentView();
+    /**
+     * Use to set layout resource to be used as base of Fragment, it will be called before {@link BaseFragment#onCreateView(View)}.
+     * @return
+     */
+    protected abstract @LayoutRes int contentView();
 
+    /**
+     * Called to do initial creation of a fragment.
+     * @param root view with result of {@link BaseFragment#contentView()}
+     * @return same root view that was in param.
+     */
     protected abstract View onCreateView(View root);
-
-    protected View root;
-
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        resolveDaggerDependencies();
         this.inflater = inflater;
         this.container = container;
         this.savedInstanceState = savedInstanceState;
+
         if (root == null) {
             root = inflater.inflate(contentView(), null);
         }
-        resolveDaggerDependencies();
-
         return onCreateView(root);
     }
 
-
+    /**
+     * use to get acces to BaseActivity instance that produced this fragment
+     * @return
+     */
     protected BaseActivity getBaseActivity() {
         if (getActivity() != null && getActivity() instanceof BaseActivity) {
             return ((BaseActivity) getActivity());

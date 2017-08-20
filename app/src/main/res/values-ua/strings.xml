@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">RateOfExchange</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="main_activity_title">Отслеживаемые банки</string>
+    <string name="choose_bank_activity_title">Выберите банк</string>
+    <string name="ok">OK</string>
+    <string name="no_banks_message">У вас пока нет отслеживаемых банков. Вы можете добвить их нажав на кнопку внизу.</string>
+    <string name="ws_bank_title">Необходимо выбрать банк и валюту, для отображения в виджете.</string>
+    <string name="ws_currency_title">Выберите валюту.</string>
+    <string name="ws_bank_hint">Банк</string>
+    <string name="ws_currency_hint">Валюта.</string>
+    <string name="ws_save">Сохранить</string>
+    <string name="currency">Валюта</string>
+    <string name="buy">Покупка</string>
+    <string name="sell">Продажа</string>
+    <array name="bankNames">
+    <item name="nbu">Национальный Банк Украины</item>
+    <item name="privatBank">Приват Банк</item>
+    <item name="a_Bank">A-Банк</item>
+    </array>
+</resources>

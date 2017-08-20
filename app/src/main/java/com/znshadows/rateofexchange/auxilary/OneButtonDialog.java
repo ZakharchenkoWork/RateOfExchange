@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.text.Html;
 import android.view.Gravity;
@@ -64,11 +65,11 @@ public class OneButtonDialog extends AlertDialog.Builder {
      * @param inputType InputType constant
      * @return this
      */
+
     public OneButtonDialog setInputType(int inputType) { // TODO: Think about InputType anotation
         this.inputType = inputType;
         return this;
     }
-
     /**
      * Set text for the positive button inside this dialog.
      * <p>
@@ -212,6 +213,7 @@ public class OneButtonDialog extends AlertDialog.Builder {
             }
             if (inputType != DEFAULT) {
                 input.setInputType(inputType);
+
             }
             configureStyle(input);
 

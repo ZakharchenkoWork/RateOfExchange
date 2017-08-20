@@ -9,7 +9,10 @@ import java.util.List;
 /**
  * Created by kostya on 17.05.2017.
  */
-
+/**
+ * Used in {@link com.znshadows.rateofexchange.general.activities.rate_list.BankRatesPresenter}
+ * @param <ViewType>
+ */
 public interface IBankRatesPresenter<ViewType extends IBankRatesView> extends IBasePreseter<ViewType> {
     /**
      * Get bank rates from API of the specified bank

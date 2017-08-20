@@ -9,7 +9,12 @@ import java.util.List;
  * Created by kostya on 17.05.2017.
  */
 
+/**
+ * Used in {@link com.znshadows.rateofexchange.general.activities.main.MainActivity}
+ */
 public interface IMainView extends IBaseView{
 
     void showChoosenBanks(List<ChoosenBank> banks);
+
+    void showNoBanksMessage();
 }

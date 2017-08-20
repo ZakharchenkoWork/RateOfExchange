@@ -11,6 +11,10 @@ import java.util.List;
  * Created by kostya on 17.05.2017.
  */
 
+/**
+ * Used in {@link com.znshadows.rateofexchange.general.activities.main.MainPresenter}
+ * @param <ViewType> Activity
+ */
 public interface IMainPresenter<ViewType extends IMainView> extends IBasePreseter<ViewType> {
     interface OnBankRatesLoadedListener {
         void onFinish(List<UnifiedBankResponce> result);
@@ -23,7 +27,10 @@ public interface IMainPresenter<ViewType extends IMainView> extends IBasePresete
      */
     void getBankRates(ChoosenBank bank, OnBankRatesLoadedListener onBankRatesLoadedListener);
     /**
-     * retrieves all banks that was choosen by user.
+     * Retrieves banks that was choosen by user. <p>
+     * After finish calls {@link IMainView#showChoosenBanks(List)}
+     * <p>or<p>
+     * calls {@link IMainView#showNoBanksMessage()}
      */
     void getChoosenBanks();
 }

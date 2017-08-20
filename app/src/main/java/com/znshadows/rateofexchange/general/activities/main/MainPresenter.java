@@ -34,10 +34,20 @@ public class MainPresenter extends BasePresenter<IMainView> implements IMainPres
         App.getAppComponent().inject(this);
     }
 
-
+    /**
+     * Retrieves banks that was choosen by user. <p>
+     * Calls {@link IMainView#showChoosenBanks(List)}
+     * <p>or<p>
+     * Calls {@link IMainView#showNoBanksMessage()}
+     */
     @Override
     public void getChoosenBanks() {
-        getView().showChoosenBanks(userData.getBanksList());
+        ArrayList<ChoosenBank> banksList = userData.getBanksList();
+        if(banksList != null && banksList.size() > 0) {
+            getView().showChoosenBanks(banksList);
+        } else {
+            getView().showNoBanksMessage();
+        }
     }
     /**
      * Retrieves rates from specified banks API

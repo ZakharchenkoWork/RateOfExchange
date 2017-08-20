@@ -6,21 +6,21 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_main2">Main2Activity</string>
-    <string name="main_activity_title">Отслеживаемые банки</string>
-    <string name="choose_bank_activity_title">Выберите банк</string>
+    <string name="main_activity_title">Watched banks</string>
+    <string name="choose_bank_activity_title">Choose bank</string>
     <string name="ok">OK</string>
-    <string name="no_banks_message">У вас пока нет отслеживаемых банков. Вы можете добвить их нажав на кнопку внизу.</string>
-    <string name="ws_bank_title">Необходимо выбрать банк и валюту, для отображения в виджете.</string>
-    <string name="ws_currency_title">Выберите валюту.</string>
-    <string name="ws_bank_hint">Банк</string>
-    <string name="ws_currency_hint">Валюта.</string>
-    <string name="ws_save">Сохранить</string>
-    <string name="currency">Валюта</string>
-    <string name="buy">Покупка</string>
-    <string name="sell">Продажа</string>
+    <string name="no_banks_message">You don\'t have watched banks yet. You can add them clicking button below.</string>
+    <string name="ws_bank_title">You need to choose bank and currency, to display on the widget.</string>
+    <string name="ws_currency_title">Choose currency.</string>
+    <string name="ws_bank_hint">Bank</string>
+    <string name="ws_currency_hint">Currency.</string>
+    <string name="ws_save">Save</string>
+    <string name="currency">Currency</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
     <array name="bankNames">
-    <item name="nbu">Национальный Банк Украины</item>
-    <item name="privatBank">Приват Банк</item>
-    <item name="a_Bank">A-Банк</item>
+    <item name="nbu">National Bank of Ukraine</item>
+    <item name="privatBank">Private Bank</item>
+    <item name="a_Bank">A-Bank</item>
     </array>
 </resources>

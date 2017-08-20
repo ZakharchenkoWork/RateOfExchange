@@ -13,6 +13,10 @@ import java.util.List;
  * Created by kostya on 17.05.2017.
  */
 
+/**
+ * {@link com.znshadows.rateofexchange.general.activities.choose_bank.ChoosseBankPresenter}
+ * @param <ViewType> Activity
+ */
 public interface IChoosseBankPresenter<ViewType extends IChooseBankView> extends IBasePreseter<ViewType> {
 
     /**
