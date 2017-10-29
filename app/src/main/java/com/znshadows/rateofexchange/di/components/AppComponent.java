@@ -5,7 +5,7 @@ import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.di.modules.ModelModule;
 import com.znshadows.rateofexchange.di.modules.PresentersModule;
 import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankActivity;
-import com.znshadows.rateofexchange.general.activities.choose_bank.ChoosseBankPresenter;
+import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankPresenter;
 import com.znshadows.rateofexchange.general.activities.loading.LoadingActivity;
 import com.znshadows.rateofexchange.general.activities.loading.LoadingPresenter;
 import com.znshadows.rateofexchange.general.activities.main.ChoosenBanksListAdapter;
@@ -35,6 +35,7 @@ import dagger.Component;
 public interface AppComponent {
 
     void inject(LoadingActivity loadingActivity);
+
     void inject(MainActivity mainActivity);
 
     void inject(MainPresenter mainPresenter);
@@ -54,7 +55,7 @@ public interface AppComponent {
 
     void inject(RateListAdapter rateListAdapter);
 
-    void inject(ChoosseBankPresenter choosseBankPresenter);
+    void inject(ChooseBankPresenter chooseBankPresenter);
 
     void inject(ChoosenBanksListAdapter choosenBanksListAdapter);
 
@@ -67,4 +68,6 @@ public interface AppComponent {
     void inject(LoadingPresenter loadingPresenter);
 
     void inject(UserData userData);
+
+
 }

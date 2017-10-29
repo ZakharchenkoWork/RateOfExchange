@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Created by Evolution on 3/13/17.
+ * Created by Konstantyn Zakharchenko on 3/13/17.
  */
 
 public class CustomDrawerLayout extends DrawerLayout {

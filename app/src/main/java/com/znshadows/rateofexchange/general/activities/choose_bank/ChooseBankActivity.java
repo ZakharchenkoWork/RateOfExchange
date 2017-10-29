@@ -12,7 +12,7 @@ import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.activities.BaseActivity;
 import com.znshadows.rateofexchange.general.activities.main.ChoosenBanksListAdapter;
 import com.znshadows.rateofexchange.general.models.BANKS;
-import com.znshadows.rateofexchange.mvp.presenters.IChoosseBankPresenter;
+import com.znshadows.rateofexchange.mvp.presenters.IChooseBankPresenter;
 import com.znshadows.rateofexchange.mvp.views.IChooseBankView;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import javax.inject.Inject;
 
 public class ChooseBankActivity extends BaseActivity implements IChooseBankView {
     @Inject
-    IChoosseBankPresenter presenter;
+    IChooseBankPresenter presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class ChooseBankActivity extends BaseActivity implements IChooseBankView 
 
         setMenuResourse(R.menu.ok_menu);
 
-        List<BANKS> choosenBanksList = presenter.getChoosenBanks();
+        List<BANKS> choosenBanksList = presenter.getChosenBanks();
         RecyclerView list = (RecyclerView) findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         list.setLayoutManager(layoutManager);
@@ -48,7 +48,7 @@ public class ChooseBankActivity extends BaseActivity implements IChooseBankView 
         list.setAdapter(chooseBanksListAdapter);
 
         setOnOptionItemSelected((v) -> {
-            presenter.saveChoosenBanks(chooseBanksListAdapter.getCheckedList());
+            presenter.saveChosenBanks(chooseBanksListAdapter.getCheckedList());
             finish();
             return true;
         });

@@ -24,37 +24,48 @@ import dagger.Provides;
 @Singleton
 @Module
 public class ModelModule {
-    @Singleton @Provides
-
-    IUserData provideUserData(){
+    @Singleton
+    @Provides
+    IUserData provideUserData() {
         return new UserData();
     }
-    @Singleton @Provides
-    NBUApi provideApiNBU(){
+
+    @Singleton
+    @Provides
+    NBUApi provideApiNBU() {
         return new NBUApiImpl();
     }
 
-    @Singleton @Provides @Named("nbu")
-    IBaseApi provideNBUApi(){
+    @Singleton
+    @Provides
+    @Named("nbu")
+    IBaseApi provideNBUApi() {
         return new NBUApiImpl();
     }
 
-    @Singleton @Provides  @Named("pb")
-    IBaseApi providePrivateBankApi(){
+    @Singleton
+    @Provides
+    @Named("pb")
+    IBaseApi providePrivateBankApi() {
         return new PrivateBankApiImpl();
     }
-    @Singleton @Provides  @Named("abank")
-    IBaseApi provideABankApi(){
+
+    @Singleton
+    @Provides
+    @Named("abank")
+    IBaseApi provideABankApi() {
         return new ABankApiImpl();
     }
 
-    @Singleton @Provides
-    IUnifiedModel provideUnifiedModel(){
+    @Singleton
+    @Provides
+    IUnifiedModel provideUnifiedModel() {
         return new UnifiedModel();
     }
 
-    @Singleton @Provides
-    IDatabaseManager provideDatabaseManager(){
+    @Singleton
+    @Provides
+    IDatabaseManager provideDatabaseManager() {
         return new DatabaseManager();
     }
 }

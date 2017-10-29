@@ -6,7 +6,7 @@ import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.mvp.models.IDatabaseManager;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
 import com.znshadows.rateofexchange.mvp.models.IUserData;
-import com.znshadows.rateofexchange.mvp.presenters.IChoosseBankPresenter;
+import com.znshadows.rateofexchange.mvp.presenters.IChooseBankPresenter;
 import com.znshadows.rateofexchange.mvp.views.IChooseBankView;
 import com.znshadows.rateofexchange.mvp.views.IMainView;
 
@@ -20,7 +20,7 @@ import javax.inject.Inject;
  * Created by kostya on 17.05.2017.
  */
 
-public class ChoosseBankPresenter extends BasePresenter<IChooseBankView> implements IChoosseBankPresenter<IChooseBankView> {
+public class ChooseBankPresenter extends BasePresenter<IChooseBankView> implements IChooseBankPresenter<IChooseBankView> {
 
     @Inject
     IUserData userData;
@@ -29,7 +29,7 @@ public class ChoosseBankPresenter extends BasePresenter<IChooseBankView> impleme
      * @return list of all banks(whithout settings) that was choosen by user.
      */
     @Override
-    public List<BANKS> getChoosenBanks() {
+    public List<BANKS> getChosenBanks() {
         return userData.getRawBanksList();
     }
 
@@ -40,7 +40,7 @@ public class ChoosseBankPresenter extends BasePresenter<IChooseBankView> impleme
      * @param banks list of banks to save
      */
     @Override
-    public void saveChoosenBanks(List<BANKS> banks) {
+    public void saveChosenBanks(List<BANKS> banks) {
         userData.setChoosenBanks(banks);
         userData.saveData();
     }

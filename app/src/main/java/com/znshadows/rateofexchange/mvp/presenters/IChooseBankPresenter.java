@@ -17,13 +17,13 @@ import java.util.List;
  * {@link com.znshadows.rateofexchange.general.activities.choose_bank.ChoosseBankPresenter}
  * @param <ViewType> Activity
  */
-public interface IChoosseBankPresenter<ViewType extends IChooseBankView> extends IBasePreseter<ViewType> {
+public interface IChooseBankPresenter<ViewType extends IChooseBankView> extends IBasePreseter<ViewType> {
 
     /**
      * Retrievs data about old banks from database
      * @return list of banks from Database
      */
-    @NonNull List<BANKS> getChoosenBanks();
+    @NonNull List<BANKS> getChosenBanks();
 
     /**
      * Saves list of banks in database.
@@ -31,5 +31,5 @@ public interface IChoosseBankPresenter<ViewType extends IChooseBankView> extends
      * If bank is already exists, it's data will not be lost.
      * @param banks list of banks to save
      */
-    void saveChoosenBanks(List<BANKS> banks);
+    void saveChosenBanks(List<BANKS> banks);
 }

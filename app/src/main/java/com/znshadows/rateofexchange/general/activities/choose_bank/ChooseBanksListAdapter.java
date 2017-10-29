@@ -22,12 +22,12 @@ public class ChooseBanksListAdapter extends RecyclerView.Adapter<ChooseBanksList
 
     private Context context;
     private List<BANKS> dataList;
-    private List<BANKS> choosenBanksList;
+    private List<BANKS> chosenBanksList;
 
-    public ChooseBanksListAdapter(Context context, List<BANKS> dataList, List<BANKS> choosenBanksList) {
+    public ChooseBanksListAdapter(Context context, List<BANKS> dataList, List<BANKS> chosenBanksList) {
         this.context = context;
         this.dataList = dataList;
-        this.choosenBanksList = choosenBanksList;
+        this.chosenBanksList = chosenBanksList;
     }
 
     @Override
@@ -58,36 +58,33 @@ public class ChooseBanksListAdapter extends RecyclerView.Adapter<ChooseBanksList
 
         holder.name.setText(context.getResources().getStringArray(R.array.bankNames)[dataList.get(position).ordinal()]);
         holder.logo.setImageResource(context.getResources().obtainTypedArray(R.array.banks_logo).getResourceId(dataList.get(position).ordinal(), -1));
-        holder.bankCheckBox.setChecked(choosenBanksList.contains(dataList.get(position)));
+        holder.bankCheckBox.setChecked(chosenBanksList.contains(dataList.get(position)));
 
         //used instead of setOnCheckedChangeListener because it's get called when ViewHolder is destroyed
         holder.bankCheckBox.setOnClickListener(checkBox -> {
             if (((CheckBox) checkBox).isChecked()) {
-                choosenBanksList.add(dataList.get(position));
+                chosenBanksList.add(dataList.get(position));
             } else {
-                choosenBanksList.remove(dataList.get(position));
+                chosenBanksList.remove(dataList.get(position));
             }
         });
     }
 
 
 
-    public List<BANKS> getCheckedList() {
-        return choosenBanksList;
+    List<BANKS> getCheckedList() {
+        return chosenBanksList;
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView logo;
         TextView name;
         CheckBox bankCheckBox;
         View itemView;
 
-        // We also create a constructor that accepts the entire item row
-        // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
+
+        ViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
             logo = (ImageView) itemView.findViewById(R.id.logo);
