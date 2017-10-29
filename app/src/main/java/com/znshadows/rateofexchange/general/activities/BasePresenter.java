@@ -2,7 +2,7 @@ package com.znshadows.rateofexchange.general.activities;
 
 import android.util.Log;
 
-import com.znshadows.rateofexchange.mvp.presenters.IBasePreseter;
+import com.znshadows.rateofexchange.mvp.presenters.IBasePresenter;
 import com.znshadows.rateofexchange.mvp.views.IBaseView;
 
 import java.util.ArrayList;
@@ -12,10 +12,10 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by kostya on 17.05.2017.
+ * Created by Konstantyn Zakharchenko on 17.05.2017.
  */
 
-public abstract class BasePresenter<ViewType extends IBaseView> implements IBasePreseter<ViewType> {
+public abstract class BasePresenter<ViewType extends IBaseView> implements IBasePresenter<ViewType> {
     private ViewType view;
     protected List<Disposable> disposables = new ArrayList<>();
 

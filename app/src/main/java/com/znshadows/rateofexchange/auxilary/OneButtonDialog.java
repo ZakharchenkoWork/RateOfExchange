@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.text.Html;
 import android.view.Gravity;
@@ -70,6 +69,7 @@ public class OneButtonDialog extends AlertDialog.Builder {
         this.inputType = inputType;
         return this;
     }
+
     /**
      * Set text for the positive button inside this dialog.
      * <p>
@@ -280,11 +280,7 @@ public class OneButtonDialog extends AlertDialog.Builder {
     }
 
     private boolean isDefault(String data) {
-        if (data == null || data.equals("") || data.equals("" + DEFAULT)) {
-            return true;
-        } else {
-            return false;
-        }
+            return data == null || data.equals("") || data.equals("" + DEFAULT);
     }
 
     public enum DIALOG_TYPE {

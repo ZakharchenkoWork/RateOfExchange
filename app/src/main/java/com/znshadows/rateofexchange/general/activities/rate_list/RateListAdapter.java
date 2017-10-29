@@ -2,7 +2,6 @@ package com.znshadows.rateofexchange.general.activities.rate_list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.models.BANKS;
-import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
+import com.znshadows.rateofexchange.general.models.UnifiedBankResponse;
 import com.znshadows.rateofexchange.mvp.presenters.IBankRatesPresenter;
 
 import java.util.List;
@@ -21,7 +20,7 @@ import javax.inject.Inject;
 
 
 /**
- * Created by Evolution on 3/9/17.
+ * Created by Konstantyn Zakharchenko on 3/9/17.
  */
 
 public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHolder> {
@@ -30,22 +29,22 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
     IBankRatesPresenter presenter;
 
 
-    private List<String> choosenCurrencies;
+    private List<String> chosenCurrencies;
     private BANKS bank;
     private Context context;
-    private List<UnifiedBankResponce> dataList;
+    private List<UnifiedBankResponse> dataList;
 
     /**
      * ViewHolder class will contain row view for RecyclerView
      */
 
 
-    public RateListAdapter(Context context, BANKS bank, List<UnifiedBankResponce> dataList) {
+    public RateListAdapter(Context context, BANKS bank, List<UnifiedBankResponse> dataList) {
         App.getAppComponent().inject(this);
         this.context = context;
         this.dataList = dataList;
         this.bank = bank;
-        choosenCurrencies = presenter.getChoosenCurrencies(bank);
+        chosenCurrencies = presenter.getChosenCurrencies(bank);
     }
 
 
@@ -78,21 +77,21 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         if (getItemViewType(position) == VIEW_TYPE.HEADER.ordinal()) {
-            if (dataList != null && dataList.size() > 0){
-                 if(dataList.get(0).getSale() == UnifiedBankResponce.NO_VALUE){
-                     handleSaleState(holder, dataList.get(0));
-                 }
+            if (dataList != null && dataList.size() > 0) {
+                if (dataList.get(0).getSale() == UnifiedBankResponse.NO_VALUE) {
+                    handleSaleState(holder, dataList.get(0));
+                }
             }
             holder.rateCheckBox.setVisibility(View.INVISIBLE);
         } else {
-            UnifiedBankResponce bankResponce = dataList.get(position - 1);
+            UnifiedBankResponse bankResponse = dataList.get(position - 1);
 
-            holder.code.setText(bankResponce.getCode());
-            holder.rateBuy.setText("" + bankResponce.getBuy());
+            holder.code.setText(bankResponse.getCode());
+            holder.rateBuy.setText("" + bankResponse.getBuy());
             holder.rateCheckBox.setVisibility(View.VISIBLE);
 
 
-            if (choosenCurrencies.contains(bankResponce.getCode())) {
+            if (chosenCurrencies.contains(bankResponse.getCode())) {
                 holder.rateCheckBox.setChecked(true);
             } else {
                 holder.rateCheckBox.setChecked(false);
@@ -100,20 +99,20 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
             //used instead of setOnCheckedChangeListener because it's get called when ViewHolder is destroyed
             holder.rateCheckBox.setOnClickListener(checkBox -> {
                 if (((CheckBox) checkBox).isChecked()) {
-                    choosenCurrencies = presenter.addCurrency(bank, bankResponce.getCode());
+                    chosenCurrencies = presenter.addCurrency(bank, bankResponse.getCode());
                 } else {
-                    choosenCurrencies = presenter.removeCurrency(bank, bankResponce.getCode());
+                    chosenCurrencies = presenter.removeCurrency(bank, bankResponse.getCode());
                 }
             });
-            handleSaleState(holder, bankResponce);
+            handleSaleState(holder, bankResponse);
         }
     }
 
-    private void handleSaleState(ViewHolder holder, UnifiedBankResponce bankResponce) {
-        if (bankResponce.getSale() == UnifiedBankResponce.NO_VALUE) {
+    private void handleSaleState(ViewHolder holder, UnifiedBankResponse bankResponse) {
+        if (bankResponse.getSale() == UnifiedBankResponse.NO_VALUE) {
             holder.rateSale.setVisibility(View.GONE);
         } else {
-            holder.rateSale.setText("" + bankResponce.getSale());
+            holder.rateSale.setText("" + bankResponse.getSale());
         }
     }
 
@@ -124,7 +123,7 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
 
         TextView code;
@@ -134,15 +133,15 @@ public class RateListAdapter extends RecyclerView.Adapter<RateListAdapter.ViewHo
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            code = (TextView) itemView.findViewById(R.id.code);
-            rateBuy = (TextView) itemView.findViewById(R.id.rateBuy);
-            rateSale = (TextView) itemView.findViewById(R.id.rateSale);
-            rateCheckBox = (CheckBox) itemView.findViewById(R.id.rateCheckBox);
+            code = itemView.findViewById(R.id.code);
+            rateBuy = itemView.findViewById(R.id.rateBuy);
+            rateSale = itemView.findViewById(R.id.rateSale);
+            rateCheckBox = itemView.findViewById(R.id.rateCheckBox);
         }
     }
 }

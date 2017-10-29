@@ -1,7 +1,7 @@
 package com.znshadows.rateofexchange.general.models;
 
 /**
- * Created by kostya on 30.05.2017.
+ * Created by Konstantyn Zakharchenko on 30.05.2017.
  */
 
 public enum BANKS {

@@ -15,19 +15,18 @@ import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.activities.BaseActivity;
 import com.znshadows.rateofexchange.general.models.BANKS;
-import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
+import com.znshadows.rateofexchange.general.models.UnifiedBankResponse;
 import com.znshadows.rateofexchange.general.models.WidgetInfo;
 import com.znshadows.rateofexchange.mvp.presenters.IWidgetSettingsPresenter;
 import com.znshadows.rateofexchange.mvp.views.IWidgetSettingsView;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 /**
- * Created by kostya on 22.06.2017.
+ * Created by Konstantyn Zakharchenko on 22.06.2017.
  */
 
 public class WidgetSettingsActivity extends BaseActivity implements IWidgetSettingsView {
@@ -38,15 +37,13 @@ public class WidgetSettingsActivity extends BaseActivity implements IWidgetSetti
     private RecyclerView banksList;
     private RecyclerView currenciesList;
     private EditText bankName;
-    private EditText curencyName;
+    private EditText currencyName;
     private LinearLayout currencyHolder;
     private Button save;
 
     private int widgetId;
-    private BANKS choosenBank;
-    private String choosenCurrency;
-
-
+    private BANKS chosenBank;
+    private String chosenCurrency;
 
 
     @Override
@@ -62,22 +59,22 @@ public class WidgetSettingsActivity extends BaseActivity implements IWidgetSetti
                     AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
-        save = (Button) findViewById(R.id.save);
+        save = findViewById(R.id.save);
         save.setVisibility(View.GONE);
 
-        bankName = (EditText) findViewById(R.id.bankName);
+        bankName = findViewById(R.id.bankName);
         bankName.setKeyListener(null);
 
-        banksList = (RecyclerView) findViewById(R.id.banksList);
-        banksList.setLayoutManager( new LinearLayoutManager(this));
+        banksList = findViewById(R.id.banksList);
+        banksList.setLayoutManager(new LinearLayoutManager(this));
         banksList.setVisibility(View.GONE);
 
-        curencyName = (EditText) findViewById(R.id.curencyName);
-        curencyName.setKeyListener(null);
-        currencyHolder = (LinearLayout) findViewById(R.id.currencyHolder);
+        currencyName = findViewById(R.id.curencyName);
+        currencyName.setKeyListener(null);
+        currencyHolder = findViewById(R.id.currencyHolder);
 
-        currenciesList = (RecyclerView) findViewById(R.id.currenciesList);
-        currenciesList.setLayoutManager( new LinearLayoutManager(this));
+        currenciesList = findViewById(R.id.currenciesList);
+        currenciesList.setLayoutManager(new LinearLayoutManager(this));
         currenciesList.setVisibility(View.GONE);
 
         currencyHolder.setVisibility(View.GONE);
@@ -85,22 +82,22 @@ public class WidgetSettingsActivity extends BaseActivity implements IWidgetSetti
         AllBanksListAdapter adapter = new AllBanksListAdapter(this, Arrays.asList(BANKS.values()));
 
         banksList.setAdapter(adapter);
-        adapter.setOnBankChoosenListener(bank -> {
+        adapter.setOnBankChosenListener(bank -> {
             banksList.setVisibility(View.GONE);
             bankName.setText(getResources().getStringArray(R.array.bankNames)[bank.ordinal()]);
-            curencyName.setText("");
+            currencyName.setText("");
             currencyHolder.setVisibility(View.VISIBLE);
-            choosenBank = bank;
+            chosenBank = bank;
 
         });
 
         bankName.setOnClickListener(new BankClickListener());
         bankName.setOnFocusChangeListener(new BankClickListener());
-        curencyName.setOnClickListener(new CurrencyClickListener());
-        curencyName.setOnFocusChangeListener(new CurrencyClickListener());
+        currencyName.setOnClickListener(new CurrencyClickListener());
+        currencyName.setOnFocusChangeListener(new CurrencyClickListener());
 
-        save.setOnClickListener((v)->{
-            presenter.saveWidgetInfo(new WidgetInfo(widgetId, choosenBank, choosenCurrency));
+        save.setOnClickListener((v) -> {
+            presenter.saveWidgetInfo(new WidgetInfo(widgetId, chosenBank, chosenCurrency));
             updateWidget();
             prepareResultIntent(true);
             finish();
@@ -114,22 +111,22 @@ public class WidgetSettingsActivity extends BaseActivity implements IWidgetSetti
         currenciesList.setVisibility(View.GONE);
     }
 
-    private void showCurenciesViews(){
+    private void showCurrenciesViews() {
         save.setVisibility(View.GONE);
-        presenter.getCurrenciesForBank(choosenBank);
+        presenter.getCurrenciesForBank(chosenBank);
     }
 
     @Override
-    public void showCurrenciesList(List<UnifiedBankResponce> dataList) {
+    public void showCurrenciesList(List<UnifiedBankResponse> dataList) {
         currenciesList.setVisibility(View.VISIBLE);
         CurrenciesListAdapter adapter = new CurrenciesListAdapter(this, dataList);
         currenciesList.setAdapter(adapter);
 
-        adapter.setOnCurrencyChoosenListener((currency)->{
-            this.choosenCurrency = currency;
+        adapter.setOnCurrencyChoosenListener((currency) -> {
+            this.chosenCurrency = currency;
             currenciesList.setVisibility(View.GONE);
             save.setVisibility(View.VISIBLE);
-            curencyName.setText(currency);
+            currencyName.setText(currency);
         });
     }
 
@@ -153,13 +150,13 @@ public class WidgetSettingsActivity extends BaseActivity implements IWidgetSetti
 
         @Override
         public void onClick(View view) {
-            showCurenciesViews();
+            showCurrenciesViews();
         }
 
         @Override
         public void onFocusChange(View view, boolean hasFocus) {
             if (hasFocus) {
-                showCurenciesViews();
+                showCurrenciesViews();
             }
         }
     }
@@ -169,17 +166,18 @@ public class WidgetSettingsActivity extends BaseActivity implements IWidgetSetti
         App.getAppComponent().inject(this);
         presenter.setView(this);
     }
-    private void prepareResultIntent(boolean isOk){
+
+    private void prepareResultIntent(boolean isOk) {
         Intent resultValue = new Intent();
         resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
-        if(isOk) {
+        if (isOk) {
             setResult(RESULT_OK, resultValue);
         } else {
             setResult(RESULT_CANCELED, resultValue);
         }
     }
 
-    private void updateWidget(){
+    private void updateWidget() {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         RemoteViews views = new RemoteViews(getPackageName(), R.layout.widget_layout);
         appWidgetManager.updateAppWidget(widgetId, views);

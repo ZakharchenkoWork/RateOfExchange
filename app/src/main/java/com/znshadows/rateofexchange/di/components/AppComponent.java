@@ -8,7 +8,7 @@ import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankAct
 import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankPresenter;
 import com.znshadows.rateofexchange.general.activities.loading.LoadingActivity;
 import com.znshadows.rateofexchange.general.activities.loading.LoadingPresenter;
-import com.znshadows.rateofexchange.general.activities.main.ChoosenBanksListAdapter;
+import com.znshadows.rateofexchange.general.activities.main.ChosenBanksListAdapter;
 import com.znshadows.rateofexchange.general.activities.main.MainActivity;
 import com.znshadows.rateofexchange.general.activities.main.MainPresenter;
 import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesActivity;
@@ -21,13 +21,12 @@ import com.znshadows.rateofexchange.general.widget.WidgetPresenter;
 import com.znshadows.rateofexchange.general.widget.WidgetProvider;
 import com.znshadows.rateofexchange.mvp.models.UnifiedModel;
 
-
 import javax.inject.Singleton;
 
 import dagger.Component;
 
 /**
- * Created by Evolution on 2/27/17.
+ * Created by Konstantyn Zakharchenko on 2/27/17.
  */
 
 @Singleton
@@ -57,7 +56,7 @@ public interface AppComponent {
 
     void inject(ChooseBankPresenter chooseBankPresenter);
 
-    void inject(ChoosenBanksListAdapter choosenBanksListAdapter);
+    void inject(ChosenBanksListAdapter chosenBanksListAdapter);
 
     void inject(WidgetSettingsActivity widgetSettingsActivity);
 

@@ -1,14 +1,13 @@
 package com.znshadows.rateofexchange.mvp.models;
 
 import com.znshadows.rateofexchange.general.models.BANKS;
-import com.znshadows.rateofexchange.general.models.ChoosenBank;
-import com.znshadows.rateofexchange.general.models.UserData;
+import com.znshadows.rateofexchange.general.models.ChosenBank;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by kostya on 21.06.2017.
+ * Created by Konstantyn Zakharchenko on 21.06.2017.
  */
 
 public interface IUserData {
@@ -28,25 +27,27 @@ public interface IUserData {
      * Retrieves list of all banks that was choosen by user,
      * with rates.
      */
-    ArrayList<ChoosenBank> getBanksList();
+    ArrayList<ChosenBank> getBanksList();
 
 
     /**
      * @return list of all banks that was choosen by user.
      */
     List<BANKS> getRawBanksList();
+
     /**
      * @return banks settings for specified bank.
      */
-    ChoosenBank getChosenBank(BANKS bank);
+    ChosenBank getChosenBank(BANKS bank);
 
     /**
      * @return list of currencies for specified bank, choosen by user.
      */
-    List<String> getChoosenCurrencies(BANKS bank);
+    List<String> getChosenCurrencies(BANKS bank);
 
     /**
      * Adds currency to specific bank
+     *
      * @param bank
      * @param currency
      */
@@ -54,6 +55,7 @@ public interface IUserData {
 
     /**
      * Removes currency from specified bank
+     *
      * @param bank
      * @param currency
      */
@@ -61,7 +63,8 @@ public interface IUserData {
 
     /**
      * Setter for banks list
+     *
      * @param banks
      */
-    void setChoosenBanks(List<BANKS> banks);
+    void setChosenBanks(List<BANKS> banks);
 }

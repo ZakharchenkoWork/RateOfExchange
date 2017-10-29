@@ -9,14 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.models.BANKS;
-import com.znshadows.rateofexchange.general.models.ChoosenBank;
-import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
+import com.znshadows.rateofexchange.general.models.ChosenBank;
+import com.znshadows.rateofexchange.general.models.UnifiedBankResponse;
 import com.znshadows.rateofexchange.mvp.presenters.IMainPresenter;
 
 import java.util.ArrayList;
@@ -28,13 +27,13 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 /**
- * Created by kostya on 30.05.2017.
+ * Created by Konstantyn Zakharchenko on 30.05.2017.
  */
 
-public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksListAdapter.ViewHolder> {
+public class ChosenBanksListAdapter extends RecyclerView.Adapter<ChosenBanksListAdapter.ViewHolder> {
     private OnClickListener onItemClickListener = null;
     private Context context;
-    private List<ChoosenBank> dataList;
+    private List<ChosenBank> dataList;
     @Inject
     IMainPresenter presenter;
 
@@ -47,13 +46,13 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
      */
 
 
-    public ChoosenBanksListAdapter(Context context, List<ChoosenBank> dataList) {
+    public ChosenBanksListAdapter(Context context, List<ChosenBank> dataList) {
         App.getAppComponent().inject(this);
         this.context = context;
         this.dataList = dataList;
     }
 
-    public ChoosenBanksListAdapter setOnItemClickListener(OnClickListener onItemClickListener) {
+    public ChosenBanksListAdapter setOnItemClickListener(OnClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
         return this;
     }
@@ -80,53 +79,53 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
     // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ChoosenBank choosenBank = dataList.get(position);
-        holder.logo.setImageResource(context.getResources().obtainTypedArray(R.array.banks_logo).getResourceId(choosenBank.getBank().ordinal(), -1));
-        holder.name.setText(context.getResources().getStringArray(R.array.bankNames)[choosenBank.getBank().ordinal()]);
+        ChosenBank chosenBank = dataList.get(position);
+        holder.logo.setImageResource(context.getResources().obtainTypedArray(R.array.banks_logo).getResourceId(chosenBank.getBank().ordinal(), -1));
+        holder.name.setText(context.getResources().getStringArray(R.array.bankNames)[chosenBank.getBank().ordinal()]);
 
         List<String> curencies = dataList.get(position).getCurencies();
         if (curencies.size() > 0) {
-            showCurrencies(holder, choosenBank, curencies);
+            showCurrencies(holder, chosenBank, curencies);
         } else {
             holder.arrow.setVisibility(View.INVISIBLE);
         }
         if (onItemClickListener != null) {
             holder.itemView.setOnClickListener((v) -> {
-                onItemClickListener.onClick(choosenBank.getBank());
+                onItemClickListener.onClick(chosenBank.getBank());
             });
         }
 
     }
 
-    private void showCurrencies(ViewHolder holder, ChoosenBank choosenBank, List<String> curencies) {
+    private void showCurrencies(ViewHolder holder, ChosenBank chosenBank, List<String> curencies) {
         //Adding header
         holder.addChild(LayoutInflater.from(context).inflate(R.layout.item_rate_list, null));
 
         for (int i = 0; i < curencies.size(); i++) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_rate_list, null);
             holder.addChild(view);
-            TextView code = (TextView) view.findViewById(R.id.code);
+            TextView code = view.findViewById(R.id.code);
             code.setText(curencies.get(i));
             ((TextView) view.findViewById(R.id.rateBuy)).setText("");
             ((TextView) view.findViewById(R.id.rateSale)).setText("");
         }
         holder.startChildsProgressBar();
 
-        presenter.getBankRates(choosenBank, (rates) -> fillChildViewsWithData(holder, rates));
+        presenter.getBankRates(chosenBank, (rates) -> fillChildViewsWithData(holder, rates));
 
         holder.showState();
     }
 
-    private void fillChildViewsWithData(ViewHolder holder, List<UnifiedBankResponce> rates) {
+    private void fillChildViewsWithData(ViewHolder holder, List<UnifiedBankResponse> rates) {
         //view with index of 0 is a header
         for (int i = 1; i < holder.childs.size(); i++) {
             View view = holder.childs.get(i);
             //adjust rates index so header does not populates with data
-            UnifiedBankResponce bankResponce = rates.get(i - 1);
+            UnifiedBankResponse bankResponce = rates.get(i - 1);
             ((TextView) view.findViewById(R.id.code)).setText(bankResponce.getCode());
             ((TextView) view.findViewById(R.id.rateBuy)).setText("" + bankResponce.getBuy());
 
-            if (bankResponce.getSale() == UnifiedBankResponce.NO_VALUE) {
+            if (bankResponce.getSale() == UnifiedBankResponse.NO_VALUE) {
                 view.findViewById(R.id.rateSale).setVisibility(GONE);
             } else {
                 ((TextView) view.findViewById(R.id.rateSale)).setText("" + bankResponce.getSale());
@@ -142,7 +141,7 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         View itemView;
         private LinearLayout childsHolder;
         ImageView logo;
@@ -153,15 +152,15 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
             this.itemView = itemView;
-            childsHolder = (LinearLayout) itemView.findViewById(R.id.childsHolder);
-            logo = (ImageView) itemView.findViewById(R.id.logo);
-            name = (TextView) itemView.findViewById(R.id.name);
-            arrow = (ImageView) itemView.findViewById(R.id.arrow);
+            childsHolder = itemView.findViewById(R.id.childsHolder);
+            logo = itemView.findViewById(R.id.logo);
+            name = itemView.findViewById(R.id.name);
+            arrow = itemView.findViewById(R.id.arrow);
 
             showState();
             arrow.setOnClickListener((v) -> {
@@ -170,7 +169,7 @@ public class ChoosenBanksListAdapter extends RecyclerView.Adapter<ChoosenBanksLi
             });
         }
 
-        public void addChild(View view) {
+        void addChild(View view) {
             childs.add(view);
             childsHolder.addView(view);
         }

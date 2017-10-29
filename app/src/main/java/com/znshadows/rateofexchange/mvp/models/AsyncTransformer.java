@@ -8,7 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by Evolution on 7/5/17.
+ * Created by Konstantyn Zakharchenko on 7/5/17.
  */
 
 public class AsyncTransformer<Type> implements ObservableTransformer<Type, Type> {

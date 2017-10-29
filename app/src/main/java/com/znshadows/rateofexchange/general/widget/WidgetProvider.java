@@ -11,19 +11,15 @@ import android.widget.RemoteViews;
 
 import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
-import com.znshadows.rateofexchange.general.activities.loading.LoadingActivity;
-import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
+import com.znshadows.rateofexchange.general.models.UnifiedBankResponse;
 import com.znshadows.rateofexchange.general.models.WidgetInfo;
-import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
 import com.znshadows.rateofexchange.mvp.presenters.IWidgetPresenter;
 import com.znshadows.rateofexchange.mvp.views.IWidgetView;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 /**
- * Created by kostya on 24.05.2017.
+ * Created by Konstantyn Zakharchenko on 24.05.2017.
  */
 
 public class WidgetProvider extends AppWidgetProvider implements IWidgetView {
@@ -87,8 +83,8 @@ public class WidgetProvider extends AppWidgetProvider implements IWidgetView {
     }
 
     @Override
-    public void showResponce(WidgetInfo widgetInfo, UnifiedBankResponce bankResponse) {
-        Log.d("showResponce", "done");
+    public void showResponse(WidgetInfo widgetInfo, UnifiedBankResponse bankResponse) {
+        Log.d("showResponse", "done");
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
         views.setTextViewText(R.id.bankName, widgetInfo.getChoosenBank().name());
         views.setTextViewText(R.id.rateToBuy, "" + bankResponse.getBuy());

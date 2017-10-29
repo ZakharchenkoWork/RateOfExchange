@@ -1,104 +1,97 @@
 package com.znshadows.rateofexchange.general.activities.widget_settings;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
-import com.znshadows.rateofexchange.general.activities.BaseFragment;
 import com.znshadows.rateofexchange.general.models.BANKS;
 
-
-import java.util.Arrays;
 import java.util.List;
 
 
-
 /**
- * Created by kostya on 24.06.2017.
+ * Created by Konstantyn Zakharchenko on 24.06.2017.
  */
 
 public class AllBanksListAdapter extends RecyclerView.Adapter<AllBanksListAdapter.ViewHolder> {
-    public interface OnBankChoosenListener {
+    public interface OnBankChosenListener {
         void onChoose(BANKS bank);
     }
 
-    private OnBankChoosenListener listener;
+    private OnBankChosenListener listener;
 
-    public void setOnBankChoosenListener(OnBankChoosenListener listener) {
+    public void setOnBankChosenListener(OnBankChosenListener listener) {
         this.listener = listener;
     }
 
     private Context context;
-        private List<BANKS> dataList;
+    private List<BANKS> dataList;
 
-        /**
-         * ViewHolder class will contain row view for RecyclerView
-         */
-
-
-        public AllBanksListAdapter(Context context, List<BANKS> dataList) {
-            this.context = context;
-            this.dataList = dataList;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return i;
-        }
+    /**
+     * ViewHolder class will contain row view for RecyclerView
+     */
 
 
-        @Override
-        public int getItemViewType(int position) {
-            return 0;
-        }
+    public AllBanksListAdapter(Context context, List<BANKS> dataList) {
+        this.context = context;
+        this.dataList = dataList;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
 
 
-        @Override
-        public AllBanksListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-            View view = LayoutInflater.from(context).inflate(R.layout.item_all_banks_list, null);
-            return new AllBanksListAdapter.ViewHolder(view);
-
-        }
-
-        // Involves populating data into the item through holder
-        @Override
-        public void onBindViewHolder(AllBanksListAdapter.ViewHolder holder, int position) {
-
-            holder.name.setText(context.getResources().getStringArray(R.array.bankNames)[dataList.get(position).ordinal()]);
-            holder.logo.setImageResource(context.getResources().obtainTypedArray(R.array.banks_logo).getResourceId(dataList.get(position).ordinal(), -1));
-            holder.itemView.setOnClickListener((v) -> {
-                if(listener != null) {
-                    listener.onChoose(dataList.get(position));
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return dataList.size();
-        }
+    @Override
+    public int getItemViewType(int position) {
+        return 0;
+    }
 
 
-        class ViewHolder extends RecyclerView.ViewHolder {
-            ImageView logo;
-            TextView name;
-            View itemView;
+    @Override
+    public AllBanksListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            public ViewHolder(View itemView) {
-                super(itemView);
-                this.itemView = itemView;
-                logo = (ImageView) itemView.findViewById(R.id.logo);
-                name = (TextView) itemView.findViewById(R.id.name);
-                itemView.findViewById(R.id.bankCheckBox).setVisibility(View.GONE);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_all_banks_list, null);
+        return new AllBanksListAdapter.ViewHolder(view);
+
+    }
+
+    // Involves populating data into the item through holder
+    @Override
+    public void onBindViewHolder(AllBanksListAdapter.ViewHolder holder, int position) {
+
+        holder.name.setText(context.getResources().getStringArray(R.array.bankNames)[dataList.get(position).ordinal()]);
+        holder.logo.setImageResource(context.getResources().obtainTypedArray(R.array.banks_logo).getResourceId(dataList.get(position).ordinal(), -1));
+        holder.itemView.setOnClickListener((v) -> {
+            if (listener != null) {
+                listener.onChoose(dataList.get(position));
             }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return dataList.size();
+    }
+
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView logo;
+        TextView name;
+        View itemView;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            this.itemView = itemView;
+            logo = itemView.findViewById(R.id.logo);
+            name = itemView.findViewById(R.id.name);
+            itemView.findViewById(R.id.bankCheckBox).setVisibility(View.GONE);
         }
     }
+}

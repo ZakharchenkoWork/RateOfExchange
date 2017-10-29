@@ -2,7 +2,6 @@ package com.znshadows.rateofexchange.general.activities;
 
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
-import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.MenuRes;
 import android.support.v4.widget.DrawerLayout;
@@ -12,8 +11,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -22,7 +19,7 @@ import com.znshadows.rateofexchange.auxilary.OneButtonDialog;
 import com.znshadows.rateofexchange.general.menu.MenuFragment;
 
 /**
- * Created by kostya on 17.05.2017.
+ * Created by Konstantyn Zakharchenko on 17.05.2017.
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -30,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public static final int NO_MENU = -1;
 
     @MenuRes
-    private int menuResourse = NO_MENU;
+    private int menuResource = NO_MENU;
     private Menu menu;
     private OnOptionItemSelected onOptionItemSelected = item -> false;
 
@@ -45,13 +42,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * Use when you need to set a content view without loosing of basic app functionality as toolbar
+     *
      * @param layoutResID
      */
     @CallSuper
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(R.layout.activity_holder_layout);
-        RelativeLayout content = (RelativeLayout) findViewById(R.id.main_content);
+        RelativeLayout content = findViewById(R.id.main_content);
         content.addView(getLayoutInflater().inflate(layoutResID, content, false));
         setDrawerState(false);
 
@@ -60,6 +58,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * call this method from onCreate if activity needs a menu inside side drawer.
      * make sure to call setupSideDrawer first.
+     *
      * @param fragment to be added.
      */
     protected void showMenuFragment(MenuFragment fragment) {
@@ -80,12 +79,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         this.menu = menu;
 
-        if (menuResourse != NO_MENU) {
-            getMenuInflater().inflate(menuResourse, menu);
+        if (menuResource != NO_MENU) {
+            getMenuInflater().inflate(menuResource, menu);
             return true;
         }
 
-            return super.onCreateOptionsMenu(menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     /**
@@ -93,7 +92,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void onStartLoading() {
 
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.loadingProgress);
+        ProgressBar progressBar = findViewById(R.id.loadingProgress);
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
         }
@@ -103,7 +102,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * Stops progress bar
      */
     public void onFinishLoading() {
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.loadingProgress);
+        ProgressBar progressBar = findViewById(R.id.loadingProgress);
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }
@@ -124,7 +123,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @return created toolbar
      */
     public Toolbar setupToolbar(int navigationDrawableId, String title) {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(title);
         toolbar.setNavigationIcon(navigationDrawableId);
@@ -134,6 +133,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * Method to retrieve toolbar. That was added to activity automaticaly.
+     *
      * @return Toolbar view
      */
     public Toolbar getToolbarLayout() {
@@ -147,9 +147,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void setupSideDrawer() {
         setDrawerState(true);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         if (toolbar != null) {
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
             toolbar.setNavigationOnClickListener((v) -> {
                 drawer.openDrawer(Gravity.LEFT);
             });
@@ -177,7 +177,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param isEnabled
      */
     private void setDrawerState(boolean isEnabled) {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (isEnabled) {
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         } else {
@@ -199,10 +199,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * Used in case we need some special menu resource, before onCreate. use NO_MENU if menu isn't needed
-     * @param menuResourse
+     *
+     * @param menuResource
      */
-    public void setMenuResourse(int menuResourse) {
-        this.menuResourse = menuResourse;
+    public void setMenuResource(int menuResource) {
+        this.menuResource = menuResource;
     }
 
     /**
@@ -211,7 +212,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param onClickListener
      */
     public void setNavigationOnClickListener(View.OnClickListener onClickListener) {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(onClickListener);
 
     }

@@ -15,7 +15,7 @@ import com.znshadows.rateofexchange.general.models.BANKS;
 import java.util.List;
 
 /**
- * Created by kostya on 30.05.2017.
+ * Created by Konstantyn Zakharchenko on 30.05.2017.
  */
 
 public class ChooseBanksListAdapter extends RecyclerView.Adapter<ChooseBanksListAdapter.ViewHolder> {
@@ -39,11 +39,13 @@ public class ChooseBanksListAdapter extends RecyclerView.Adapter<ChooseBanksList
     public int getItemViewType(int position) {
         return 0;
     }
+
     // Returns the total count of items in the list
     @Override
     public int getItemCount() {
         return dataList.size();
     }
+
     // Called once, on first item
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -71,7 +73,6 @@ public class ChooseBanksListAdapter extends RecyclerView.Adapter<ChooseBanksList
     }
 
 
-
     List<BANKS> getCheckedList() {
         return chosenBanksList;
     }
@@ -87,9 +88,9 @@ public class ChooseBanksListAdapter extends RecyclerView.Adapter<ChooseBanksList
         ViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
-            logo = (ImageView) itemView.findViewById(R.id.logo);
-            name = (TextView) itemView.findViewById(R.id.name);
-            bankCheckBox = (CheckBox) itemView.findViewById(R.id.bankCheckBox);
+            logo = itemView.findViewById(R.id.logo);
+            name = itemView.findViewById(R.id.name);
+            bankCheckBox = itemView.findViewById(R.id.bankCheckBox);
         }
     }
 

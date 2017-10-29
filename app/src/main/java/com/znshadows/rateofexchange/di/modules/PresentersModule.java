@@ -8,7 +8,6 @@ import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesPresen
 import com.znshadows.rateofexchange.general.activities.widget_settings.WidgetSettingsPresenter;
 import com.znshadows.rateofexchange.general.widget.WidgetPresenter;
 import com.znshadows.rateofexchange.mvp.presenters.IBankRatesPresenter;
-
 import com.znshadows.rateofexchange.mvp.presenters.IChooseBankPresenter;
 import com.znshadows.rateofexchange.mvp.presenters.ILoadingPresenter;
 import com.znshadows.rateofexchange.mvp.presenters.IMainPresenter;
@@ -21,7 +20,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by Evolution on 2/27/17.
+ * Created by Konstantyn Zakharchenko on 2/27/17.
  */
 @Singleton
 @Module
@@ -29,34 +28,37 @@ public class PresentersModule {
 
     @Singleton
     @Provides
-    ILoadingPresenter provideLoadingPresenter(){
+    ILoadingPresenter provideLoadingPresenter() {
         return new LoadingPresenter();
     }
 
     @Singleton
     @Provides
-    IMainPresenter provideMainPresenter(){
+    IMainPresenter provideMainPresenter() {
         return new MainPresenter();
     }
+
     @Singleton
     @Provides
-    IChooseBankPresenter provideChooseBankPresenter(){
+    IChooseBankPresenter provideChooseBankPresenter() {
         return new ChooseBankPresenter();
     }
 
     @Singleton
     @Provides
-    IBankRatesPresenter provideBankRatesPresenter(){
+    IBankRatesPresenter provideBankRatesPresenter() {
         return new BankRatesPresenter();
     }
+
     @Singleton
     @Provides
-    IWidgetSettingsPresenter provideWidgetSettingsPresenter(){
+    IWidgetSettingsPresenter provideWidgetSettingsPresenter() {
         return new WidgetSettingsPresenter();
     }
+
     @Singleton
     @Provides
-    IWidgetPresenter provideWidgetPresenter(){
+    IWidgetPresenter provideWidgetPresenter() {
         return new WidgetPresenter();
     }
 }

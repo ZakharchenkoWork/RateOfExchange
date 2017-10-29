@@ -11,21 +11,22 @@ import retrofit2.http.Path;
 
 
 /**
- * Created by kostya on 19.05.2017.
+ * Created by Konstantyn Zakharchenko on 19.05.2017.
  */
 
-public interface NBUApi{
+public interface NBUApi {
     String URL_START = "https://bank.gov.ua/";
     String json = "?json";
+
     @Headers({"Accept: application/json;charset=utf-8",
-            "Accept-Language:ru-RU,ru;","Content-Type: application/json;charset=utf-8"})
+            "Accept-Language:ru-RU,ru;", "Content-Type: application/json;charset=utf-8"})
     @GET("/NBUStatService/v1/statdirectory/exchange?json")
-    Observable<List<NBUResponse>> getTodaysList();
+    Observable<List<NBUResponse>> getTodayList();
 
 //https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=EUR&date=20170627&json
 
     @Headers({"Accept: application/json;charset=utf-8",
-            "Accept-Language:ru-RU,ru;","Content-Type: application/json;charset=utf-8"})
+            "Accept-Language:ru-RU,ru;", "Content-Type: application/json;charset=utf-8"})
     @GET("/NBUStatService/v1/statdirectory/exchange?{query}")
-    Observable<NBUResponse> getTodaysRate(@Path("query") String query);
+    Observable<NBUResponse> getTodayRate(@Path("query") String query);
 }

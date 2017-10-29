@@ -1,7 +1,7 @@
 package com.znshadows.rateofexchange.general.db;
 
 /**
- * Created by kostya on 30.05.2017.
+ * Created by Konstantyn Zakharchenko on 30.05.2017.
  */
 
 import android.content.Context;
@@ -19,7 +19,7 @@ import com.znshadows.rateofexchange.general.models.WidgetInfo;
 import java.sql.SQLException;
 
 /**
- * Created by kostya on 07.01.2017.
+ * Created by Konstantyn Zakharchenko on 07.01.2017.
  */
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
@@ -69,7 +69,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     /**
      * Returns the Database Access Object (DAO) for our UserData class. It will create it or just give the cached * value.
      */
-    public Dao<UserData, String> getUserDao() throws SQLException {
+    Dao<UserData, String> getUserDao() throws SQLException {
         if (userDao == null) {
             userDao = getDao(UserData.class);
         }
@@ -79,7 +79,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     /**
      * Returns the Database Access Object (DAO) for our WidgetInfo class. It will create it or just give the cached * value.
      */
-    public Dao<WidgetInfo, String> getWidgetsDao() throws SQLException {
+    Dao<WidgetInfo, String> getWidgetsDao() throws SQLException {
         if (widgetsDao == null) {
             widgetsDao = getDao(WidgetInfo.class);
         }

@@ -4,19 +4,18 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by kostya on 03.06.2017.
+ * Created by Konstantyn Zakharchenko on 03.06.2017.
  */
 
-public class PrivateBankResponce {
+public class PrivateBankResponse {
     //{"ccy":"EUR","base_ccy":"UAH","buy":"29.20000","sale":"29.80000"}
     @SerializedName("buy")
-    @Expose
     private double buy;
+
     @SerializedName("sale")
-    @Expose
     private double sale;
+
     @SerializedName("ccy")
-    @Expose
     private String code;
 
     public double getBuy() {

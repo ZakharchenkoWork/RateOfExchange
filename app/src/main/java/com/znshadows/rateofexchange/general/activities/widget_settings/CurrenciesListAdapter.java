@@ -8,36 +8,31 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
-import com.znshadows.rateofexchange.general.models.BANKS;
-import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
-import com.znshadows.rateofexchange.mvp.presenters.IBankRatesPresenter;
+import com.znshadows.rateofexchange.general.models.UnifiedBankResponse;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 
 /**
- * Created by Evolution on 3/9/17.
+ * Created by Konstantyn Zakharchenko on 3/9/17.
  */
 
 public class CurrenciesListAdapter extends RecyclerView.Adapter<CurrenciesListAdapter.ViewHolder> {
 
-    public interface OnCurrencyChoosenListener {
+    public interface OnCurrencyChosenListener {
         void onChoose(String code);
     }
 
     private Context context;
-    private List<UnifiedBankResponce> dataList;
-    private OnCurrencyChoosenListener listener = (s) -> {
+    private List<UnifiedBankResponse> dataList;
+    private OnCurrencyChosenListener listener = (s) -> {
     };
 
     /**
      * @param listener to be invoked when user clicks on currency
      */
-    public void setOnCurrencyChoosenListener(OnCurrencyChoosenListener listener) {
+    public void setOnCurrencyChoosenListener(OnCurrencyChosenListener listener) {
         this.listener = listener;
     }
 
@@ -46,7 +41,7 @@ public class CurrenciesListAdapter extends RecyclerView.Adapter<CurrenciesListAd
      */
 
 
-    public CurrenciesListAdapter(Context context, List<UnifiedBankResponce> dataList) {
+    public CurrenciesListAdapter(Context context, List<UnifiedBankResponse> dataList) {
         this.context = context;
         this.dataList = dataList;
 
@@ -93,7 +88,7 @@ public class CurrenciesListAdapter extends RecyclerView.Adapter<CurrenciesListAd
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
 
         TextView code;
@@ -103,15 +98,15 @@ public class CurrenciesListAdapter extends RecyclerView.Adapter<CurrenciesListAd
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            code = (TextView) itemView.findViewById(R.id.code);
-            rateBuy = (TextView) itemView.findViewById(R.id.rateBuy);
-            rateSale = (TextView) itemView.findViewById(R.id.rateSale);
-            rateCheckBox = (CheckBox) itemView.findViewById(R.id.rateCheckBox);
+            code = itemView.findViewById(R.id.code);
+            rateBuy = itemView.findViewById(R.id.rateBuy);
+            rateSale = itemView.findViewById(R.id.rateSale);
+            rateCheckBox = itemView.findViewById(R.id.rateCheckBox);
         }
     }
 }

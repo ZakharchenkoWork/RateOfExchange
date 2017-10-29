@@ -1,29 +1,24 @@
 package com.znshadows.rateofexchange.general.activities.choose_bank;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.R;
 import com.znshadows.rateofexchange.general.activities.BaseActivity;
-import com.znshadows.rateofexchange.general.activities.main.ChoosenBanksListAdapter;
 import com.znshadows.rateofexchange.general.models.BANKS;
 import com.znshadows.rateofexchange.mvp.presenters.IChooseBankPresenter;
 import com.znshadows.rateofexchange.mvp.views.IChooseBankView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 
 /**
- * Created by kostya on 30.05.2017.
+ * Created by Konstantyn Zakharchenko on 30.05.2017.
  */
 
 public class ChooseBankActivity extends BaseActivity implements IChooseBankView {
@@ -38,10 +33,10 @@ public class ChooseBankActivity extends BaseActivity implements IChooseBankView 
         setupToolbar(R.drawable.btn_header_back_normal, getString(R.string.choose_bank_activity_title));
         setNavigationOnClickListener(view -> finish());
 
-        setMenuResourse(R.menu.ok_menu);
+        setMenuResource(R.menu.ok_menu);
 
         List<BANKS> choosenBanksList = presenter.getChosenBanks();
-        RecyclerView list = (RecyclerView) findViewById(R.id.list);
+        RecyclerView list = findViewById(R.id.list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         list.setLayoutManager(layoutManager);
         ChooseBanksListAdapter chooseBanksListAdapter = new ChooseBanksListAdapter(this, Arrays.asList(BANKS.values()), choosenBanksList);

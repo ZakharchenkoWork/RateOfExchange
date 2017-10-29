@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Created by kostya on 26.06.2017.
+ * Created by Konstantyn Zakharchenko on 26.06.2017.
  */
 
 public class DatabaseManager implements IDatabaseManager {

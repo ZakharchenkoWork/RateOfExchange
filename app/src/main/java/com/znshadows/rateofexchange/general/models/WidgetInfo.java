@@ -4,7 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * Created by kostya on 26.06.2017.
+ * Created by Konstantyn Zakharchenko on 26.06.2017.
  */
 
 @DatabaseTable(tableName = "widgets_data")
@@ -12,16 +12,16 @@ public class WidgetInfo {
     @DatabaseField(id = true)
     private int widgetId;
     @DatabaseField
-    private BANKS choosenBank;
+    private BANKS chosenBank;
     @DatabaseField
-    private String choosenCurrency;
+    private String chosenCurrency;
 
     public WidgetInfo() {}
 
-    public WidgetInfo(int widgetId, BANKS choosenBank, String choosenCurrency) {
+    public WidgetInfo(int widgetId, BANKS chosenBank, String chosenCurrency) {
         this.widgetId = widgetId;
-        this.choosenBank = choosenBank;
-        this.choosenCurrency = choosenCurrency;
+        this.chosenBank = chosenBank;
+        this.chosenCurrency = chosenCurrency;
     }
 
     public int getWidgetId() {
@@ -29,11 +29,11 @@ public class WidgetInfo {
     }
 
     public BANKS getChoosenBank() {
-        return choosenBank;
+        return chosenBank;
     }
 
     public String getChoosenCurrency() {
-        return choosenCurrency;
+        return chosenCurrency;
     }
 
 }

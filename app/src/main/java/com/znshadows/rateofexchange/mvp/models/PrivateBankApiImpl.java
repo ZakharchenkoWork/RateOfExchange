@@ -1,52 +1,50 @@
 package com.znshadows.rateofexchange.mvp.models;
 
-import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
-import com.znshadows.rateofexchange.general.models.responces.NBUResponse;
-import com.znshadows.rateofexchange.general.models.responces.PrivateBankResponce;
+import com.znshadows.rateofexchange.general.models.UnifiedBankResponse;
+import com.znshadows.rateofexchange.general.models.responces.PrivateBankResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.http.Query;
 
 /**
- * Created by kostya on 19.05.2017.
+ * Created by Konstantyn Zakharchenko on 19.05.2017.
  */
 
-public class PrivateBankApiImpl extends BaseModel implements PrivateBankApi, IBaseApi{
+public class PrivateBankApiImpl extends BaseModel implements PrivateBankApi, IBaseApi {
 
     PrivateBankApi apiInterface;
 
     public PrivateBankApiImpl() {
         apiInterface = getApiBuilder(URL_START).create(PrivateBankApi.class);
     }
+
     @Override
-    public Observable<List<PrivateBankResponce>> getTodaysList(@Query("json") boolean isJson, @Query("exchange") String emptyExchange, @Query("coursid") int courseId) {
-        return apiInterface.getTodaysList(isJson, emptyExchange,courseId)
+    public Observable<List<PrivateBankResponse>> getTodayList(@Query("json") boolean isJson, @Query("exchange") String emptyExchange, @Query("coursid") int courseId) {
+        return apiInterface.getTodayList(isJson, emptyExchange, courseId)
                 .compose(new AsyncTransformer<>());
     }
 
     @Override
-    public Observable<List<UnifiedBankResponce>> getTodaysUnifiedList() {
-        return getTodaysList(true, "", 4).map((List<PrivateBankResponce> responceDTO) -> {
-            List<UnifiedBankResponce> mapedResponse = new ArrayList<>();
-            for (PrivateBankResponce pbResponse : responceDTO) {
-                mapedResponse.add(new UnifiedBankResponce("", pbResponse.getCode(), pbResponse.getBuy(), pbResponse.getSale()));
+    public Observable<List<UnifiedBankResponse>> getTodayUnifiedList() {
+        return getTodayList(true, "", 4).map((List<PrivateBankResponse> responseDTO) -> {
+            List<UnifiedBankResponse> mappedResponse = new ArrayList<>();
+            for (PrivateBankResponse pbResponse : responseDTO) {
+                mappedResponse.add(new UnifiedBankResponse("", pbResponse.getCode(), pbResponse.getBuy(), pbResponse.getSale()));
             }
-            return mapedResponse;
+            return mappedResponse;
         });
     }
 
     @Override
-    public Observable<UnifiedBankResponce> getTodaysUnifiedRate(String currency) {
-        return getTodaysList(true, "", 4).map((List<PrivateBankResponce> responceDTO) -> {
+    public Observable<UnifiedBankResponse> getTodayUnifiedRate(String currency) {
+        return getTodayList(true, "", 4).map((List<PrivateBankResponse> responceDTO) -> {
 
-            for (PrivateBankResponce pbResponse : responceDTO) {
+            for (PrivateBankResponse pbResponse : responceDTO) {
                 if (pbResponse.getCode().equals(currency)) {
-                     return new UnifiedBankResponce("", pbResponse.getCode(), pbResponse.getBuy(), pbResponse.getSale());
+                    return new UnifiedBankResponse("", pbResponse.getCode(), pbResponse.getBuy(), pbResponse.getSale());
                 }
             }
             return null;

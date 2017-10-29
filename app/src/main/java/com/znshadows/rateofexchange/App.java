@@ -9,19 +9,20 @@ import com.znshadows.rateofexchange.mvp.models.IDatabaseManager;
 import javax.inject.Inject;
 
 /**
- * Created by kostya on 18.05.2017.
+ * Created by Konstantyn Zakharchenko on 18.05.2017.
  */
 
 public class App extends Application {
     private static AppComponent appComponent;
     @Inject
     IDatabaseManager databaseManager;
+
     @Override
     public void onCreate() {
         super.onCreate();
         appComponent = DaggerAppComponent.create();
         appComponent.inject(this);
-    databaseManager.setup(getApplicationContext());
+        databaseManager.setup(getApplicationContext());
     }
 
     @Override
@@ -29,6 +30,7 @@ public class App extends Application {
         databaseManager.release();
         super.onTerminate();
     }
+
     public static AppComponent getAppComponent() {
         return appComponent;
     }

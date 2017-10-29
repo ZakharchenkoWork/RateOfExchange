@@ -6,7 +6,7 @@ import com.znshadows.rateofexchange.general.models.UserData;
 import com.znshadows.rateofexchange.general.models.WidgetInfo;
 
 /**
- * Created by kostya on 27.06.2017.
+ * Created by Konstantyn Zakharchenko on 27.06.2017.
  */
 
 
@@ -17,6 +17,7 @@ public interface IDatabaseManager {
 
     /**
      * Call when app lunched first time
+     *
      * @param context app context
      */
     void setup(Context context);
@@ -33,7 +34,6 @@ public interface IDatabaseManager {
     void saveUserData(UserData userData);
 
     UserData getLastUserData();
-
 
 
 }

@@ -2,13 +2,10 @@ package com.znshadows.rateofexchange.general.activities.main;
 
 import com.znshadows.rateofexchange.App;
 import com.znshadows.rateofexchange.general.activities.BasePresenter;
-import com.znshadows.rateofexchange.general.models.BANKS;
-import com.znshadows.rateofexchange.general.models.ChoosenBank;
-import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
+import com.znshadows.rateofexchange.general.models.ChosenBank;
+import com.znshadows.rateofexchange.general.models.UnifiedBankResponse;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
-
 import com.znshadows.rateofexchange.mvp.models.IUserData;
-import com.znshadows.rateofexchange.mvp.models.UnifiedModel;
 import com.znshadows.rateofexchange.mvp.presenters.IMainPresenter;
 import com.znshadows.rateofexchange.mvp.views.IMainView;
 
@@ -19,7 +16,7 @@ import javax.inject.Inject;
 
 
 /**
- * Created by kostya on 17.05.2017.
+ * Created by Konstantyn Zakharchenko on 17.05.2017.
  */
 
 public class MainPresenter extends BasePresenter<IMainView> implements IMainPresenter<IMainView> {
@@ -36,29 +33,31 @@ public class MainPresenter extends BasePresenter<IMainView> implements IMainPres
 
     /**
      * Retrieves banks that was choosen by user. <p>
-     * Calls {@link IMainView#showChoosenBanks(List)}
+     * Calls {@link IMainView#showChosenBanks(List)}
      * <p>or<p>
      * Calls {@link IMainView#showNoBanksMessage()}
      */
     @Override
-    public void getChoosenBanks() {
-        ArrayList<ChoosenBank> banksList = userData.getBanksList();
-        if(banksList != null && banksList.size() > 0) {
-            getView().showChoosenBanks(banksList);
+    public void getChosenBanks() {
+        ArrayList<ChosenBank> banksList = userData.getBanksList();
+        if (banksList != null && banksList.size() > 0) {
+            getView().showChosenBanks(banksList);
         } else {
             getView().showNoBanksMessage();
         }
     }
+
     /**
      * Retrieves rates from specified banks API
-     * @param bank target
+     *
+     * @param bank                      target
      * @param onBankRatesLoadedListener callback
      */
     @Override
-    public void getBankRates(ChoosenBank bank, OnBankRatesLoadedListener onBankRatesLoadedListener) {
-        model.getTodaysList(bank.getBank()).subscribe(
+    public void getBankRates(ChosenBank bank, OnBankRatesLoadedListener onBankRatesLoadedListener) {
+        model.getTodayList(bank.getBank()).subscribe(
                 getObserver(true, (bankResponse) -> {
-                    List<UnifiedBankResponce> result = new ArrayList<>();
+                    List<UnifiedBankResponse> result = new ArrayList<>();
                     for (int i = 0; i < bankResponse.size(); i++) {
                         if (bank.checkCurrency(bankResponse.get(i).getCode())) {
                             result.add(bankResponse.get(i));

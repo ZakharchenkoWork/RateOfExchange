@@ -2,10 +2,7 @@ package com.znshadows.rateofexchange.mvp.models;
 
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.znshadows.rateofexchange.general.models.UnifiedBankResponce;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -14,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by kostya on 24.05.2017.
+ * Created by Konstantyn Zakharchenko on 24.05.2017.
  */
 
 abstract class BaseModel {
@@ -27,7 +24,7 @@ abstract class BaseModel {
                 .build();
     }
 
-    protected OkHttpClient getOkHttpClient(){
+    protected OkHttpClient getOkHttpClient() {
         return new OkHttpClient.Builder()
                 .connectTimeout(100, TimeUnit.SECONDS)
                 .writeTimeout(100, TimeUnit.SECONDS)

@@ -9,20 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by kostya on 17.06.2017.
+ * Created by Konstantyn Zakharchenko on 17.06.2017.
  */
 @DatabaseTable(tableName = "choosen_banks")
-public class ChoosenBank implements Serializable{
+public class ChosenBank implements Serializable{
     public static final String NOT_SET = "";
     @DatabaseField
     private BANKS bank = null;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
     private ArrayList<String> curencies = new ArrayList<>();
 
-    public ChoosenBank() {
+    public ChosenBank() {
 
     }
-    public ChoosenBank(BANKS bank) {
+    public ChosenBank(BANKS bank) {
         this.bank = bank;
     }
 

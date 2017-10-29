@@ -12,20 +12,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import static com.znshadows.rateofexchange.general.models.ChoosenBank.NOT_SET;
-
 /**
- * Created by kostya on 30.05.2017.
+ * Created by Konstantyn Zakharchenko on 30.05.2017.
  */
 
 @DatabaseTable(tableName = "user_data")
 public class UserData implements IUserData {
+    private static final int ID = 1;
     @Inject
     IDatabaseManager databaseManager;
     @DatabaseField(id = true)
-    private int userId = 1;
+    private int userId = ID;
     @DatabaseField(dataType = DataType.SERIALIZABLE)
-    private ArrayList<ChoosenBank> banksList = new ArrayList<>();
+    private ArrayList<ChosenBank> banksList = new ArrayList<>();
 
     public UserData() {
     }
@@ -48,7 +47,7 @@ public class UserData implements IUserData {
     }
 
     @Override
-    public ArrayList<ChoosenBank> getBanksList() {
+    public ArrayList<ChosenBank> getBanksList() {
         return banksList;
     }
 
@@ -60,24 +59,25 @@ public class UserData implements IUserData {
         }
         return result;
     }
+
     /**
      * @return banks settings for specified bank. Or null if bank is not set yet.
      */
     @Override
-    public ChoosenBank getChosenBank(BANKS bank) {
-        for (ChoosenBank choosenBank : banksList) {
-            if (choosenBank.getBank() == bank) {
-                return choosenBank;
+    public ChosenBank getChosenBank(BANKS bank) {
+        for (ChosenBank chosenBank : banksList) {
+            if (chosenBank.getBank() == bank) {
+                return chosenBank;
             }
         }
         return null;
     }
 
     @Override
-    public List<String> getChoosenCurrencies(BANKS bank) {
-        for (ChoosenBank choosenBank : banksList) {
-            if (choosenBank.getBank() == bank) {
-                return choosenBank.getCurencies();
+    public List<String> getChosenCurrencies(BANKS bank) {
+        for (ChosenBank chosenBank : banksList) {
+            if (chosenBank.getBank() == bank) {
+                return chosenBank.getCurencies();
             }
         }
         return new ArrayList<>();
@@ -85,38 +85,40 @@ public class UserData implements IUserData {
 
     @Override
     public void addCurencyToBank(BANKS bank, String currency) {
-        ChoosenBank choosenBank;
-        if ((choosenBank = getChosenBank(bank)) == null) {
-            choosenBank = new ChoosenBank(bank);
-            choosenBank.addCurrency(currency);
-            banksList.add(choosenBank);
+        ChosenBank chosenBank;
+        if ((chosenBank = getChosenBank(bank)) == null) {
+            chosenBank = new ChosenBank(bank);
+            chosenBank.addCurrency(currency);
+            banksList.add(chosenBank);
         } else {
-            choosenBank.addCurrency(currency);
+            chosenBank.addCurrency(currency);
         }
     }
 
     @Override
     public void removeCurencyFromBank(BANKS bank, String currency) {
-        ChoosenBank choosenBank;
-        if ((choosenBank = getChosenBank(bank)) != null) {
-            choosenBank.removeCurrency(currency);
+        ChosenBank chosenBank;
+        if ((chosenBank = getChosenBank(bank)) != null) {
+            chosenBank.removeCurrency(currency);
         }
     }
+
     /**
      * Use to update list if banks choosen by users, preserves old banks settings if they are still in the list.
+     *
      * @param banks list of all banks that has been choosen this time.
      */
     @Override
-    public void setChoosenBanks(List<BANKS> banks) {
+    public void setChosenBanks(List<BANKS> banks) {
         for (int bankIndex = 0; bankIndex < banks.size(); bankIndex++) {
             boolean isBankInList = false;
-            for (int choosenBankIndex = 0; choosenBankIndex < banksList.size(); choosenBankIndex++) {
-                if (banksList.get(choosenBankIndex).getBank() == banks.get(bankIndex)) {
+            for (int chosenBankIndex = 0; chosenBankIndex < banksList.size(); chosenBankIndex++) {
+                if (banksList.get(chosenBankIndex).getBank() == banks.get(bankIndex)) {
                     isBankInList = true;
                 }
             }
             if (!isBankInList) {
-                banksList.add(new ChoosenBank(banks.get(bankIndex)));
+                banksList.add(new ChosenBank(banks.get(bankIndex)));
             }
         }
         for (int i = 0; i < banksList.size(); i++) {
