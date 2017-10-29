@@ -1,13 +1,15 @@
 package com.znshadows.rateofexchange.di.modules;
 
-import com.znshadows.rateofexchange.general.activities.choose_bank.ChoosseBankPresenter;
+
+import com.znshadows.rateofexchange.general.activities.choose_bank.ChooseBankPresenter;
 import com.znshadows.rateofexchange.general.activities.loading.LoadingPresenter;
 import com.znshadows.rateofexchange.general.activities.main.MainPresenter;
 import com.znshadows.rateofexchange.general.activities.rate_list.BankRatesPresenter;
 import com.znshadows.rateofexchange.general.activities.widget_settings.WidgetSettingsPresenter;
 import com.znshadows.rateofexchange.general.widget.WidgetPresenter;
 import com.znshadows.rateofexchange.mvp.presenters.IBankRatesPresenter;
-import com.znshadows.rateofexchange.mvp.presenters.IChoosseBankPresenter;
+
+import com.znshadows.rateofexchange.mvp.presenters.IChooseBankPresenter;
 import com.znshadows.rateofexchange.mvp.presenters.ILoadingPresenter;
 import com.znshadows.rateofexchange.mvp.presenters.IMainPresenter;
 import com.znshadows.rateofexchange.mvp.presenters.IWidgetPresenter;
@@ -38,8 +40,8 @@ public class PresentersModule {
     }
     @Singleton
     @Provides
-    IChoosseBankPresenter provideChooseBankPresenter(){
-        return new ChoosseBankPresenter();
+    IChooseBankPresenter provideChooseBankPresenter(){
+        return new ChooseBankPresenter();
     }
 
     @Singleton
