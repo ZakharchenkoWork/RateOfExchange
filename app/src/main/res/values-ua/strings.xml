@@ -19,8 +19,9 @@
     <string name="buy">Покупка</string>
     <string name="sell">Продажа</string>
     <array name="bankNames">
-    <item name="nbu">Национальный Банк Украины</item>
-    <item name="privatBank">Приват Банк</item>
-    <item name="a_Bank">A-Банк</item>
+        <item name="nbu">Национальный Банк Украины</item>
+        <item name="privatBank">Приват Банк</item>
+        <item name="a_Bank">A-Банк</item>
+        <item name="alfa_Bank">Альфа-банк</item>
     </array>
 </resources>

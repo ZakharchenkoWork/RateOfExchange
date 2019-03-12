@@ -25,6 +25,9 @@ public class UnifiedModel implements IUnifiedModel {
     @Inject
     @Named("abank")
     IBaseApi abankApi;
+    @Inject
+    @Named("alfabank")
+    IBaseApi alfabankApi;
 
     public UnifiedModel() {
         App.getAppComponent().inject(this);
@@ -48,6 +51,8 @@ public class UnifiedModel implements IUnifiedModel {
                 return pbApi;
             case A_BANK:
                 return abankApi;
+                case ALFABANK:
+                return alfabankApi;
         }
         return nbuApi;
     }

@@ -3,6 +3,7 @@ package com.znshadows.rateofexchange.di.modules;
 import com.znshadows.rateofexchange.general.db.DatabaseManager;
 import com.znshadows.rateofexchange.general.models.UserData;
 import com.znshadows.rateofexchange.mvp.models.ABankApiImpl;
+import com.znshadows.rateofexchange.mvp.models.AlfabankApiImpl;
 import com.znshadows.rateofexchange.mvp.models.IBaseApi;
 import com.znshadows.rateofexchange.mvp.models.IDatabaseManager;
 import com.znshadows.rateofexchange.mvp.models.IUnifiedModel;
@@ -55,6 +56,13 @@ public class ModelModule {
     @Named("abank")
     IBaseApi provideABankApi() {
         return new ABankApiImpl();
+    }
+
+    @Singleton
+    @Provides
+    @Named("alfabank")
+    IBaseApi provideAlfabankApi() {
+        return new AlfabankApiImpl();
     }
 
     @Singleton

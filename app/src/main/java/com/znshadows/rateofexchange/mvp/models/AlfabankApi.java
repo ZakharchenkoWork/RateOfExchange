@@ -8,10 +8,10 @@ import retrofit2.http.GET;
  * Created by Konstantyn Zakharchenko on 19.05.2017.
  */
 
-public interface ABankApi {
-    String URL_START = "https://privatbank.ua/";
+public interface AlfabankApi {
+    String URL_START = "https://alfabank.ua/";
 
-    @GET("ru/currency-a-bank")
+    @GET("/")
     Observable<String> getTodayList();
 
 
