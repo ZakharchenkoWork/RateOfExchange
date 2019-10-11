@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:configure="com.znshadows.rateofexchange.general.activities.widget_settings.WidgetSettingsActivity"
+    android:configure="com.hast.exchangerate.general.activities.widget_settings.WidgetSettingsActivity"
     android:minWidth="74dp"
     android:minHeight="74dp"
     android:updatePeriodMillis="10000"
