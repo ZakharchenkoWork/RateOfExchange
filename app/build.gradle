@@ -13,6 +13,7 @@ android {
         versionName "0.3"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
     compileOptions {
         sourceCompatibility = '1.8'
@@ -28,9 +29,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+
 
     implementation 'com.j256.ormlite:ormlite-android:5.1'
     implementation 'com.j256.ormlite:ormlite-core:5.1'
@@ -50,12 +49,20 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.0.6'
 
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
-    testImplementation 'junit:junit:4.12'
+
     annotationProcessor 'com.google.dagger:dagger-compiler:2.24'
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     implementation 'com.google.android.gms:play-services-ads:18.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.0.1'
+
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:core:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
 }

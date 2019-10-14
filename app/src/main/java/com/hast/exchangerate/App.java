@@ -26,6 +26,7 @@ public class App extends Application {
         appComponent = DaggerAppComponent.create();
         appComponent.inject(this);
         databaseManager.setup(getApplicationContext());
+
         MobileAds.initialize(this, initializationStatus-> Log.i("AdMob","OnInitializationCompleteListener"));
     }
 
