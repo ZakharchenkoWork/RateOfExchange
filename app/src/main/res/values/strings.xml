@@ -18,6 +18,7 @@
     <string name="currency">Currency</string>
     <string name="buy">Buy</string>
     <string name="sell">Sell</string>
+
     <array name="bankNames">
     <item name="nbu">National Bank of Ukraine</item>
     <item name="privatBank">Private Bank</item>

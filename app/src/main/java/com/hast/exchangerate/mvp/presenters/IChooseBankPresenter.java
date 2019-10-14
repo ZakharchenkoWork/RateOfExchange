@@ -1,6 +1,6 @@
 package com.hast.exchangerate.mvp.presenters;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.hast.exchangerate.general.models.BANKS;
 import com.hast.exchangerate.mvp.views.IChooseBankView;

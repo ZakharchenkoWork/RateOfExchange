@@ -1,12 +1,10 @@
 package com.hast.exchangerate.general.activities;
 
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.MenuRes;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.CallSuper;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.MenuRes;
+
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,9 +12,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.hast.rateofexchange.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
 import com.hast.exchangerate.auxilary.OneButtonDialog;
 import com.hast.exchangerate.general.menu.MenuFragment;
+import com.hast.rateofexchange.R;
 
 /**
  * Created by Konstantyn Zakharchenko on 17.05.2017.

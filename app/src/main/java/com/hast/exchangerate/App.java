@@ -1,8 +1,11 @@
 package com.hast.exchangerate;
 
 import android.app.Application;
+import android.util.Log;
 
+import com.google.android.gms.ads.MobileAds;
 import com.hast.exchangerate.di.components.AppComponent;
+
 import com.hast.exchangerate.di.components.DaggerAppComponent;
 import com.hast.exchangerate.mvp.models.IDatabaseManager;
 
@@ -23,6 +26,7 @@ public class App extends Application {
         appComponent = DaggerAppComponent.create();
         appComponent.inject(this);
         databaseManager.setup(getApplicationContext());
+        MobileAds.initialize(this, initializationStatus-> Log.i("AdMob","OnInitializationCompleteListener"));
     }
 
     @Override

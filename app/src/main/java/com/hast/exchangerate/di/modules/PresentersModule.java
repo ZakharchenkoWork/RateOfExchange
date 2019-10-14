@@ -22,7 +22,7 @@ import dagger.Provides;
 /**
  * Created by Konstantyn Zakharchenko on 2/27/17.
  */
-@Singleton
+
 @Module
 public class PresentersModule {
 

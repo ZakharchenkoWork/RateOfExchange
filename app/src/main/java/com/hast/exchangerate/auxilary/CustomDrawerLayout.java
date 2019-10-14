@@ -1,8 +1,10 @@
 package com.hast.exchangerate.auxilary;
 
 import android.content.Context;
-import android.support.v4.widget.DrawerLayout;
+
 import android.util.AttributeSet;
+
+import androidx.drawerlayout.widget.DrawerLayout;
 
 /**
  * Created by Konstantyn Zakharchenko on 3/13/17.
