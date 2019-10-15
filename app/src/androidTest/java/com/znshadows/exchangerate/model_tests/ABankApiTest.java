@@ -11,8 +11,6 @@ import com.hast.exchangerate.general.models.responces.abank.ABANKResponce;
 import com.hast.exchangerate.general.models.responces.abank.Datum;
 import com.hast.exchangerate.mvp.models.ABankApi;
 import com.hast.exchangerate.mvp.models.ABankApiImpl;
-import com.hast.exchangerate.mvp.models.AlfabankApi;
-import com.hast.exchangerate.mvp.models.AlfabankApiImpl;
 
 
 import org.junit.Before;
@@ -31,16 +29,16 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(AndroidJUnit4.class)
 public class ABankApiTest {
-    AlfabankApi alfabankApi;
+    ABankApi aBankApi;
 
     @Before
     public void setUp() throws Exception {
-        alfabankApi = new AlfabankApiImpl();
+        aBankApi = new ABankApiImpl();
     }
 
     @Test
     public void getTodaysListTest() throws Exception {
-        TestObserver<String> observer = alfabankApi.getTodayList().test().await();
+        TestObserver<ABANKResponce> observer = aBankApi.getTodayList().test().await();
         //Thread.sleep(5000);
         observer.assertSubscribed();
         observer.assertNoErrors();
@@ -49,18 +47,25 @@ public class ABankApiTest {
         assertNotEquals(observer.getEvents().get(0).size(), 0);
         assertNotEquals(observer.getEvents().get(0).get(0), null);
 
-        assertTrue(observer.getEvents().get(0).get(0) instanceof String);
+        assertTrue(observer.getEvents().get(0).get(0) instanceof ABANKResponce);
+        assertTrue(observer.getEvents().get(0).get(0) instanceof ABANKResponce);
 
-
-        String answer = (String)observer.getEvents().get(0).get(0);
+        ABANKResponce answer = (ABANKResponce)observer.getEvents().get(0).get(0);
         assertNotEquals(answer, null);
-        assertTrue(answer.contains("<div class=\"currency-tab-block\" data-tab=\"1\">"));
-        assertTrue(answer.contains("USD"));
-        assertTrue(answer.contains("EUR"));
-        assertTrue(answer.contains("RUB"));
-        assertTrue(answer.contains("<span class=\"small-title\">Купівля</span>"));
-        assertTrue(answer.contains("<span class=\"small-title\">Продаж</span>"));
+        assertNotEquals(answer.getData(), null);
+        assertNotEquals(answer.getData().size(), 0);
+        assertTrue(answer.getData().get(0) instanceof Datum);
+        assertNotEquals( answer.getData().get(0), null);
 
+        List<Datum> data = answer.getData();
 
+        boolean isUSDFound = false;
+        for (Datum item : data) {
+            isUSDFound = item.getCcyA().equals("USD");
+            if (isUSDFound){
+                break;
+            }
+        }
+        assertTrue(isUSDFound);
     }
 }
