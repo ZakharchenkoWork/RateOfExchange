@@ -6,6 +6,7 @@
         <item>@drawable/a_bank_logo</item>
         <item>@drawable/alfabank_logo</item>
         <item>@drawable/otp_bank_logo</item>
+        <item>@drawable/raiffeizen_bank_aval_logo</item>
     </integer-array>
 
 </resources>

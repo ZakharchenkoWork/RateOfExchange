@@ -169,10 +169,16 @@ public abstract class BaseActivity extends AppCompatActivity {
      * Called by presenters, when there is an error
      */
     public void onError() {
-        new OneButtonDialog(this, OneButtonDialog.DIALOG_TYPE.MESSAGE_ONLY).setTitle("Oops.").setMessage("Sorry, there was an error, please try again later.").build();
+        new OneButtonDialog(this, OneButtonDialog.DIALOG_TYPE.MESSAGE_ONLY)
+                .setTitle("Oops.")
+                .setMessage("Sorry, there was an error, please try again later.")
+                .setOkListener(this::onNetworkErrorDialogOkClick)
+                .build();
         //Toast.makeText(this, "Network error", Toast.LENGTH_SHORT).show();
     }
+protected void onNetworkErrorDialogOkClick(Object a){
 
+}
     /**
      * used for enabling and disabling side drawer, disabled by default
      *

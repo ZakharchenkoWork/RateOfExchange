@@ -12,6 +12,7 @@ import com.hast.exchangerate.mvp.models.NBUApi;
 import com.hast.exchangerate.mvp.models.NBUApiImpl;
 import com.hast.exchangerate.mvp.models.OtpBankApiImpl;
 import com.hast.exchangerate.mvp.models.PrivateBankApiImpl;
+import com.hast.exchangerate.mvp.models.RaiffeizenBankImpl;
 import com.hast.exchangerate.mvp.models.UnifiedModel;
 
 import javax.inject.Named;
@@ -71,6 +72,13 @@ public class ModelModule {
     @Named("otpbankApi")
     IBaseApi provideOTPbankApi() {
         return new OtpBankApiImpl();
+    }
+
+    @Singleton
+    @Provides
+    @Named("raiffeizenBankApi")
+    IBaseApi provideRBAApi() {
+        return new RaiffeizenBankImpl();
     }
 
     @Singleton

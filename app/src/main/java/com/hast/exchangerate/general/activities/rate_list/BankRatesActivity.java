@@ -47,6 +47,11 @@ public class BankRatesActivity extends BaseActivity implements IBankRatesView {
         presenter.getBankRates(BANKS.values()[bankIndex]);
     }
 
+    @Override
+    protected void onNetworkErrorDialogOkClick(Object a) {
+        finish();
+    }
+
     /**
      * Called from {@link BankRatesPresenter#getBankRates(BANKS)}
      *
