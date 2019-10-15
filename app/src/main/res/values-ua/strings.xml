@@ -23,5 +23,6 @@
         <item name="privatBank">Приват Банк</item>
         <item name="a_Bank">A-Банк</item>
         <item name="alfa_Bank">Альфа-банк</item>
+        <item name="alfa_Bank">ОТП Банк</item>
     </array>
 </resources>

@@ -9,7 +9,7 @@ import retrofit2.http.GET;
  */
 
 public interface OtpBankApi {
-    String URL_START = "https://alfabank.ua/";
+    String URL_START = "https://ru.otpbank.com.ua/";
 
     @GET("/")
     Observable<String> getTodayList();

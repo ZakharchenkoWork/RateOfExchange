@@ -1,5 +1,6 @@
 package com.hast.exchangerate.mvp.models;
 
+import com.hast.exchangerate.general.models.responces.PrivateBankResponse;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.hast.exchangerate.general.models.UnifiedBankResponse;
 
@@ -14,22 +15,12 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  * Created by Konstantyn Zakharchenko on 19.05.2017.
  */
 
-public class OtpBankApiImpl extends BaseModel implements AlfabankApi, IBaseApi {
+public class OtpBankApiImpl extends BaseModel implements OtpBankApi, IBaseApi {
 
-    AlfabankApi apiInterface;
+    OtpBankApi apiInterface;
 
     public OtpBankApiImpl() {
-        apiInterface = getApiBuilder(URL_START).create(AlfabankApi.class);
-    }
-
-    @Override
-    protected Retrofit getApiBuilder(String baseUrl) {
-        return new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .baseUrl(baseUrl)
-                .client(getOkHttpClient())
-                .build();
+        apiInterface = getApiBuilder(URL_START).create(OtpBankApi.class);
     }
 
     @Override
@@ -45,19 +36,20 @@ public class OtpBankApiImpl extends BaseModel implements AlfabankApi, IBaseApi {
             //Log.d("data", responseDTO);
             List<UnifiedBankResponse> mappedResponse = new ArrayList<>();
 
-            String data[] = responseDTO.split("<div class=\"currency-tab-block\" data-tab=\"0\">")[1].split("</section>")[0].split("<div class=\"currency-block\">");
+            String[] data = responseDTO.split("<td class=\"first_column\">");
+            String[] parts = {data[1].split("</tr>")[0],
+                    data[2].split("</tr>")[0],
+                    data[3].split("</tr>")[0]};
+            for (String part : parts) {
+                String[] dataParts = part.split("</td>");
 
+                String buy = dataParts[1].replace("<td>", "").trim();
+                String sell = dataParts[2].replace("<td>", "").trim();
+                mappedResponse.add(new UnifiedBankResponse("", dataParts[0].trim(),
+                        Double.parseDouble(buy),
+                        Double.parseDouble(sell)));
+            }
 
-            //Log.d("data", data);
-           for (int i = 1; i < 4; i++) {
-
-               String[] parts = data[i].split("</div>");
-               String currency = parts[0].replace("<div class=\"title\">", "").trim();
-               String buy = parts[1].replace("<div class=\"rate\">", "").trim();
-               String sell = parts[2].replace("<div class=\"rate\">", "").trim();
-
-               mappedResponse.add(new UnifiedBankResponse("", currency, Double.parseDouble(buy), Double.parseDouble(sell)));
-           }
             return mappedResponse;
         });
     }

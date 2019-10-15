@@ -24,5 +24,6 @@
     <item name="privatBank">Private Bank</item>
     <item name="a_Bank">A-Bank</item>
     <item name="alfa_bank">Alfa-Bank</item>
+    <item name="otp_bank">OTP Bank</item>
     </array>
 </resources>

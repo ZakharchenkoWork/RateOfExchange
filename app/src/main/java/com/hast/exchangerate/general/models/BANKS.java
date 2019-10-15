@@ -8,5 +8,6 @@ public enum BANKS {
         NBU,
         PRIVATE_BANK,
         A_BANK,
-        ALFABANK
+        ALFABANK,
+        OTP_BANK
 }

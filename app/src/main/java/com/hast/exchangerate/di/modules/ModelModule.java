@@ -10,6 +10,7 @@ import com.hast.exchangerate.mvp.models.IUnifiedModel;
 import com.hast.exchangerate.mvp.models.IUserData;
 import com.hast.exchangerate.mvp.models.NBUApi;
 import com.hast.exchangerate.mvp.models.NBUApiImpl;
+import com.hast.exchangerate.mvp.models.OtpBankApiImpl;
 import com.hast.exchangerate.mvp.models.PrivateBankApiImpl;
 import com.hast.exchangerate.mvp.models.UnifiedModel;
 
@@ -63,6 +64,13 @@ public class ModelModule {
     @Named("alfabank")
     IBaseApi provideAlfabankApi() {
         return new AlfabankApiImpl();
+    }
+
+    @Singleton
+    @Provides
+    @Named("otpbankApi")
+    IBaseApi provideOTPbankApi() {
+        return new OtpBankApiImpl();
     }
 
     @Singleton
