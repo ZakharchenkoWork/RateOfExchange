@@ -21,10 +21,15 @@ public class NBUApiImpl extends BaseModel implements NBUApi, IBaseApi {
     public NBUApiImpl() {
         apiInterface = getApiBuilder(URL_START).create(NBUApi.class);
     }
-
+    //https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=20170627&json
     @Override
     public Observable<List<NBUResponse>> getTodayList() {
-        return apiInterface.getTodayList()
+        String date = new SimpleDateFormat("yyyyMMdd").format(new Date(System.currentTimeMillis()));
+        return getTodayList(date+apiInterface.json);
+    }
+    @Override
+    public Observable<List<NBUResponse>> getTodayList(String query) {
+        return apiInterface.getTodayList(query)
                 .compose(new AsyncTransformer<>());
     }
 
@@ -49,6 +54,7 @@ public class NBUApiImpl extends BaseModel implements NBUApi, IBaseApi {
     @Override
     public Observable<UnifiedBankResponse> getTodayUnifiedRate(String currency) {
         //valcode=EUR&date=20170627
+        //https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=EUR&date=20170627&json
         String date = new SimpleDateFormat("yyyyMMDD").format(new Date(System.currentTimeMillis()));
         return apiInterface.getTodayRate("valcode=" + currency + "date=" + date + apiInterface.json).map((NBUResponse responceDTO) ->
                 new UnifiedBankResponse(responceDTO.getName(), responceDTO.getCode(), responceDTO.getRate()));

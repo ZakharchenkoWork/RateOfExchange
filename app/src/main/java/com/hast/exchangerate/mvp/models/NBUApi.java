@@ -8,6 +8,7 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 /**
@@ -16,11 +17,13 @@ import retrofit2.http.Path;
 
 public interface NBUApi {
     String URL_START = "https://bank.gov.ua/";
-    String json = "?json";
+    String json = "&json";
 
     @Headers({"Accept: application/json;charset=utf-8",
             "Accept-Language:ru-RU,ru;", "Content-Type: application/json;charset=utf-8"})
-    @GET("/NBUStatService/v1/statdirectory/exchange?json")
+    @GET("/NBUStatService/v1/statdirectory/exchange")
+    Observable<List<NBUResponse>> getTodayList(@Query("date") String date);
+
     Observable<List<NBUResponse>> getTodayList();
 
 //https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=EUR&date=20170627&json

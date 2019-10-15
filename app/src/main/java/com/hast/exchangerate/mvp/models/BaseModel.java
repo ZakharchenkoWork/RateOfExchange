@@ -3,9 +3,13 @@ package com.hast.exchangerate.mvp.models;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -30,6 +34,22 @@ abstract class BaseModel {
                 .writeTimeout(100, TimeUnit.SECONDS)
                 .readTimeout(100, TimeUnit.SECONDS)
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .addInterceptor(new AmpersandInterceptor())// Added because of NBU has an incorrect query for api which requires a workaround
                 .build();
+    }
+
+    class AmpersandInterceptor implements Interceptor {
+        @Override
+        public Response intercept(Interceptor.Chain chain) throws IOException {
+            Request request = chain.request();
+            String stringurl = request.url().toString();
+            stringurl = stringurl.replace("%26", "&");
+
+            Request newRequest = new Request.Builder()
+                    .url(stringurl)
+                    .build();
+
+            return chain.proceed(newRequest);
+        }
     }
 }
