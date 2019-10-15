@@ -1,5 +1,7 @@
 package com.hast.exchangerate.mvp.models;
 
+import com.hast.exchangerate.general.models.responces.abank.ABANKResponce;
+import com.hast.exchangerate.general.models.responces.abank.Datum;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.hast.exchangerate.general.models.UnifiedBankResponse;
 
@@ -22,18 +24,10 @@ public class ABankApiImpl extends BaseModel implements ABankApi, IBaseApi {
         apiInterface = getApiBuilder(URL_START).create(ABankApi.class);
     }
 
-    @Override
-    protected Retrofit getApiBuilder(String baseUrl) {
-        return new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .baseUrl(baseUrl)
-                .client(getOkHttpClient())
-                .build();
-    }
+
 
     @Override
-    public Observable<String> getTodayList() {
+    public Observable<ABANKResponce> getTodayList() {
         return apiInterface.getTodayList()
                 .compose(new AsyncTransformer<>());
     }
@@ -41,25 +35,25 @@ public class ABankApiImpl extends BaseModel implements ABankApi, IBaseApi {
 
     @Override
     public Observable<List<UnifiedBankResponse>> getTodayUnifiedList() {
-        return getTodayList().map((String responseDTO) -> {
+        return getTodayList().map((ABANKResponce responseDTO) -> {
 
             List<UnifiedBankResponse> mappedResponse = new ArrayList<>();
-            String[] parcedData = new String[9];
-            int parcedDataIndex = 0;
-            String[] data = responseDTO.split("<tbody id='selectByPB'>")[1].split("</tbody>")[0].split("</tr>");
-            for (int i = 0; i < data.length; i++) {
-                String[] dataParts = data[i].replace("/UAH", "").split(">");
-                for (int partIndex = 0; partIndex < dataParts.length; partIndex++) {
-                    if (dataParts[partIndex].contains("</td")) {
-                        parcedData[parcedDataIndex] = dataParts[partIndex].replace("</td", "");
-                        parcedDataIndex++;
+
+
+
+            for (Datum dataSell: responseDTO.getData()) {
+                if (dataSell.getCcyA().toUpperCase().contains("UAH")){
+                    String foreignCode = dataSell.getCcyB().toUpperCase();
+                    for (Datum dataBuy : responseDTO.getData()) {
+                        if(dataBuy.getCcyA().toUpperCase().contains(foreignCode)){
+                            mappedResponse.add(new UnifiedBankResponse("", foreignCode, dataBuy.getRateB(), dataSell.getRateA()));
+                            break;
+                        }
                     }
                 }
+
             }
 
-            for (int i = 0; i < parcedData.length; i += 3) {
-                mappedResponse.add(new UnifiedBankResponse("", parcedData[i], Double.parseDouble(parcedData[i + 1]), Double.parseDouble(parcedData[i + 2])));
-            }
             return mappedResponse;
         });
     }

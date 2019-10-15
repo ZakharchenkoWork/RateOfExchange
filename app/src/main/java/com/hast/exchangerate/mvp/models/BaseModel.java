@@ -19,13 +19,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 abstract class BaseModel {
+    Retrofit retrofit = null;
     protected Retrofit getApiBuilder(String baseUrl) {
-        return new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
-                .baseUrl(baseUrl)
-                .client(getOkHttpClient())
-                .build();
+        if (retrofit == null) {
+            return new Retrofit.Builder()
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
+                    .baseUrl(baseUrl)
+                    .client(getOkHttpClient())
+                    .build();
+        } else {
+            return retrofit;
+        }
     }
 
     protected OkHttpClient getOkHttpClient() {
