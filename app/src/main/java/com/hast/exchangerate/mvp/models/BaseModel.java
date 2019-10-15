@@ -13,6 +13,7 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Created by Konstantyn Zakharchenko on 24.05.2017.
@@ -24,6 +25,7 @@ abstract class BaseModel {
         if (retrofit == null) {
             return new Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
                     .baseUrl(baseUrl)
                     .client(getOkHttpClient())

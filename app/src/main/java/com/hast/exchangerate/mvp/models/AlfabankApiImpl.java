@@ -22,15 +22,6 @@ public class AlfabankApiImpl extends BaseModel implements AlfabankApi, IBaseApi 
         apiInterface = getApiBuilder(URL_START).create(AlfabankApi.class);
     }
 
-    @Override
-    protected Retrofit getApiBuilder(String baseUrl) {
-        return new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .baseUrl(baseUrl)
-                .client(getOkHttpClient())
-                .build();
-    }
 
     @Override
     public Observable<String> getTodayList() {
@@ -45,7 +36,9 @@ public class AlfabankApiImpl extends BaseModel implements AlfabankApi, IBaseApi 
             //Log.d("data", responseDTO);
             List<UnifiedBankResponse> mappedResponse = new ArrayList<>();
 
-            String data[] = responseDTO.split("<div class=\"currency-tab-block\" data-tab=\"0\">")[1].split("</section>")[0].split("<div class=\"currency-block\">");
+            String data[] = responseDTO.split("<div class=\"currency-tab-block\" data-tab=\"1\">")[1]
+                    .split("<div class=\"currency-tab-block\" data-tab=\"0\">")[0]
+                    .split("<div class=\"currency-block\">");
 
 
             //Log.d("data", data);
@@ -53,8 +46,16 @@ public class AlfabankApiImpl extends BaseModel implements AlfabankApi, IBaseApi 
 
                String[] parts = data[i].split("</div>");
                String currency = parts[0].replace("<div class=\"title\">", "").trim();
-               String buy = parts[1].replace("<div class=\"rate\">", "").trim();
-               String sell = parts[2].replace("<div class=\"rate\">", "").trim();
+               String buy = parts[1].replace("<div class=\"rate\">", "")
+                       .replace("<span class=\"small-title\">Купівля</span>","")
+                       .replace("<span class=\"rate-number\">", "")
+                       .replace("</span>", "")
+                       .trim();
+               String sell = parts[2].replace("<div class=\"rate\">", "")
+                       .replace("<span class=\"small-title\">Продаж</span>","")
+                       .replace("<span class=\"rate-number\">", "")
+                       .replace("</span>", "")
+                       .trim();
 
                mappedResponse.add(new UnifiedBankResponse("", currency, Double.parseDouble(buy), Double.parseDouble(sell)));
            }
