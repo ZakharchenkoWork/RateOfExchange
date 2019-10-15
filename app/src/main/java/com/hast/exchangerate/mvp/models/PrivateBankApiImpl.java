@@ -29,7 +29,7 @@ public class PrivateBankApiImpl extends BaseModel implements PrivateBankApi, IBa
 
     @Override
     public Observable<List<UnifiedBankResponse>> getTodayUnifiedList() {
-        return getTodayList(true, "", 4).map((List<PrivateBankResponse> responseDTO) -> {
+        return getTodayList(true, "", 5).map((List<PrivateBankResponse> responseDTO) -> {
             List<UnifiedBankResponse> mappedResponse = new ArrayList<>();
             for (PrivateBankResponse pbResponse : responseDTO) {
                 mappedResponse.add(new UnifiedBankResponse("", pbResponse.getCode(), pbResponse.getBuy(), pbResponse.getSale()));
@@ -40,7 +40,7 @@ public class PrivateBankApiImpl extends BaseModel implements PrivateBankApi, IBa
 
     @Override
     public Observable<UnifiedBankResponse> getTodayUnifiedRate(String currency) {
-        return getTodayList(true, "", 4).map((List<PrivateBankResponse> responceDTO) -> {
+        return getTodayList(true, "", 5).map((List<PrivateBankResponse> responceDTO) -> {
 
             for (PrivateBankResponse pbResponse : responceDTO) {
                 if (pbResponse.getCode().equals(currency)) {

@@ -19,6 +19,7 @@ public interface PrivateBankApi {
 
     @Headers({"Accept: application/json;charset=utf-8",
             "Accept-Language:ru-RU,ru;", "Content-Type: application/json;charset=utf-8"})
+    //https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5
     @GET("p24api/pubinfo")
     Observable<List<PrivateBankResponse>> getTodayList(@Query("json") boolean isJson, @Query("exchange") String emptyExchange, @Query("coursid") int courseId);
 
