@@ -45,7 +45,6 @@ public class UnifiedApiTest {
             assertNotEquals(observer.getEvents().get(0).get(0), null);
 
             assertTrue(observer.getEvents().get(0).get(0) instanceof List);
-            assertTrue(observer.getEvents().get(0).get(0) instanceof List);
 
             List<Object> answer = (List<Object>) observer.getEvents().get(0).get(0);
             assertNotEquals(answer, null);
