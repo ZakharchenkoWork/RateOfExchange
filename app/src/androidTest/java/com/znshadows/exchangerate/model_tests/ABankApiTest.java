@@ -37,7 +37,7 @@ public class ABankApiTest {
     }
 
     @Test
-    public void getTodaysListTest() throws Exception {
+    public void testABank() throws Exception {
         TestObserver<ABANKResponce> observer = aBankApi.getTodayList().test().await();
         //Thread.sleep(5000);
         observer.assertSubscribed();

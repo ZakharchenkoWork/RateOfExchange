@@ -34,7 +34,7 @@ public class PrivateBankApiTest {
     }
 
     @Test
-    public void getTodaysListTest() throws Exception {
+    public void testPrivateBank() throws Exception {
         TestObserver<List<PrivateBankResponse>> observer = privateBankApi.getTodayList(true, "", 5).test().await();
         //Thread.sleep(5000);
         observer.assertSubscribed();

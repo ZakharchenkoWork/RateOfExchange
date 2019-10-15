@@ -33,7 +33,7 @@ public class OTPBankApiTest {
     }
 
     @Test
-    public void getTodaysListTest() throws Exception {
+    public void testOTPBank() throws Exception {
         TestObserver<String> observer = otpbankApi.getTodayList().test().await();
         //Thread.sleep(5000);
         observer.assertSubscribed();

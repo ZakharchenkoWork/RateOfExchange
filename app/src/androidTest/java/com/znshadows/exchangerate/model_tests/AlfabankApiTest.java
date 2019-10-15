@@ -31,7 +31,7 @@ public class AlfabankApiTest {
     }
 
     @Test
-    public void getTodaysListTest() throws Exception {
+    public void testAlfaBank() throws Exception {
         TestObserver<String> observer = alfabankApi.getTodayList().test().await();
         //Thread.sleep(5000);
         observer.assertSubscribed();

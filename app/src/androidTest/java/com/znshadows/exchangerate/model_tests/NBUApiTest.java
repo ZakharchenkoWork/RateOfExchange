@@ -37,7 +37,7 @@ public class NBUApiTest {
     }
 
     @Test
-    public void getTodaysListTest() throws Exception {
+    public void testNBU() throws Exception {
         TestObserver<List<NBUResponse>> observer = nbuApi.getTodayList().test().await();
         //Thread.sleep(5000);
         observer.assertSubscribed();
