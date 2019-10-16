@@ -7,10 +7,10 @@ package com.hast.exchangerate.general.models;
 /**
  * Procedure for adding new bank.
  * Add a constant to this enum
- * Add interface and Implementation to mvp/models package
- * Add provide code in class ModelModule
- * Add a case to the switch in class UnifiedModel
- * Add injection of the Api in class UnifiedModel
+ * Add interface and Implementation to {@link com.hast.exchangerate.mvp.models} package
+ * Add provide code in class {@link com.hast.exchangerate.di.modules.ModelModule}
+ * Add a case to the switch in class {@link com.hast.exchangerate.mvp.models.UnifiedModel#getBankApi(BANKS)}
+ * Add injection of the Api in class {@link com.hast.exchangerate.mvp.models.UnifiedModel}
  * Add name of the bank to bankNames array at strings.xml
  * Add bank icon to res/drawable and a reference at arrays.xml
 
@@ -21,5 +21,6 @@ public enum BANKS {
     A_BANK,
     ALFABANK,
     OTP_BANK,
-    RAIFFEIZEN_BANK_AVAL
+    RAIFFEIZEN_BANK_AVAL,
+    UKRSIBBANK
 }
