@@ -24,5 +24,6 @@
         <item name="a_Bank">A-Банк</item>
         <item name="alfa_Bank">Альфа-банк</item>
         <item name="alfa_Bank">ОТП Банк</item>
+        <item name="raiffeizen_bank_aval">Райффайзен Банк Аваль</item>
     </array>
 </resources>
